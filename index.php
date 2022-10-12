@@ -5,33 +5,42 @@ include('config/connect.php');
 
 
 
-$email = $p_id= $p_name = '';
-$err='';
-if (isset($_POST['login'])) {
+$name = $email = $age = $number = $password = ' ';
+if (isset($_POST['signup'])) {
 
     
     $email = stripslashes($_REQUEST['email']);
     $email = mysqli_real_escape_string($conn, $email);
 
-    $p_id = stripslashes($_REQUEST['p_id']);
-    $p_id = mysqli_real_escape_string($conn, $p_id);
+    $name = stripslashes($_REQUEST['name']);
+    $name = mysqli_real_escape_string($conn, $name);
 
-    $p_name = stripslashes($_REQUEST['p_name']);
-    $p_name = mysqli_real_escape_string($conn, $p_name);
+    $age = stripslashes($_REQUEST['age']);
+    $age = mysqli_real_escape_string($conn, $age);
 
-    // echo $p_id;
-    // echo $p_name;
-    // echo $email;
+    $password = stripslashes($_REQUEST['password']);
+    $password = mysqli_real_escape_string($conn, $password);
+
+    $number = stripslashes($_REQUEST['number']);
+    $number = mysqli_real_escape_string($conn, $number);
+
     
-    $query    = "SELECT * FROM patients WHERE p_email='$email' AND p_id='$p_id' AND p_name='$p_name'";   
+    $query    = "INSERT INTO login (usename,email,password,age,number)
+    VALUES ('$name', '$email', '$password' , '$age', '$number')"; 
+   
     $result   = mysqli_query($conn, $query);
-    $rows = mysqli_num_rows($result);
-    
+
+    $check_query    = "SELECT no FROM login WHERE email='$email' AND usename='$name'";   
+    $check_result   = mysqli_query($conn, $check_query);
+
+    $rows = mysqli_num_rows($check_result);
+  
     if ($rows == 1) {
-        $_SESSION['p_id'] = $p_id; 
-        header("Location: data.php");
+        $_SESSION['name'] = $name; 
+        $_SESSION['email'] = $email;
+        echo 'Success';
     } else {
-        $err = "Email Id/Password is incorrect, Try Again !!!";
+        echo 'Error';
     }
 
 }
@@ -44,55 +53,58 @@ if (isset($_POST['login'])) {
     <title>Login</title>
     <?php include('header.php') ?>
     <style>
-        
+        #signup_body{
+          background-image: linear-gradient(to bottom, #ace6e9, #3bbee0, #0092de, #0061d2, #0821ac);
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+        }
+        #sign_up_card{
+            border-radius: 10px 100px 10px 100px;
+        }
     </style>
    
     
 </head>
-<body id="login_body">
-    
+<body id="signup_body">
+    <div class="container">
+        <img src="./images/logo1.png" alt="logo" width="40%" height="30%" class="mx-auto  d-block">
+        <div class="card mb-3 w-50 mx-auto p-3 border-secondary shadow-lg" id="sign_up_card">
+            
+            <h1 class="fs-1 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New User </h1> 
+            
+            <form action="" method="POST" class="m-2">
+                <div class="mb-3 ">
+                    <label for="name" class="form-label ">  <i class="fa-solid fa-user"></i> Username: </label>
+                    <input type="text" class="form-control shadow" id="name" name="name"  required>
+                </div>
 
-    <div class="card w-75  mb-2 m-auto border border-2 shadow-lg" style="background-color:#F5FCFF">
-       
-    <h1 class="text-secondary text-center fs-1 pt-2">Login</h1>
+                <div class="mb-3">
+                    <label for="email" class="form-label"> <i class="fa-solid fa-envelope"></i> Email: </label>
+                    <input type="email" class="form-control shadow" id="email" name="email" placeholder="example@gmail.com" required>
+                </div>
 
-       
-        <img src="image/medtrons_logo.jpg"  class="m-auto rounded-circle p-2" alt=""  srcset="" style="width:100px; height:100px;">
-        <form action="" method="POST">
+                <div class="mb-3">
+                    <label for="password" class="form-label"> <i class="fa-solid fa-lock"></i> Password: </label>
+                    <input type="password" class="form-control shadow" id="password" name="password" required>
+                </div>
 
-        <div class="ms-3 me-3 ">
+                <div class="mb-3 ">
+                    <label for="age" class="form-label"> <i class="fa-solid fa-user-pen"></i> Age:</label>
+                    <input type="number" class="form-control shadow" id="age" name="age"  required>
+                </div>
 
-            <div class="mb-3 ">
-                <label for="p_id" class="form-label "> <i class="fa-solid fa-image-portrait"></i> ID:</label>
-                <input type="text" class="form-control shadow" id="p_id" name="p_id"  placeholder="Enter your ID..." required>
-              </div>
-            <div class="mb-3 ">
-                <label for="p_name" class="form-label"> <i class="fa-solid fa-user"></i> Name:</label>
-                <input type="text" class="form-control shadow" id="p_name" name="p_name" 
-                 placeholder="Enter your Name..." required>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label"> <i class="fa-solid fa-envelope"></i> Email: </label>
-                <input type="email" class="form-control shadow" id="email" name="email"
-                 placeholder="Enter your Email..." required>
-            </div>
+                <div class="mb-3 ">
+                    <label for="number" class="form-label"> <i class="fa-solid fa-phone"></i> Phone Number:</label>
+                    <input type="text" class="form-control shadow" id="number" name="number" >
+                </div>
 
-            <div class="pt-3  text-center  w-100">
-                 <input type="submit" value="Login" id="login" name="login" class="btn btn-light btn-outline-primary shadow-sm">
-            </div>
-
-            <div class="pt-3 pb-3 text-center  w-100">
-                <a href="register.php">New user? Sign up</a>
-             </div>
+                <div class="pt-3  text-center  w-100">
+                    <input type="submit" value="Sign Up" id="Sign Up" name="signup" class="btn btn-light btn-outline-primary shadow-sm">
+                </div>
+            </form>
 
         </div>
-
-        </form>
-        
-
-
     </div>
-
     
    
 </body>
