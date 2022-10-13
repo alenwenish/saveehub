@@ -38,11 +38,8 @@ if (isset($_POST['signup'])) {
     if ($rows == 1) {
         $_SESSION['name'] = $name; 
         $_SESSION['email'] = $email;
-        echo 'Success';
-    } else {
-        echo 'Error';
-    }
-
+        header("Location: home.php");
+    } 
 }
 
 ?>
@@ -99,7 +96,11 @@ if (isset($_POST['signup'])) {
                 </div>
 
                 <div class="pt-3  text-center  w-100">
-                    <input type="submit" value="Sign Up" id="Sign Up" name="signup" class="btn btn-light btn-outline-primary shadow-sm">
+                    <input type="submit" value="Register" id="Sign Up" name="signup" class="btn btn-light btn-outline-primary shadow-sm">
+                </div>
+
+                <div class="pt-3 pb-1 text-center  w-100">
+                    <a href="login.php">Already a User? Log in</a>
                 </div>
             </form>
 
