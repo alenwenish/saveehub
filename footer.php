@@ -13,6 +13,11 @@
       <i class="fa-solid fa-magnifying-glass"></i></a> 
     </li>
 
+    <li class="nav-item">
+      <a class="nav-link text-white " href="friends.php"> &nbsp;
+      <i class="fa-solid fa-globe"></i></a> 
+    </li>
+
     
     <li class="nav-item">
       <a class="nav-link text-white" href="viewprofile.php"> &nbsp; <i class="fa-solid fa-user-pen"></i>  </a>
