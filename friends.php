@@ -3,6 +3,13 @@
 session_start();
 include('config/connect.php');
 
+$username = $_SESSION['name'];
+$sql = "SELECT username FROM login where username != '$username'";
+$res = mysqli_query($conn,$sql);
+$rows = array();
+while($row = mysqli_fetch_array($res))
+    $rows[] = $row;
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +25,19 @@ include('config/connect.php');
 <body>
     <?php include('navigation.php'); ?>
 
-    <p class="text-center p-3"> No pending request :(</p>
+    <div>
+        <table class="mx-auto m-1">
+            <?php foreach($rows as $row) { ?>
+                
+                <tr class="border shadow  mb-2 fs-4 shadow">
+                    <td class="p-4"> <i class="fa-regular fa-user"></i> </td>
+                    <td class="p-4">  <?php echo $row['username']; ?> </td>
+                    <td class="p-4">  <button class="btn btn-sm btn-primary">FOLLOW</button></td>
+                </tr>
+            
+            <?php } ?>
+        </table>
+    </div>
 
     
 
