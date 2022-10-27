@@ -25,7 +25,7 @@ if (isset($_POST['signup'])) {
     $number = mysqli_real_escape_string($conn, $number);
 
     
-    $query    = "INSERT INTO login (usename,email,password,age,number)
+    $query    = "INSERT INTO login (username,email,password,age,number)
     VALUES ('$name', '$email', '$password' , '$age', '$number')"; 
    
     $result   = mysqli_query($conn, $query);

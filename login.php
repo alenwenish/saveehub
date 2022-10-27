@@ -16,11 +16,11 @@ if (isset($_POST['login'])) {
     $password = mysqli_real_escape_string($conn, $password);
 
     
-    $query    = "SELECT usename FROM login WHERE email='$email' AND  password='$password'"; 
+    $query    = "SELECT username FROM login WHERE email='$email' AND  password='$password'"; 
     $result   = mysqli_query($conn, $query);
     $rows = mysqli_num_rows($result);
   
-    $name = $result->fetch_array()['usename'];
+    $name = $result->fetch_array()['username'];
 
     if ($rows == 1) {
         $_SESSION['name'] = $name; 
