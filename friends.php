@@ -26,10 +26,10 @@ while($row = mysqli_fetch_array($res))
     <?php include('navigation.php'); ?>
 
     <div>
-        <table class="mx-auto m-1">
+        <table class="table w-50 mx-auto mt-3">
             <?php foreach($rows as $row) { ?>
                 
-                <tr class="border shadow  mb-2 fs-4 shadow">
+                <tr class="border   mb-2 fs-4 shadow-sm">
                     <td class="p-4"> <i class="fa-regular fa-user"></i> </td>
                     <td class="p-4">  <?php echo $row['username']; ?> </td>
                     <td class="p-4">  <button class="btn btn-sm btn-primary">FOLLOW</button></td>
