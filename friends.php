@@ -25,15 +25,17 @@ while($row = mysqli_fetch_array($res))
 <body>
     <?php include('navigation.php'); ?>
 
-    <div>
-        <table class="table w-50 mx-auto mt-3">
+    <div class="container">
+        <h2 class="fs-2 fw-normal text-secondary pt-4 text-center"> Follow Requests</h2>
+        <table class="container table w-50 mx-auto mt-3">
             <?php foreach($rows as $row) { ?>
                 
-                <tr class="border   mb-2 fs-4 shadow-sm">
-                    <td class="p-4"> <i class="fa-regular fa-user"></i> </td>
-                    <td class="p-4">  <?php echo $row['username']; ?> </td>
-                    <td class="p-4">  <button class="btn btn-sm btn-primary">FOLLOW</button></td>
+                <tr class="fs-4 shadow-sm">
+                    <td class="py-2 px-3"> <i class="fa-regular fa-user"></i> </td>
+                    <td class="py-2 px-3">  <?php echo $row['username']; ?> </td>
+                    <td class="py-2 px-3">  <button class="btn btn-sm btn-dark">FOLLOW</button></td>                                    
                 </tr>
+                
             
             <?php } ?>
         </table>

@@ -36,7 +36,7 @@ if(isset($_POST['file_submit'])){
     <?php include('header.php'); ?>
     <style>
          #view_profile{
-            background-image: radial-gradient(circle, #48dce5, #77d9de, #96d6d8, #b0d2d3, #c6cece); 
+          background-image: linear-gradient(to bottom, #e2f0f0, #e5f3f3, #e8f6f6, #ecf9f9, #effcfc);
           background-repeat: no-repeat;
           background-attachment: fixed;
         }
@@ -74,7 +74,8 @@ if(isset($_POST['file_submit'])){
   </form>
 </div>
 <br><br>
-<div>
+<div class="container  p-1">
+
 
   <?php
   $sql = "SELECT * FROM image where username = '$username'";

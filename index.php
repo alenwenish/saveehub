@@ -51,7 +51,7 @@ if (isset($_POST['signup'])) {
     <?php include('header.php') ?>
     <style>
         #signup_body{
-          background-image: linear-gradient(to bottom, #ace6e9, #3bbee0, #0092de, #0061d2, #0821ac);
+            background-image: linear-gradient(to bottom, #d4f5f5, #adc6c6, #889a9a, #647070, #434848);
           background-repeat: no-repeat;
           background-attachment: fixed;
         }
