@@ -3,8 +3,6 @@
 session_start();
 include('config/connect.php');
 
-
-
 $name = $email = $age = $number = $password = ' ';
 if (isset($_POST['signup'])) {
 
