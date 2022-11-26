@@ -9,6 +9,7 @@ $username = $_SESSION['name'];
 $_SESSION['status'] = 1;
 
 $sql = "SELECT * FROM image where username != '$username'";
+// echo $sql;
 $res = mysqli_query($conn,$sql);
 $rows = array();
 while($row = mysqli_fetch_array($res))

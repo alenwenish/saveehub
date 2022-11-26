@@ -33,7 +33,11 @@ while($row = mysqli_fetch_array($res))
                 <tr class="fs-4 shadow-sm">
                     <td class="py-2 px-3"> <i class="fa-regular fa-user"></i> </td>
                     <td class="py-2 px-3">  <?php echo $row['username']; ?> </td>
-                    <td class="py-2 px-3">  <button class="btn btn-sm btn-dark">FOLLOW</button></td>                                    
+                    <td class="py-2 px-3"> 
+                        <a href="addfollower.php?acc=<?php echo $username; ?>&follower=<?php echo $row['username']; ?> "  >
+                        <button class="btn btn-sm btn-dark">FOLLOW</button>
+                        </a>
+                    </td>                                    
                 </tr>
                 
             
