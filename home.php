@@ -5,12 +5,16 @@ include('config/connect.php');
 
 
 $username = $_SESSION['name'];
+
+$_SESSION['status'] = 1;
+
 $sql = "SELECT * FROM image where username != '$username'";
 $res = mysqli_query($conn,$sql);
 $rows = array();
 while($row = mysqli_fetch_array($res))
     $rows[] = $row;
 
+    
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +28,7 @@ while($row = mysqli_fetch_array($res))
 </head>
 
 <body>
-    <?php include('navigation.php'); ?>
+    <!-- <?php include('navigation.php'); ?> -->
     <br>
 
     <?php foreach($rows as $row) { ?>
@@ -32,7 +36,7 @@ while($row = mysqli_fetch_array($res))
     <div class="text-center">
        <h4 class="ps-3"> <i class="fa-regular fa-user"></i> <?php echo $row['username']; ?>  </h4>
        <img src="./uploads/<?php echo $row['post']; ?>"  width="300px" class="p-3 shadow mx-auto" alt="">
-       <h4 class="p-1"> <i class="fa-regular fa-heart"> </i> <?php echo $row['likes']; ?> likes  </h4>
+       <h4 class="p-1">  <a href="update.php?id=<?php echo $row['id'] ?>" class="text-decoration-none text-danger" > <i class="fa-regular fa-heart"> </i> </a> <?php echo $row['likes']; ?> likes  </h4>
     </div>
     <hr>
    
@@ -42,5 +46,7 @@ while($row = mysqli_fetch_array($res))
 
     <br><br>
     <?php include('footer.php'); ?>
+
+    
 </body>
 </html>
