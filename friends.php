@@ -4,7 +4,8 @@ session_start();
 include('config/connect.php');
 
 $username = $_SESSION['name'];
-$sql = "SELECT username FROM login where username != '$username'";
+$sql = "SELECT username FROM login where username NOT IN (SELECT follower_name FROM followers WHERE account = '$username') AND username != '$username'";
+
 $res = mysqli_query($conn,$sql);
 $rows = array();
 while($row = mysqli_fetch_array($res))
