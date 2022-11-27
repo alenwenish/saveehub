@@ -30,7 +30,7 @@ while($row = mysqli_fetch_array($res))
 </head>
 
 <body>
-    <!-- <?php include('navigation.php'); ?> -->
+    <?php include('navigation.php'); ?>
     <br>
 
     <?php foreach($rows as $row) { ?>
@@ -43,8 +43,6 @@ while($row = mysqli_fetch_array($res))
     <hr>
    
     <?php } ?>
-
-    
 
     <br><br>
     <?php include('footer.php'); ?>

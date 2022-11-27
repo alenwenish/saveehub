@@ -24,6 +24,17 @@ if(isset($_POST['file_submit'])){
   
 }
 
+
+$sql = "SELECT count(follower_name) as following FROM followers WHERE account = '$username'";
+$res = mysqli_query($conn,$sql);
+$following = $res->fetch_array()['following'];
+
+
+$sql = "SELECT count(follower_name) as follower FROM followers WHERE follower_name = '$username'";
+$res = mysqli_query($conn,$sql);
+$follower = $res->fetch_array()['follower'];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -55,11 +66,11 @@ if(isset($_POST['file_submit'])){
       <div class="row text-center pt-3 pe-3 mx-auto">
         <div class="col bg-dark text-warning fw-bolder card m-1 p-2 shadow">
             <h4> Followers </h4>
-            <h5> 100 </h5>
+            <h5> <?php echo $follower; ?> </h5>
         </div>
         <div class="col card bg-dark text-warning fw-bolder m-1 p-2 shadow">
             <h4> Following </h4>
-            <h5> 50 </h5>
+            <h5> <?php echo $following; ?> </h5>
         </div>
       </div>
       </div>
