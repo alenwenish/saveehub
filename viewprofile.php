@@ -64,17 +64,90 @@ $follower = $res->fetch_array()['follower'];
 
       <div class="col-8">
       <div class="row text-center pt-3 pe-3 mx-auto">
-        <div class="col bg-dark text-warning fw-bolder card m-1 p-2 shadow">
-            <h4> Followers </h4>
-            <h5> <?php echo $follower; ?> </h5>
+
+        <button class="col bg-dark text-warning fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Followers <br>
+           <?php echo $follower; ?> 
+        </button>
+
+        <div class="col bg-dark text-warning fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+            Following <br>
+            <?php echo $following; ?> 
         </div>
-        <div class="col card bg-dark text-warning fw-bolder m-1 p-2 shadow">
-            <h4> Following </h4>
-            <h5> <?php echo $following; ?> </h5>
-        </div>
+
       </div>
       </div>
 </div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Followers</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      <?php
+        $query = "SELECT account from followers where follower_name = '$username'";
+        $result = mysqli_query($conn,$query);
+        $rows = array();
+        while($row = mysqli_fetch_array($result))
+              $rows[] = $row;
+        ?>
+       
+        <?php foreach($rows as $row) { ?>
+          <h6 class="p-1 card text-center text-secondary ">  <?php echo $row['account']; ?> </h6> <br>
+        <?php } ?>
+
+        
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Following</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <?php
+        $query = "SELECT follower_name from followers where account = '$username'";
+        $result = mysqli_query($conn,$query);
+        $rows = array();
+        while($row = mysqli_fetch_array($result))
+              $rows[] = $row;
+        ?>
+       
+        <?php foreach($rows as $row) { ?>
+          <h6 class="p-1 card text-center text-secondary ">  <?php echo $row['follower_name']; ?> </h6> <br>
+        <?php } ?>
+
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
 
 <div class="w-50 m-auto">
   <form action="" method="POST"  enctype="multipart/form-data">
