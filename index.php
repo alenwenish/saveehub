@@ -3,6 +3,7 @@
 session_start();
 include('config/connect.php');
 
+$msg = '';
 $name = $email = $age = $number = $password = ' ';
 if (isset($_POST['signup'])) {
 
@@ -36,7 +37,9 @@ if (isset($_POST['signup'])) {
     if ($rows == 1) {
         $_SESSION['name'] = $name; 
         $_SESSION['email'] = $email;
-        header("Location: home.php");
+        $msg = "Registration Successful. Log in";
+    }else{
+        $msg = "Registration Failed. Retry";
     } 
 }
 
@@ -62,8 +65,7 @@ if (isset($_POST['club_signup'])) {
     
     $query    = "INSERT INTO club (club_name, club_email, club_password , club_fc, club_sc)
     VALUES ('$club_name', '$club_email', '$club_password' , '$club_fc', '$club_sc')"; 
-   
-   echo $query;
+
     $result   = mysqli_query($conn, $query);
 
     $check_query    = "SELECT id FROM club WHERE club_email='$club_email' AND club_name='$club_name'";   
@@ -74,7 +76,9 @@ if (isset($_POST['club_signup'])) {
     if ($rows == 1) {
         $_SESSION['name'] = $club_name; 
         $_SESSION['email'] = $club_email;
-        header("Location: home.php");
+        $msg = "Registration Successful. Log in";
+    }else{
+        $msg = "Registration Failed. Retry";
     } 
 }
 
@@ -116,6 +120,8 @@ if (isset($_POST['club_signup'])) {
             
             <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New User </h1> 
             
+            <h3 class="fs-6 text-center text-warning"> <?php echo $msg ?> </h3>
+
             <form action="" method="POST" class="m-2">
                 <div class="mb-3 ">
                     <label for="name" class="form-label ">  <i class="fa-solid fa-user"></i> Username: </label>
@@ -157,6 +163,8 @@ if (isset($_POST['club_signup'])) {
         <div class="card mb-3 w-50 mx-auto p-3 border-secondary shadow-lg" id="sign_up_club_card">
             
             <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New Club </h1> 
+            
+            <h3 class="fs-6 text-center text-warning"> <?php echo $msg ?> </h3>
             
             <form action="" method="POST" class="m-2">
                 <div class="mb-3 ">
