@@ -7,8 +7,6 @@ include('config/connect.php');
 
 $username = $_SESSION['name'];
 
-$_SESSION['status'] = 1;
-
 $sql = "SELECT * FROM club_pics where username IN (SELECT follower_name FROM followers WHERE account = '$username')";
 
 
@@ -41,7 +39,7 @@ while($row = mysqli_fetch_array($res))
     <div class="text-center">
        <h4 class="ps-3"> <i class="fa-regular fa-user"></i> <?php echo $row['username']; ?>  </h4>
        <img src="./club_pics/<?php echo $row['post']; ?>"  width="300px" class="p-3 shadow mx-auto" alt="">
-       <h4 class="p-1">  <a href="update.php?id=<?php echo $row['id'] ?>" class="text-decoration-none text-danger" > <i class="fa-regular fa-heart"> </i> </a> <?php echo $row['likes']; ?> likes  </h4>
+       <h4 class="p-1">  <a href="update.php?id=<?php echo $row['id']?>&pic=0" class="text-decoration-none text-danger" > <i class="fa-regular fa-heart"> </i> </a> <?php echo $row['likes']; ?> likes  </h4>
     </div>
     <hr>
    

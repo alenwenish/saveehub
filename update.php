@@ -5,24 +5,24 @@ session_start();
 include('config/connect.php');
 
 $id = $_GET['id'];
-$status =  $_SESSION['status'];
+$status =  $_GET['pic'];
 
-if( $status  % 2 == 1){
+if( $status == 1){
 $query    = " UPDATE image SET likes = likes+1 WHERE id = '$id'"; 
 $result   = mysqli_query($conn, $query);
-$_SESSION['status'] += 1;
+$url = "http://localhost/saveehub/home.php";
+header("Location: $url ");
 
 
-}else{
-$query    = " UPDATE image SET likes = likes-1 WHERE id = '$id'"; 
+}else if($status == 0){
+$query    = " UPDATE club_pics SET likes = likes+1 WHERE id = '$id'"; 
 $result   = mysqli_query($conn, $query);
-$_SESSION['status'] += 1;
+$url = "http://localhost/saveehub/events.php";
+header("Location: $url ");
 
 }
 
-$url = "http://localhost/saveehub/home.php";
 
-header("Location: $url ");
 
 
 ?>
