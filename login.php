@@ -19,12 +19,21 @@ if (isset($_POST['login'])) {
     $query    = "SELECT username FROM login WHERE email='$email' AND  password='$password'"; 
     $result   = mysqli_query($conn, $query);
     $rows = mysqli_num_rows($result);
-  
     $name = $result->fetch_array()['username'];
+
+    $query1    = "SELECT club_name FROM club WHERE club_email='$email' AND  club_password='$password'"; 
+    $result1   = mysqli_query($conn, $query1);
+    $rows1 = mysqli_num_rows($result1);
+    $name1 = $result1->fetch_array()['club_name'];
 
     if ($rows == 1) {
         $_SESSION['name'] = $name; 
         $_SESSION['email'] = $email;
+        header("Location: home.php");
+    }else if($rows1 == 1){
+        $_SESSION['name'] = $name1; 
+        $_SESSION['email'] = $email;
+        $_SESSION['is_club'] = 1;
         header("Location: home.php");
     } 
 }
