@@ -2,26 +2,41 @@
 
 session_start();
 include('config/connect.php');
+$status = $_SESSION['is_club'];
 
 $username = $_SESSION['name'];
 if(isset($_POST['file_submit'])){
 
   $filename = $_FILES["uploadfile"]["name"];
- 
   $tempname = $_FILES["uploadfile"]["tmp_name"];
 
 
-  $folder  = './uploads/'.$filename;
+  if($status == 0){
 
-  $query = "INSERT INTO image(username,post) VALUES ('$username', '$filename')";
-  mysqli_query($conn, $query);
+    $folder  = './uploads/'.$filename;
+    $query = "INSERT INTO image(username,post) VALUES ('$username', '$filename')";
+    mysqli_query($conn, $query);
 
-  if(move_uploaded_file($tempname,$folder)){
-    echo 'POST UPLOADED SUCCESSFULLY';
-  }else{
-    echo 'POST UPLOAD FAILED';
+    if(move_uploaded_file($tempname,$folder)){
+      echo 'POST UPLOADED SUCCESSFULLY';
+    }else{
+      echo 'POST UPLOAD FAILED';
+    }
+
+  }else if($status == 1){
+
+    $folder  = './club_pics/'.$filename;
+    $query = "INSERT INTO club_pics(username,post) VALUES ('$username', '$filename')";
+    mysqli_query($conn, $query);
+
+    if(move_uploaded_file($tempname,$folder)){
+      echo 'POST UPLOADED SUCCESSFULLY';
+    }else{
+      echo 'POST UPLOAD FAILED';
+    }
+
   }
-  
+
 }
 
 
@@ -101,13 +116,9 @@ $follower = $res->fetch_array()['follower'];
         <?php foreach($rows as $row) { ?>
           <h6 class="p-1 card text-center text-secondary ">  <?php echo $row['account']; ?> </h6> <br>
         <?php } ?>
-
-        
+   
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
+     
     </div>
   </div>
 </div>
@@ -133,14 +144,8 @@ $follower = $res->fetch_array()['follower'];
         <?php foreach($rows as $row) { ?>
           <h6 class="p-1 card text-center text-secondary ">  <?php echo $row['follower_name']; ?> </h6> <br>
         <?php } ?>
-
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
-
-
+    
     </div>
   </div>
 </div>
@@ -162,15 +167,26 @@ $follower = $res->fetch_array()['follower'];
 
 
   <?php
+
+  if($status == 0){
+
   $sql = "SELECT * FROM image where username = '$username'";
   $res = mysqli_query($conn,$sql);
   while($data = mysqli_fetch_assoc($res)) {
-    
   ?>
-  
   <img src="./uploads/<?php echo $data['post']; ?>" width="15%" height="10%" alt="">
-  
-  <?php } ?>
+
+  <?php }
+    }else if($status == 1) {
+      
+      $sql = "SELECT * FROM club_pics where username = '$username'";
+      $res = mysqli_query($conn,$sql);
+      while($data = mysqli_fetch_assoc($res)) {
+      
+      ?>
+ <img src="./club_pics/<?php echo $data['post']; ?>" width="15%" height="10%" alt="">
+
+  <?php } } ?>
 
 </div>
 

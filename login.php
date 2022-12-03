@@ -29,6 +29,7 @@ if (isset($_POST['login'])) {
     if ($rows == 1) {
         $_SESSION['name'] = $name; 
         $_SESSION['email'] = $email;
+        $_SESSION['is_club'] = 0;
         header("Location: home.php");
     }else if($rows1 == 1){
         $_SESSION['name'] = $name1; 
