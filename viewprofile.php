@@ -73,8 +73,10 @@ $follower = $res->fetch_array()['follower'];
 
 <div class="row">
       <div class="text-center col-4">
-        <h1 style="font-size:108px"> <i class="fa-regular fa-user"></i>  </h1>
+        <h1 style="font-size:72px"> <i class="fa-regular fa-user"></i>  </h1>
         <p class="fs-3 fw-bold"> <?php echo  $_SESSION['name'] ?> </p>
+
+        <button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#exampleModal2"> Edit Profile</button>
       </div>
 
       <div class="col-8">
@@ -151,7 +153,7 @@ $follower = $res->fetch_array()['follower'];
 </div>
 
 
-
+<br>
 
 
 <div class="w-50 m-auto">
@@ -189,6 +191,30 @@ $follower = $res->fetch_array()['follower'];
   <?php } } ?>
 
 </div>
+
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      
+      </div> 
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <br><br>
