@@ -29,6 +29,14 @@ while($row = mysqli_fetch_array($res1))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friends</title>
     <?php include('header.php') ?>
+
+    <style>
+        #club{
+            display:none;
+        }
+    </style>
+
+    
 </head>
 
 <body>
@@ -36,9 +44,16 @@ while($row = mysqli_fetch_array($res1))
 
     <div class="container">
         <h2 class="fs-2 fw-normal text-secondary pt-4 text-center"> Follow Requests</h2>
-        <h2 class="fs-4 fw-normal text-secondary pt-4 text-center"> Friends</h2>
 
-        <table class="container table w-50 mx-auto mt-3">
+        <div class="text-center pt-3">
+        <button class="fs-5 fw-normal px-4 text-center btn btn-outline-secondary" id="friend_button" onclick = showfriend()> Friends</button>
+        <button class="fs-5 fw-normal px-4 text-center btn btn-outline-secondary" id="club_button" onclick =  showclub()> Clubs</button>
+        </div>
+
+         <br>
+         
+         <div class="text-center mx-auto w-75">
+        <table class="container table w-50 mx-auto mt-3" id="friends"  >
             <?php foreach($rows as $row) { ?>
                 
                 <tr class="fs-4 shadow-sm">
@@ -54,10 +69,10 @@ while($row = mysqli_fetch_array($res1))
             
             <?php } ?>
         </table>
-
-        <h2 class="fs-4 fw-normal text-secondary pt-4 text-center"> Clubs </h2>
-
-        <table class="container table w-50 mx-auto mt-3">
+            </div>
+        
+        <div class="text-center mx-auto w-75">
+        <table class="container table w-50 mx-auto mt-3" id="club">
             <?php foreach($rows1 as $row) { ?>
                 
                 <tr class="fs-4 shadow-sm">
@@ -73,11 +88,30 @@ while($row = mysqli_fetch_array($res1))
             
             <?php } ?>
         </table>
+        </div>
 
     </div>
 
     <br><br><br>
 
     <?php include('footer.php'); ?>
+
+    <script>
+          var friends = document.getElementById('friends');
+          var club = document.getElementById('club');
+
+          function showfriend(){
+            friends.style.display = "block";
+            club.style.display = "none";
+
+        }
+
+        function showclub(){
+            friends.style.display = "none";
+            club.style.display = "block";
+        }
+
+
+    </script>
 </body>
 </html>
