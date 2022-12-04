@@ -1,5 +1,12 @@
 <?php
 
+
+session_start();
+include('config/connect.php');
+$status = $_SESSION['is_club'];
+
+$username = $_SESSION['name'];
+
 $user = $name = $bio = $link = ' ';
 
 if (isset($_POST['update'])) {
@@ -58,7 +65,25 @@ if (isset($_POST['update'])) {
 
 ?>
 
-<form action="" method="POST" class="m-2" enctype="multipart/form-data">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <?php include('header.php'); ?>
+
+</head>
+<body class="container mx-auto w-50 bg-dark" >
+    <br><br>
+    
+
+<div class="p-3 card border border-secondary border-1 shadow">
+
+<h1 class="fs-3 text-center"> Edit Profile</h1>
+    <form action="" method="POST" class="m-2" enctype="multipart/form-data">
 
     <div class=" mb-3 ">
         <label for="Profile" class="form-label "> Profile Pic: </label> <br>
@@ -89,3 +114,7 @@ if (isset($_POST['update'])) {
                     <input type="submit" value="Update" id="update" name="update" class="btn btn-light btn-outline-primary shadow-sm">
                 </div>          
 </form>
+</div>
+
+</body>
+</html>

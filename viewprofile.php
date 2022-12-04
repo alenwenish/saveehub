@@ -85,7 +85,7 @@ $follower = $res->fetch_array()['follower'];
         <img src="./uploads/sunrise.jpeg" class="pt-2" alt="" id="profile_pic">
         <p class="fs-3 fw-bold"> <?php echo  $_SESSION['name'] ?> </p>
 
-        <button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#exampleModal2"> Edit Profile</button>
+        <button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#exampleModal2"> <a href="editprofile.php" class="text-decoration-none text-dark"> Edit Profile </a> </button>
       </div>
 
       <div class="col-8">
@@ -201,22 +201,6 @@ $follower = $res->fetch_array()['follower'];
 
 </div>
 
-
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-      <?php include('editprofile.php'); ?>
-      
-      </div> 
-    </div>
-  </div>
-</div>
 
 
 
