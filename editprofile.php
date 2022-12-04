@@ -1,20 +1,31 @@
 <?php
 
-$username = $name = $bio = $link = ' ';
+$user = $name = $bio = $link = ' ';
 
 if (isset($_POST['update'])) {
 
+    $filename = $_FILES["uploadpic"]["name"];
+    $tempname = $_FILES["uploadpic"]["tmp_name"];
+
+    $folder  = './profile_pics/'.$filename;
+
+   
     $name = stripslashes($_REQUEST['name']);
     $name = mysqli_real_escape_string($conn, $name);
 
-    $username = stripslashes($_REQUEST['username']);
-    $username = mysqli_real_escape_string($conn, $username);
+    $user = stripslashes($_REQUEST['username']);
+    $user = mysqli_real_escape_string($conn, $user);
 
     $bio = stripslashes($_REQUEST['bio']);
     $bio = mysqli_real_escape_string($conn, $bio);
 
     $link = stripslashes($_REQUEST['link']);
     $link = mysqli_real_escape_string($conn, $link);
+
+    $query = "UPDATE login SET pic = '$filename' WHERE username = '$username'";
+    mysqli_query($conn, $query);
+
+    move_uploaded_file($tempname,$folder);
 
     $query    = " UPDATE login SET bio = '$bio' WHERE username = '$username'"; 
     $result   = mysqli_query($conn, $query);
@@ -25,19 +36,33 @@ if (isset($_POST['update'])) {
     $query    = " UPDATE login SET name = '$name' WHERE username = '$username'"; 
     $result   = mysqli_query($conn, $query);
 
-    $query    = " UPDATE login SET username = '$username' WHERE username = '$username'"; 
+    $query    = " UPDATE followers SET account = '$user' WHERE account = '$username'"; 
     $result   = mysqli_query($conn, $query);
 
-    $_SESSION['name'] = $username;    
+    $query    = " UPDATE followers SET follower_name = '$user' WHERE follower_name = '$username'"; 
+    $result   = mysqli_query($conn, $query);
+
+    $query    = " UPDATE image SET username = '$user' WHERE username = '$username'"; 
+    $result   = mysqli_query($conn, $query);
+
+    $query    = " UPDATE login SET username = '$user' WHERE username = '$username'"; 
+    $result   = mysqli_query($conn, $query);
+
+    
+    $_SESSION['name'] = $user;    
+
+    $url = "http://localhost/saveehub/viewprofile.php";
+    header("Location: $url ");
+
 }
 
 ?>
 
-<form action="" method="POST" class="m-2">
+<form action="" method="POST" class="m-2" enctype="multipart/form-data">
 
     <div class=" mb-3 ">
         <label for="Profile" class="form-label "> Profile Pic: </label> <br>
-        <input type="file" name="uploadfile" id="uploadfile" class="form-control border border-dark border-2"  aria-describedby="inputGroupFileAddon04" >    
+        <input type="file" name="uploadpic" id="uploadpic" class="form-control border border-dark border-2"  aria-describedby="inputGroupFileAddon04" >    
     </div>
 
                 <div class="mb-3 ">
