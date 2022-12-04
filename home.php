@@ -16,6 +16,7 @@ $rows = array();
 while($row = mysqli_fetch_array($res))
     $rows[] = $row;
 
+
     
 ?>
 
@@ -36,6 +37,8 @@ while($row = mysqli_fetch_array($res))
     <?php foreach($rows as $row) { ?>
 
     <div class="text-center">
+
+    
        <h4 class="ps-3"> <i class="fa-regular fa-user"></i> <?php echo $row['username']; ?>  </h4>
        <img src="./uploads/<?php echo $row['post']; ?>"  width="300px" class="p-3 shadow mx-auto" alt="">
        <h4 class="p-1">  <a href="update.php?id=<?php echo $row['id']?>&pic=1" class="text-decoration-none text-danger" > <i class="fa-regular fa-heart"> </i> </a> <?php echo $row['likes']; ?> likes  </h4>
