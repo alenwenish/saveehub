@@ -7,7 +7,7 @@ $msg = '';
 $name = $email = $age = $number = $password = ' ';
 if (isset($_POST['signup'])) {
 
-    
+
     $email = stripslashes($_REQUEST['email']);
     $email = mysqli_real_escape_string($conn, $email);
 
@@ -23,31 +23,31 @@ if (isset($_POST['signup'])) {
     $number = stripslashes($_REQUEST['number']);
     $number = mysqli_real_escape_string($conn, $number);
 
-    
+
     $query    = "INSERT INTO login (username,email,password,age,number)
-    VALUES ('$name', '$email', '$password' , '$age', '$number')"; 
-   
+    VALUES ('$name', '$email', '$password' , '$age', '$number')";
+
     $result   = mysqli_query($conn, $query);
 
-    $check_query    = "SELECT no FROM login WHERE email='$email' AND username='$name'";   
-   
+    $check_query    = "SELECT no FROM login WHERE email='$email' AND username='$name'";
+
     $check_result   = mysqli_query($conn, $check_query);
 
     $rows = mysqli_num_rows($check_result);
-  
+
     if ($rows == 1) {
-        $_SESSION['name'] = $name; 
+        $_SESSION['name'] = $name;
         $_SESSION['email'] = $email;
         $msg = "Registration Successful. Log in";
-    }else{
+    } else {
         $msg = "Registration Failed. Retry";
-    } 
+    }
 }
 
 $club_name = $club_email = $club_fc = $club_sc = $club_password = ' ';
 if (isset($_POST['club_signup'])) {
 
-    
+
     $club_email = stripslashes($_REQUEST['club_email']);
     $club_email = mysqli_real_escape_string($conn, $club_email);
 
@@ -63,24 +63,24 @@ if (isset($_POST['club_signup'])) {
     $club_fc = stripslashes($_REQUEST['club_fc']);
     $club_fc = mysqli_real_escape_string($conn, $club_fc);
 
-    
+
     $query    = "INSERT INTO club (club_name, club_email, club_password , club_fc, club_sc)
-    VALUES ('$club_name', '$club_email', '$club_password' , '$club_fc', '$club_sc')"; 
+    VALUES ('$club_name', '$club_email', '$club_password' , '$club_fc', '$club_sc')";
 
     $result   = mysqli_query($conn, $query);
 
-    $check_query    = "SELECT id FROM club WHERE club_email='$club_email' AND club_name='$club_name'";   
+    $check_query    = "SELECT id FROM club WHERE club_email='$club_email' AND club_name='$club_name'";
     $check_result   = mysqli_query($conn, $check_query);
 
     $rows = mysqli_num_rows($check_result);
-  
+
     if ($rows == 1) {
-        $_SESSION['name'] = $club_name; 
+        $_SESSION['name'] = $club_name;
         $_SESSION['email'] = $club_email;
         $msg = "Registration Successful. Log in";
-    }else{
+    } else {
         $msg = "Registration Failed. Retry";
-    } 
+    }
 }
 
 
@@ -88,45 +88,49 @@ if (isset($_POST['club_signup'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-<head>  
+
+<head>
     <title>Login</title>
     <?php include('header.php') ?>
     <style>
-        #signup_body{
+        #signup_body {
             background-image: linear-gradient(to bottom, #d4f5f5, #adc6c6, #889a9a, #647070, #434848);
-          background-repeat: no-repeat;
-          background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
-        #sign_up_card, #sign_up_club_card{
+
+        #sign_up_card,
+        #sign_up_club_card {
             border-radius: 10px 100px 10px 100px;
         }
 
-        #sign_up_club_card{
+        #sign_up_club_card {
             display: none;
         }
     </style>
-   
-    
+
+
 </head>
+
 <body id="signup_body">
     <div class="container">
         <img src="./images/logo1.png" alt="logo" width="15%" height="30%" class="mx-auto  d-block">
 
         <div class="text-center m-2">
-            <button class="btn btn-primary" onclick = showUser()> Join as a Student</button>
-            <button class="btn btn-primary" onclick = showClub()> Join as a Club</button>
+            <button class="btn btn-primary" onclick=showUser()> Join as a Student</button>
+            <button class="btn btn-primary" onclick=showClub()> Join as a Club</button>
         </div>
 
         <div class="card mb-3 w-50 mx-auto p-3 border-secondary shadow-lg" id="sign_up_card">
-            
-            <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New User </h1> 
-            
+
+            <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New User </h1>
+
             <h3 class="fs-6 text-center text-warning"> <?php echo $msg ?> </h3>
 
             <form action="" method="POST" class="m-2">
                 <div class="mb-3 ">
-                    <label for="name" class="form-label ">  <i class="fa-solid fa-user"></i> Username: </label>
-                    <input type="text" class="form-control shadow" id="name" name="name"  required>
+                    <label for="name" class="form-label "> <i class="fa-solid fa-user"></i> Username: </label>
+                    <input type="text" class="form-control shadow" id="name" name="name" required>
                 </div>
 
                 <div class="mb-3">
@@ -141,12 +145,12 @@ if (isset($_POST['club_signup'])) {
 
                 <div class="mb-3 ">
                     <label for="age" class="form-label"> <i class="fa-solid fa-user-pen"></i> Age:</label>
-                    <input type="number" class="form-control shadow" id="age" name="age"  required>
+                    <input type="number" class="form-control shadow" id="age" name="age" required>
                 </div>
 
                 <div class="mb-3 ">
                     <label for="number" class="form-label"> <i class="fa-solid fa-phone"></i> Phone Number:</label>
-                    <input type="text" class="form-control shadow" id="number" name="number" >
+                    <input type="text" class="form-control shadow" id="number" name="number">
                 </div>
 
                 <div class="pt-3  text-center  w-100">
@@ -162,15 +166,15 @@ if (isset($_POST['club_signup'])) {
 
 
         <div class="card mb-3 w-50 mx-auto p-3 border-secondary shadow-lg" id="sign_up_club_card">
-            
-            <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New Club </h1> 
-            
+
+            <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New Club </h1>
+
             <h3 class="fs-6 text-center text-warning"> <?php echo $msg ?> </h3>
-            
+
             <form action="" method="POST" class="m-2">
                 <div class="mb-3 ">
-                    <label for="name" class="form-label ">  <i class="fa-solid fa-user"></i> Club name: </label>
-                    <input type="text" class="form-control shadow" id="club_name" name="club_name"  required>
+                    <label for="name" class="form-label "> <i class="fa-solid fa-user"></i> Club name: </label>
+                    <input type="text" class="form-control shadow" id="club_name" name="club_name" required>
                 </div>
 
                 <div class="mb-3">
@@ -180,12 +184,12 @@ if (isset($_POST['club_signup'])) {
 
                 <div class="mb-3 ">
                     <label for="coord" class="form-label"> <i class="fa-solid fa-user-pen"></i> Student Coordinator:</label>
-                    <input type="text" class="form-control shadow" id="club_sc" name="club_sc"  required>
+                    <input type="text" class="form-control shadow" id="club_sc" name="club_sc" required>
                 </div>
 
                 <div class="mb-3 ">
                     <label for="coord" class="form-label"> <i class="fa-solid fa-user-pen"></i> Faculty Coordinator:</label>
-                    <input type="text" class="form-control shadow" id="club_fc" name="club_fc" >
+                    <input type="text" class="form-control shadow" id="club_fc" name="club_fc">
                 </div>
 
                 <div class="mb-3">
@@ -193,7 +197,7 @@ if (isset($_POST['club_signup'])) {
                     <input type="password" class="form-control shadow" id="club_password" name="club_password" required>
                 </div>
 
-               
+
 
                 <div class="pt-3  text-center  w-100">
                     <input type="submit" value="Register" id="club Sign Up" name="club_signup" class="btn btn-light btn-outline-primary shadow-sm">
@@ -209,23 +213,21 @@ if (isset($_POST['club_signup'])) {
     </div>
 
     <script>
-
         var user = document.getElementById('sign_up_card');
         var club = document.getElementById('sign_up_club_card');
 
-        function showUser(){
+        function showUser() {
             user.style.display = "block";
             club.style.display = "none";
         }
 
-        function showClub(){
+        function showClub() {
             user.style.display = "none";
             club.style.display = "block";
         }
-
-
     </script>
-    
-   
+
+
 </body>
+
 </html>

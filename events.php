@@ -10,17 +10,18 @@ $username = $_SESSION['name'];
 $sql = "SELECT * FROM club_pics where username IN (SELECT follower_name FROM followers WHERE account = '$username')";
 
 
-$res = mysqli_query($conn,$sql);
+$res = mysqli_query($conn, $sql);
 $rows = array();
-while($row = mysqli_fetch_array($res))
+while ($row = mysqli_fetch_array($res))
     $rows[] = $row;
 
-    
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,22 +35,23 @@ while($row = mysqli_fetch_array($res))
 
     <br>
 
-    <?php foreach($rows as $row) { ?>
+    <?php foreach ($rows as $row) { ?>
 
-    <div class="text-center">
-       <h4 class="ps-3"> <i class="fa-regular fa-user"></i> <?php echo $row['username']; ?>  </h4>
-       <img src="./club_pics/<?php echo $row['post']; ?>"  width="300px" class="p-3 shadow mx-auto" alt="">
-       <h4 class="p-1">  <a href="update.php?id=<?php echo $row['id']?>&pic=0" class="text-decoration-none text-danger" > <i class="fa-regular fa-heart"> </i> </a> <?php echo $row['likes']; ?> likes  </h4>
-    </div>
-    <hr>
-   
+        <div class="text-center">
+            <h4 class="ps-3"> <i class="fa-regular fa-user"></i> <?php echo $row['username']; ?> </h4>
+            <img src="./club_pics/<?php echo $row['post']; ?>" width="300px" class="p-3 shadow mx-auto" alt="">
+            <h4 class="p-1"> <a href="update.php?id=<?php echo $row['id'] ?>&pic=0" class="text-decoration-none text-danger"> <i class="fa-regular fa-heart"> </i> </a> <?php echo $row['likes']; ?> likes </h4>
+        </div>
+        <hr>
+
     <?php } ?>
 
     <br><br>
 
 
-    
+
 
     <?php include('footer.php'); ?>
 </body>
+
 </html>
