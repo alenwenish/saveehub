@@ -66,6 +66,14 @@ $follower = $res->fetch_array()['follower'];
           background-repeat: no-repeat;
           background-attachment: fixed;
         }
+        #profile_pic{
+          width: 30%;
+          border-radius : 80px;
+        }
+        #username,#name,#link,#bio{
+          border-bottom: 2px solid black;
+         
+        }
     </style>
 </head>
 
@@ -73,7 +81,8 @@ $follower = $res->fetch_array()['follower'];
 
 <div class="row">
       <div class="text-center col-4">
-        <h1 style="font-size:72px"> <i class="fa-regular fa-user"></i>  </h1>
+        <!-- <h1 style="font-size:72px"> <i class="fa-regular fa-user"></i>  </h1> -->
+        <img src="./uploads/sunrise.jpeg" class="pt-2" alt="" id="profile_pic">
         <p class="fs-3 fw-bold"> <?php echo  $_SESSION['name'] ?> </p>
 
         <button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#exampleModal2"> Edit Profile</button>
@@ -202,6 +211,7 @@ $follower = $res->fetch_array()['follower'];
       </div>
       <div class="modal-body">
 
+      <?php include('editprofile.php'); ?>
       
       </div> 
     </div>
