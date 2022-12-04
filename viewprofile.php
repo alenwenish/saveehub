@@ -49,6 +49,26 @@ $sql = "SELECT count(follower_name) as follower FROM followers WHERE follower_na
 $res = mysqli_query($conn,$sql);
 $follower = $res->fetch_array()['follower'];
 
+$name = $bio = $link = $pic = '';
+
+$sql = "SELECT name  FROM login WHERE username = '$username'";
+$res = mysqli_query($conn,$sql);
+$name = $res->fetch_array()['name'];
+
+$sql = "SELECT bio  FROM login WHERE username = '$username'";
+$res = mysqli_query($conn,$sql);
+$bio = $res->fetch_array()['bio'];
+
+
+$sql = "SELECT link FROM login WHERE username = '$username'";
+$res = mysqli_query($conn,$sql);
+$link = $res->fetch_array()['link'];
+
+$sql = "SELECT pic FROM login where username = '$username'";
+$res = mysqli_query($conn,$sql);
+$pic = $res->fetch_array()['pic'];
+
+
 
 ?>
 
@@ -67,7 +87,8 @@ $follower = $res->fetch_array()['follower'];
           background-attachment: fixed;
         }
         #profile_pic{
-          width: 30%;
+          width: 180px;
+          height : 180px;
           border-radius : 80px;
         }
         #username,#name,#link,#bio{
@@ -81,11 +102,22 @@ $follower = $res->fetch_array()['follower'];
 
 <div class="row">
       <div class="text-center col-4">
-        <!-- <h1 style="font-size:72px"> <i class="fa-regular fa-user"></i>  </h1> -->
-        <img src="./uploads/sunrise.jpeg" class="pt-2" alt="" id="profile_pic">
+
+       <?php if($pic == '') {  ?>
+        <h1 style="font-size:72px"> <i class="fa-regular fa-user"></i>  </h1>
+      <?php }else{ ?>
+        <img src="./profile_pics/<?php echo $pic ?>" class="pt-2" alt="" id="profile_pic">
+      <?php } ?>
+      
         <p class="fs-3 fw-bold"> <?php echo  $_SESSION['name'] ?> </p>
 
-        <button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#exampleModal2"> <a href="editprofile.php" class="text-decoration-none text-dark"> Edit Profile </a> </button>
+        <div class="text-center">
+          <spam class="fw-bolder"> <?php echo $name; ?></spam> <br>  
+          <spam><?php echo $bio; ?></spam> <br>
+          <a href="<?php echo $link ?>"> <?php echo $link; ?> </a>
+
+        </div>
+      <br>
       </div>
 
       <div class="col-8">
@@ -96,12 +128,19 @@ $follower = $res->fetch_array()['follower'];
            <?php echo $follower; ?> 
         </button>
 
-        <div class="col bg-dark text-warning fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+        <button class="col bg-dark text-warning fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
             Following <br>
             <?php echo $following; ?> 
-        </div>
+      </button>
 
       </div>
+
+      <br>
+
+      
+      <button class="btn btn-warning text-center mx-auto d-block w-75 " data-bs-toggle="modal" data-bs-target="#exampleModal2"> <a href="editprofile.php" class="text-decoration-none text-dark"> Edit Profile </a> </button>
+    
+
       </div>
 </div>
 
@@ -211,7 +250,7 @@ $follower = $res->fetch_array()['follower'];
 
 
     
-<br><br>
+<br><br> <br>
     <?php include('footer.php'); ?>
 </body>
 </html>
