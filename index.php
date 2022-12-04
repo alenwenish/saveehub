@@ -29,7 +29,8 @@ if (isset($_POST['signup'])) {
    
     $result   = mysqli_query($conn, $query);
 
-    $check_query    = "SELECT no FROM login WHERE email='$email' AND usename='$name'";   
+    $check_query    = "SELECT no FROM login WHERE email='$email' AND username='$name'";   
+   
     $check_result   = mysqli_query($conn, $check_query);
 
     $rows = mysqli_num_rows($check_result);
