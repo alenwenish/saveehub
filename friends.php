@@ -4,7 +4,7 @@ session_start();
 include('config/connect.php');
 
 $username = $_SESSION['name'];
-$sql = "SELECT username FROM login where username NOT IN (SELECT follower_name FROM followers WHERE account = '$username') AND username != '$username'";
+$sql = "SELECT username,pic FROM login where username NOT IN (SELECT follower_name FROM followers WHERE account = '$username') AND username != '$username'";
 
 $res = mysqli_query($conn, $sql);
 $rows = array();
@@ -35,6 +35,12 @@ while ($row = mysqli_fetch_array($res1))
         #club {
             display: none;
         }
+
+        .friends_pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 80px;
+        }
     </style>
 
 
@@ -58,7 +64,13 @@ while ($row = mysqli_fetch_array($res1))
                 <?php foreach ($rows as $row) { ?>
 
                     <tr class="fs-4 shadow-sm">
-                        <td class="py-2 px-3"> <i class="fa-regular fa-user"></i> </td>
+
+                        <?php if($row['pic'] != ''){ ?> 
+                        <td class="py-2 px-3"> <img src="./profile_pics/<?php echo $row['pic']; ?>" alt="" class="friends_pic"> </td>
+                        <?php }else{ ?> 
+                        <td class="py-2 px-3">  <i class="fa-regular fa-user"></i>  </td>
+                        <?php } ?>
+
                         <td class="py-2 px-3"> <?php echo $row['username']; ?> </td>
                         <td class="py-2 px-3">
                             <a href="addfollower.php?acc=<?php echo $username; ?>&follower=<?php echo $row['username']; ?> ">
