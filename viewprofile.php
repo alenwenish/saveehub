@@ -80,7 +80,7 @@ $pic = $res->fetch_array()['pic'];
   <?php include('header.php'); ?>
   <style>
     #view_profile {
-      background-image: linear-gradient(to bottom, #e2f0f0, #e5f3f3, #e8f6f6, #ecf9f9, #effcfc);
+      /* background-image: linear-gradient(to bottom, #e2f0f0, #e5f3f3, #e8f6f6, #ecf9f9, #effcfc); */
       background-repeat: no-repeat;
       background-attachment: fixed;
     }
@@ -96,15 +96,23 @@ $pic = $res->fetch_array()['pic'];
     #link,
     #bio {
       border-bottom: 2px solid black;
-
     }
+
+    #box1{
+      border: 2px solid black;
+      margin: 20px;
+      border-radius: 20em 1em 40em / 5em 30em;
+      background-image: linear-gradient(to bottom, #292f2f, #3b4141, #4f5454, #636868, #787d7d);
+    }
+
+    
   </style>
 </head>
 
 <body id="view_profile">
 
-  <div class="row">
-    <div class="text-center col-4">
+  <div class="row p-2" id="box1">
+    <div class="text-center col-4 text-warning ">
 
       <?php if ($pic == '') {  ?>
         <h1 style="font-size:72px"> <i class="fa-regular fa-user"></i> </h1>
@@ -117,7 +125,7 @@ $pic = $res->fetch_array()['pic'];
       <div class="text-center">
         <spam class="fw-bolder"> <?php echo $name; ?></spam> <br>
         <spam><?php echo $bio; ?></spam> <br>
-        <a href="<?php echo $link ?>"> <?php echo $link; ?> </a>
+        <a href="<?php echo $link ?>" class="text-white"> <?php echo $link; ?> </a>
 
       </div>
       <br>
@@ -126,12 +134,12 @@ $pic = $res->fetch_array()['pic'];
     <div class="col-8">
       <div class="row text-center pt-3 pe-3 mx-auto">
 
-        <button class="col bg-dark text-warning fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button class="col bg-secondary text-warning rounded-pill fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Followers <br>
           <?php echo $follower; ?>
         </button>
 
-        <button class="col bg-dark text-warning fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+        <button class="col bg-secondary text-warning rounded-pill fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
           Following <br>
           <?php echo $following; ?>
         </button>
@@ -147,7 +155,7 @@ $pic = $res->fetch_array()['pic'];
         <form action="" method="POST" enctype="multipart/form-data">
           <div class="input-group">
             <input type="file" name="uploadfile" id="uploadfile" class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
-            <button class="btn btn-outline-success" type="submit" name="file_submit" id="inputGroupFileAddon04">Upload</button>
+            <button class="btn btn-outline-warning" type="submit" name="file_submit" id="inputGroupFileAddon04">Upload</button>
           </div>
         </form>
       </div>
@@ -212,21 +220,9 @@ $pic = $res->fetch_array()['pic'];
   </div>
 
 
-  <br>
-
-
-  <!-- <div class="w-50 m-auto">
-  <form action="" method="POST"  enctype="multipart/form-data">
-      <div class="input-group">
-        <input type="file" name="uploadfile" id="uploadfile" class="form-control border border-dark border-2"  aria-describedby="inputGroupFileAddon04" >
-        <button class="btn btn-outline-success" type="submit" name="file_submit" id="inputGroupFileAddon04">Upload</button>
-      </div>
-  </form>
-</div> -->
-  <br><br>
+  <h3 class="text-secondary fw-normal text-center ">Your posts</h3>
+  
   <div class="container  p-1">
-
-
     <?php
 
     if ($status == 0) {
