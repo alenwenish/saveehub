@@ -1,9 +1,12 @@
 <style>
   #profile_pic {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 80px;
+  }
 
+  #navigation{
+   background-image: linear-gradient(to bottom, #656d6d, #838b8b, #a3aaaa, #c4caca, #e6ebeb);
   }
 </style>
 <?php
@@ -18,11 +21,11 @@ $pic = $res->fetch_array()['pic'];
 
 <div>
 
-  <nav class="navbar navbar-expand-sm shadow  navbar-inverse navbar-fixed-top  navbar-dark " style="background-color:#F5FCFF">
+  <nav class="navbar navbar-expand-sm shadow  bg-dark navbar-inverse fixed-top  navbar-dark " style="background-color:#F5FCFF" id="navigation">
 
-    <a class="nav-link text-black float-start text-warning fs-2 ps-4" href="">
+  &nbsp;
 
-
+    <a class="nav-link text-black float-start text-warning fs-4 ps-4" href="">
 
       <?php if ($pic == '') {  ?>
         <i class="fa-regular fa-user"></i>
@@ -34,8 +37,9 @@ $pic = $res->fetch_array()['pic'];
 
       <?php echo  $_SESSION['name'] ?> </a>
 
-    <img src="images/logo1.png" class="d-block mx-auto" width="120px" height="10%">
+    <img src="images/logo1.png" class="d-block mx-auto" width="100px" height="10%">
     <a class="nav-link text-black float-end text-warning fs-3" href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
 
   </nav>
 </div>
+<br><br><br><br>

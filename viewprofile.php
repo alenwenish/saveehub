@@ -105,6 +105,10 @@ $pic = $res->fetch_array()['pic'];
       background-image: linear-gradient(to bottom, #292f2f, #3b4141, #4f5454, #636868, #787d7d);
     }
 
+    #followers,#following{
+      background-image: linear-gradient(to bottom, #656d6d, #525959, #3f4646, #2e3434, #1d2323);
+    }
+
     
   </style>
 </head>
@@ -134,12 +138,12 @@ $pic = $res->fetch_array()['pic'];
     <div class="col-8">
       <div class="row text-center pt-3 pe-3 mx-auto">
 
-        <button class="col bg-secondary text-warning rounded-pill fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button class="col text-warning rounded-pill fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" id="followers">
           Followers <br>
           <?php echo $follower; ?>
         </button>
 
-        <button class="col bg-secondary text-warning rounded-pill fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+        <button class="col text-warning rounded-pill fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" id="following">
           Following <br>
           <?php echo $following; ?>
         </button>
@@ -155,7 +159,7 @@ $pic = $res->fetch_array()['pic'];
         <form action="" method="POST" enctype="multipart/form-data">
           <div class="input-group">
             <input type="file" name="uploadfile" id="uploadfile" class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
-            <button class="btn btn-outline-warning" type="submit" name="file_submit" id="inputGroupFileAddon04">Upload</button>
+            <button class="btn btn-warning" type="submit" name="file_submit" id="inputGroupFileAddon04">Upload</button>
           </div>
         </form>
       </div>
