@@ -168,8 +168,8 @@ if (isset($_POST['club_signup'])) {
         <img src="./images/logo1.png" alt="logo" width="15%" height="30%" class="mx-auto  d-block">
 
         <div class="text-center m-2">
-            <button class="btn btn-primary" onclick=showUser() id="student_button"> Join as a Student</button>
-            <button class="btn btn-primary" onclick=showClub() id="club_button"> Join as a Club</button>
+            <button class="btn btn-outline-dark" onclick=showUser() id="student_button"> Join as a Student</button>
+            <button class="btn btn-outline-dark" onclick=showClub() id="club_button"> Join as a Club</button>
         </div>
 
         <br>

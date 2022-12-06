@@ -55,7 +55,29 @@ if (isset($_POST['login'])) {
         }
 
         #login_card {
-            border-radius: 100px 10px 100px 10px;
+            border-radius: 100px 100px 100px 100px;
+            box-shadow: 0 0 35px 1px black;
+            animation: shadows 2s infinite;
+            border: 1px solid gold;
+        }
+
+        @keyframes shadows {
+            0% {
+                text-shadow: gold 0 0 10px;
+            }
+
+            50% {
+                text-shadow: goldenrod 0 0 10px;
+            }
+
+            75% {
+                text-shadow: darkorange 0 0 10px;
+            }
+
+            100% {
+                text-shadow: yellow 0 0 100px;
+            }
+
         }
 
         .custom-shape-divider-bottom-1670230400 {
@@ -77,8 +99,6 @@ if (isset($_POST['login'])) {
         .custom-shape-divider-bottom-1670230400 .shape-fill {
             fill: #A5D5F3;
         }
-
-        
     </style>
 
 
@@ -94,7 +114,7 @@ if (isset($_POST['login'])) {
 
     <div class="container position-relative">
         <img src="./images/logo1.png" alt="logo" width="40%" height="30%" class="mx-auto  d-block ">
-        <div class="card mb-3 w-50 mx-auto p-3 border-secondary shadow-lg" id="login_card">
+        <div class="card mb-3 w-50 mx-auto p-3 border-secondary" id="login_card">
 
             <h1 class="fs-1 text-center text-secondary"> Login </h1>
 
