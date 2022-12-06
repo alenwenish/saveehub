@@ -242,11 +242,17 @@ $pic = $res->fetch_array()['pic'];
           <div class="modal-dialog">
             <div class="modal-content">
 
+              <div class="modal-header">
+                <img src="./profile_pics/<?php echo $pic ?>" class="pt-2 " alt="" style=" width: 50px; height: 50px; border-radius: 80px;"> &nbsp; &nbsp;
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo $data['username']; ?> </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
               <div class="modal-body">
                 <img src="./uploads/<?php echo $data['post']; ?>" width="100%" height="100%" alt="">
                 <br>
                 &nbsp;
-                <i class="fa-regular fa-heart text-danger fs-3"> </i>
+                <i class="fa-regular fa-heart text-danger fs-3"> </i> &nbsp;
                 <span class="fs-4"><?php echo $data['likes']; ?> likes </span>
 
               </div>
