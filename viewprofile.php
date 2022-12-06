@@ -98,7 +98,7 @@ $pic = $res->fetch_array()['pic'];
       border-bottom: 2px solid black;
     }
 
-    #box1{
+    #box1 {
       border: 2px solid black;
       margin: 20px;
       border-radius: 20em 1em 40em / 5em 30em;
@@ -106,11 +106,10 @@ $pic = $res->fetch_array()['pic'];
       box-shadow: 0 0 10px 1px black;
     }
 
-    #followers,#following{
+    #followers,
+    #following {
       background-image: linear-gradient(to bottom, #656d6d, #525959, #3f4646, #2e3434, #1d2323);
     }
-
-    
   </style>
 </head>
 
@@ -226,7 +225,7 @@ $pic = $res->fetch_array()['pic'];
 
 
   <h3 class="text-secondary fw-normal text-center ">Your posts</h3>
-  
+
   <div class="container  p-1">
     <?php
 
@@ -236,7 +235,28 @@ $pic = $res->fetch_array()['pic'];
       $res = mysqli_query($conn, $sql);
       while ($data = mysqli_fetch_assoc($res)) {
     ?>
-        <img src="./uploads/<?php echo $data['post']; ?>"  width="15%" height="10%" alt="">
+
+        <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="10%" alt="" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $data['username']; ?><?php echo $data['id']; ?>">
+
+        <div class="modal fade" id="<?php echo $data['username']; ?><?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-body">
+                <img src="./uploads/<?php echo $data['post']; ?>" width="100%" height="100%" alt="">
+                <br>
+                &nbsp;
+                <i class="fa-regular fa-heart text-danger fs-3"> </i>
+                <span class="fs-4"><?php echo $data['likes']; ?> likes </span>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
 
       <?php }
     } else if ($status == 1) {
@@ -252,6 +272,7 @@ $pic = $res->fetch_array()['pic'];
     } ?>
 
   </div>
+
 
 
 
