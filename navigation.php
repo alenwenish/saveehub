@@ -21,7 +21,7 @@ $pic = $res->fetch_array()['pic'];
 
 <div>
 
-  <nav class="navbar navbar-expand-sm shadow  bg-dark navbar-inverse fixed-top  navbar-dark " style="background-color:#F5FCFF" id="navigation">
+  <nav class="navbar navbar-expand-sm shadow  bg-dark navbar-inverse fixed-top  navbar-dark" style="background-color:#F5FCFF" id="navigation">
 
   &nbsp;
 

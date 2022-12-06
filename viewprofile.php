@@ -103,6 +103,7 @@ $pic = $res->fetch_array()['pic'];
       margin: 20px;
       border-radius: 20em 1em 40em / 5em 30em;
       background-image: linear-gradient(to bottom, #292f2f, #3b4141, #4f5454, #636868, #787d7d);
+      box-shadow: 0 0 10px 1px black;
     }
 
     #followers,#following{
@@ -235,7 +236,7 @@ $pic = $res->fetch_array()['pic'];
       $res = mysqli_query($conn, $sql);
       while ($data = mysqli_fetch_assoc($res)) {
     ?>
-        <img src="./uploads/<?php echo $data['post']; ?>" width="15%" height="10%" alt="">
+        <img src="./uploads/<?php echo $data['post']; ?>"  width="15%" height="10%" alt="">
 
       <?php }
     } else if ($status == 1) {
