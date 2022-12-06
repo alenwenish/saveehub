@@ -101,7 +101,29 @@ if (isset($_POST['club_signup'])) {
 
         #sign_up_card,
         #sign_up_club_card {
-            border-radius: 10px 100px 10px 100px;
+            border-radius: 100px 100px 100px 100px;
+            box-shadow: 0 0 40px 1px #48abe0;
+            animation: shadows 2s infinite;
+            border: 1px solid gold;
+        }
+
+        @keyframes shadows {
+            0% {
+                text-shadow: gold 0 0 10px;
+            }
+
+            50% {
+                text-shadow: goldenrod 0 0 10px;
+            }
+
+            75% {
+                text-shadow: darkorange 0 0 10px;
+            }
+
+            100% {
+                text-shadow: yellow 0 0 100px;
+            }
+
         }
 
         #sign_up_club_card {
@@ -126,7 +148,7 @@ if (isset($_POST['club_signup'])) {
         }
 
         .custom-shape-divider-top-1670231206 .shape-fill {
-           fill :lightcyan;
+            fill: lightcyan;
         }
     </style>
 
@@ -146,11 +168,12 @@ if (isset($_POST['club_signup'])) {
         <img src="./images/logo1.png" alt="logo" width="15%" height="30%" class="mx-auto  d-block">
 
         <div class="text-center m-2">
-            <button class="btn btn-primary" onclick=showUser()> Join as a Student</button>
-            <button class="btn btn-primary" onclick=showClub()> Join as a Club</button>
+            <button class="btn btn-primary" onclick=showUser() id="student_button"> Join as a Student</button>
+            <button class="btn btn-primary" onclick=showClub() id="club_button"> Join as a Club</button>
         </div>
 
-        <div class="card mb-3 w-50 mx-auto p-3 border-secondary shadow-lg" id="sign_up_card">
+        <br>
+        <div class="card mb-3 w-50 mx-auto p-3 " id="sign_up_card">
 
             <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New User </h1>
 
@@ -194,7 +217,7 @@ if (isset($_POST['club_signup'])) {
         </div>
 
 
-        <div class="card mb-3 w-50 mx-auto p-3 border-secondary shadow-lg" id="sign_up_club_card">
+        <div class="card mb-3 w-50 mx-auto p-3 " id="sign_up_club_card">
 
             <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New Club </h1>
 
