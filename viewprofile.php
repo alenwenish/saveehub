@@ -4,7 +4,10 @@ session_start();
 include('config/connect.php');
 $status = $_SESSION['is_club'];
 
+
 $username = $_SESSION['name'];
+$name = $bio = $link = $pic = '';
+
 if (isset($_POST['file_submit'])) {
 
   $filename = $_FILES["uploadfile"]["name"];
@@ -22,6 +25,23 @@ if (isset($_POST['file_submit'])) {
     } else {
       echo 'POST UPLOAD FAILED';
     }
+
+    $sql = "SELECT name  FROM login WHERE username = '$username'";
+    $res = mysqli_query($conn, $sql);
+    $name = $res->fetch_array()['name'];
+
+    $sql = "SELECT bio  FROM login WHERE username = '$username'";
+    $res = mysqli_query($conn, $sql);
+    $bio = $res->fetch_array()['bio'];
+
+    $sql = "SELECT link FROM login WHERE username = '$username'";
+    $res = mysqli_query($conn, $sql);
+    $link = $res->fetch_array()['link'];
+
+    $sql = "SELECT pic FROM login where username = '$username'";
+    $res = mysqli_query($conn, $sql);
+    $pic = $res->fetch_array()['pic'];
+
   } else if ($status == 1) {
 
     $folder  = './club_pics/' . $filename;
@@ -33,6 +53,22 @@ if (isset($_POST['file_submit'])) {
     } else {
       echo 'POST UPLOAD FAILED';
     }
+
+    $sql = "SELECT name  FROM club WHERE club_name = '$username'";
+    $res = mysqli_query($conn, $sql);
+    $name = $res->fetch_array()['name'];
+
+    $sql = "SELECT bio  FROM club WHERE club_name = '$username'";
+    $res = mysqli_query($conn, $sql);
+    $bio = $res->fetch_array()['bio'];
+
+    $sql = "SELECT link FROM club WHERE club_name = '$username'";
+    $res = mysqli_query($conn, $sql);
+    $link = $res->fetch_array()['link'];
+
+    $sql = "SELECT pic FROM club where club_name = '$username'";
+    $res = mysqli_query($conn, $sql);
+    $pic = $res->fetch_array()['pic'];
   }
 }
 
@@ -45,26 +81,6 @@ $following = $res->fetch_array()['following'];
 $sql = "SELECT count(follower_name) as follower FROM followers WHERE follower_name = '$username'";
 $res = mysqli_query($conn, $sql);
 $follower = $res->fetch_array()['follower'];
-
-$name = $bio = $link = $pic = '';
-
-$sql = "SELECT name  FROM login WHERE username = '$username'";
-$res = mysqli_query($conn, $sql);
-$name = $res->fetch_array()['name'];
-
-$sql = "SELECT bio  FROM login WHERE username = '$username'";
-$res = mysqli_query($conn, $sql);
-$bio = $res->fetch_array()['bio'];
-
-
-$sql = "SELECT link FROM login WHERE username = '$username'";
-$res = mysqli_query($conn, $sql);
-$link = $res->fetch_array()['link'];
-
-$sql = "SELECT pic FROM login where username = '$username'";
-$res = mysqli_query($conn, $sql);
-$pic = $res->fetch_array()['pic'];
-
 
 
 ?>
@@ -103,6 +119,7 @@ $pic = $res->fetch_array()['pic'];
       margin: 20px;
       border-radius: 20em 1em 40em / 5em 30em;
       background-image: linear-gradient(to bottom, #292f2f, #3b4141, #4f5454, #636868, #787d7d);
+      /* background-image: linear-gradient(to bottom, #76e3e9, #8de5ea, #a1e7ea, #b3e9eb, #c4ebec); */
       box-shadow: 0 0 10px 1px black;
     }
 
@@ -157,7 +174,7 @@ $pic = $res->fetch_array()['pic'];
       <div class="w-75 m-auto">
 
         <form action="" method="POST" enctype="multipart/form-data">
-          <div class="input-group">
+          <div class="input-group mb-1">
             <input type="file" name="uploadfile" id="uploadfile" class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
             <button class="btn btn-warning" type="submit" name="file_submit" id="inputGroupFileAddon04">Upload</button>
           </div>
@@ -236,8 +253,8 @@ $pic = $res->fetch_array()['pic'];
       while ($data = mysqli_fetch_assoc($res)) {
     ?>
 
-       
-          <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="10%" alt="" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $data['username']; ?><?php echo $data['id']; ?>">
+
+        <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="10%" alt="" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $data['username']; ?><?php echo $data['id']; ?>">
 
 
         <div class="modal fade" id="<?php echo $data['username']; ?><?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
