@@ -11,7 +11,7 @@ $rows = array();
 while ($row = mysqli_fetch_array($res))
     $rows[] = $row;
 
-$sql1 = "SELECT club_name FROM club where club_name NOT IN (SELECT follower_name FROM followers WHERE account = '$username') AND club_name != '$username'";
+$sql1 = "SELECT club_name,pic FROM club where club_name NOT IN (SELECT follower_name FROM followers WHERE account = '$username') AND club_name != '$username'";
 
 $res1 = mysqli_query($conn, $sql1);
 $rows1 = array();
@@ -65,10 +65,10 @@ while ($row = mysqli_fetch_array($res1))
 
                     <tr class="fs-4 shadow-sm">
 
-                        <?php if($row['pic'] != ''){ ?> 
-                        <td class="py-2 px-3"> <img src="./profile_pics/<?php echo $row['pic']; ?>" alt="" class="friends_pic"> </td>
-                        <?php }else{ ?> 
-                        <td class="py-2 px-3">  <i class="fa-regular fa-user"></i>  </td>
+                        <?php if ($row['pic'] != '') { ?>
+                            <td class="py-2 px-3"> <img src="./profile_pics/<?php echo $row['pic']; ?>" alt="" class="friends_pic"> </td>
+                        <?php } else { ?>
+                            <td class="py-2 px-3"> <i class="fa-regular fa-user"></i> </td>
                         <?php } ?>
 
                         <td class="py-2 px-3"> <?php echo $row['username']; ?> </td>
@@ -89,7 +89,13 @@ while ($row = mysqli_fetch_array($res1))
                 <?php foreach ($rows1 as $row) { ?>
 
                     <tr class="fs-4 shadow-sm">
-                        <td class="py-2 px-3"> <i class="fa-regular fa-user"></i> </td>
+
+                        <?php if ($row['pic'] != '') { ?>
+                            <td class="py-2 px-3"> <img src="./club_pics/<?php echo $row['pic']; ?>" alt="" class="friends_pic"> </td>
+                        <?php } else { ?>
+                            <td class="py-2 px-3"> <i class="fa-regular fa-user"></i> </td>
+                        <?php } ?>
+
                         <td class="py-2 px-3"> <?php echo $row['club_name']; ?> </td>
                         <td class="py-2 px-3">
                             <a href="addfollower.php?acc=<?php echo $username; ?>&follower=<?php echo $row['club_name']; ?> ">

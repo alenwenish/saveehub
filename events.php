@@ -28,6 +28,13 @@ while ($row = mysqli_fetch_array($res))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events</title>
     <?php include('header.php') ?>
+    <style>
+        .club_pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 80px;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,7 +46,21 @@ while ($row = mysqli_fetch_array($res))
 
         <div class="text-center">
             <h4 class="ps-3">
-                <i class="fa-regular fa-user"></i> <?php echo $row['username']; ?>
+                <?php
+                $pic = '';
+                $name = $row['username'];
+                $sql = "SELECT pic FROM club where club_name = '$name'";
+                $res = mysqli_query($conn, $sql);
+                
+                $pic = $res->fetch_array()['pic'];
+                if ($pic == '') { ?>
+                    <i class="fa-regular fa-user"></i>
+                <?php } else { ?>
+                    <img src="./profile_pics/<?php echo $pic; ?>" alt="" class="club_pic">
+                <?php } ?>
+
+
+                <?php echo $row['username']; ?>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <span>
                     <i class="fa-solid fa-ellipsis-vertical btn" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Save Post">

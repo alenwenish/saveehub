@@ -10,12 +10,20 @@
   }
 </style>
 <?php
+$status = $_SESSION['is_club'];
 
 $pic = '';
+
+if($status == 0){
 
 $sql = "SELECT pic FROM login where username = '$username'";
 $res = mysqli_query($conn, $sql);
 $pic = $res->fetch_array()['pic'];
+}else if($status == 1){
+  $sql = "SELECT pic FROM club where club_name = '$username'";
+$res = mysqli_query($conn, $sql);
+$pic = $res->fetch_array()['pic'];
+}
 
 ?>
 
