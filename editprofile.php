@@ -11,6 +11,8 @@ $user = $name = $bio = $link = ' ';
 
 if (isset($_POST['update'])) {
 
+
+
     $filename = $_FILES["uploadpic"]["name"];
     $tempname = $_FILES["uploadpic"]["tmp_name"];
 
@@ -29,37 +31,73 @@ if (isset($_POST['update'])) {
     $link = stripslashes($_REQUEST['link']);
     $link = mysqli_real_escape_string($conn, $link);
 
-    $query = "UPDATE login SET pic = '$filename' WHERE username = '$username'";
-    mysqli_query($conn, $query);
+    if ($status == 0) {
 
-    move_uploaded_file($tempname, $folder);
+        $query = "UPDATE login SET pic = '$filename' WHERE username = '$username'";
+        mysqli_query($conn, $query);
 
-    $query    = " UPDATE login SET bio = '$bio' WHERE username = '$username'";
-    $result   = mysqli_query($conn, $query);
+        move_uploaded_file($tempname, $folder);
 
-    $query    = " UPDATE login SET link = '$link' WHERE username = '$username'";
-    $result   = mysqli_query($conn, $query);
+        $query    = " UPDATE login SET bio = '$bio' WHERE username = '$username'";
+        $result   = mysqli_query($conn, $query);
 
-    $query    = " UPDATE login SET name = '$name' WHERE username = '$username'";
-    $result   = mysqli_query($conn, $query);
+        $query    = " UPDATE login SET link = '$link' WHERE username = '$username'";
+        $result   = mysqli_query($conn, $query);
 
-    $query    = " UPDATE followers SET account = '$user' WHERE account = '$username'";
-    $result   = mysqli_query($conn, $query);
+        $query    = " UPDATE login SET name = '$name' WHERE username = '$username'";
+        $result   = mysqli_query($conn, $query);
 
-    $query    = " UPDATE followers SET follower_name = '$user' WHERE follower_name = '$username'";
-    $result   = mysqli_query($conn, $query);
+        $query    = " UPDATE followers SET account = '$user' WHERE account = '$username'";
+        $result   = mysqli_query($conn, $query);
 
-    $query    = " UPDATE image SET username = '$user' WHERE username = '$username'";
-    $result   = mysqli_query($conn, $query);
+        $query    = " UPDATE followers SET follower_name = '$user' WHERE follower_name = '$username'";
+        $result   = mysqli_query($conn, $query);
 
-    $query    = " UPDATE login SET username = '$user' WHERE username = '$username'";
-    $result   = mysqli_query($conn, $query);
+        $query    = " UPDATE image SET username = '$user' WHERE username = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query    = " UPDATE login SET username = '$user' WHERE username = '$username'";
+        $result   = mysqli_query($conn, $query);
 
 
-    $_SESSION['name'] = $user;
+        $_SESSION['name'] = $user;
 
-    $url = "http://localhost/saveehub/viewprofile.php";
-    header("Location: $url ");
+        $url = "http://localhost/saveehub/viewprofile.php";
+        header("Location: $url ");
+    } else if ($status == 1) {
+
+        $query = "UPDATE club SET pic = '$filename' WHERE club_name = '$username'";
+        mysqli_query($conn, $query);
+
+        move_uploaded_file($tempname, $folder);
+
+        $query    = " UPDATE club SET bio = '$bio' WHERE  club_name = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query    = " UPDATE club SET link = '$link' WHERE  club_name = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query    = " UPDATE club SET name = '$name' WHERE  club_name = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query    = " UPDATE followers SET account = '$user' WHERE account = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query    = " UPDATE followers SET follower_name = '$user' WHERE follower_name = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query    = " UPDATE club_pics SET username = '$user' WHERE username = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query    = " UPDATE club SET username = '$user' WHERE  club_name = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+
+        $_SESSION['name'] = $user;
+
+        $url = "http://localhost/saveehub/viewprofile.php";
+        header("Location: $url ");
+    }
 }
 
 ?>
@@ -92,7 +130,7 @@ if (isset($_POST['update'])) {
             </div>
 
             <div class="mb-3 ">
-                <label for="username" class="form-label "> Username: </label>
+                <label for="username" class="form-label "> Username/Clubname: </label>
                 <input type="text" class="form-control shadow" id="username" name="username" value="<?php echo $username ?>" required>
             </div>
 
