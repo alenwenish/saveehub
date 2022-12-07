@@ -1,6 +1,6 @@
 <style>
-  #footer{
-    border-radius : 150px 150px 0px 0px;
+  #footer {
+    border-radius: 150px 150px 0px 0px;
   }
 </style>
 
@@ -14,8 +14,14 @@
 
       <li class="nav-item">
         <a class="nav-link text-white " href="events.php"> &nbsp;
+          <i class="fa-solid fa-people-group"></i></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white " href="search.php"> &nbsp;
           <i class="fa-solid fa-magnifying-glass"></i></a>
       </li>
+
 
       <li class="nav-item">
         <a class="nav-link text-white " href="friends.php"> &nbsp;

@@ -60,7 +60,7 @@ while ($row = mysqli_fetch_array($res1))
         <br>
 
         <div class="text-center mx-auto w-75">
-            <table class="container table w-50 mx-auto mt-3" id="friends">
+            <table class="table w-50 mx-auto mt-3" id="friends">
                 <?php foreach ($rows as $row) { ?>
 
                     <tr class="fs-4 shadow-sm">

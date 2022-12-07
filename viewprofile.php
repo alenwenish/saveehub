@@ -236,7 +236,9 @@ $pic = $res->fetch_array()['pic'];
       while ($data = mysqli_fetch_assoc($res)) {
     ?>
 
-        <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="10%" alt="" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $data['username']; ?><?php echo $data['id']; ?>">
+       
+          <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="10%" alt="" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $data['username']; ?><?php echo $data['id']; ?>">
+
 
         <div class="modal fade" id="<?php echo $data['username']; ?><?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
