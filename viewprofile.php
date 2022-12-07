@@ -294,7 +294,30 @@ if ($status == 0) {
       while ($data = mysqli_fetch_assoc($res)) {
 
       ?>
-        <img src="./club_pics/<?php echo $data['post']; ?>" width="15%" height="10%" alt="">
+        <img src="./club_pics/<?php echo $data['post']; ?>" width="25%" height="10%" alt="" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $data['username'][0]; ?><?php echo $data['id']; ?>">
+
+
+        <div class="modal fade" id="<?php echo $data['username'][0]; ?><?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <img src="./profile_pics/<?php echo $pic ?>" class="pt-2 " alt="" style=" width: 50px; height: 50px; border-radius: 80px;"> &nbsp; &nbsp;
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo $data['username']; ?> </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <div class="modal-body">
+                <img src="./club_pics/<?php echo $data['post']; ?>" width="100%" height="100%" alt="">
+                <br>
+                &nbsp;
+                <i class="fa-regular fa-heart text-danger fs-3"> </i> &nbsp;
+                <span class="fs-4"><?php echo $data['likes']; ?> likes </span>
+
+              </div>
+            </div>
+          </div>
+        </div>
 
     <?php }
     } ?>
