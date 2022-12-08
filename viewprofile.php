@@ -7,42 +7,6 @@ $status = $_SESSION['is_club'];
 
 $username = $_SESSION['name'];
 $name = $bio = $link = $pic = '';
-$success = '';
-
-echo $success;
-
-if (isset($_POST['file_submit'])) {
-
-  $filename = $_FILES["uploadfile"]["name"];
-  $tempname = $_FILES["uploadfile"]["tmp_name"];
-
-
-  if ($status == 0) {
-
-    $folder  = './uploads/' . $filename;
-    $query = "INSERT INTO image(username,post) VALUES ('$username', '$filename')";
-    mysqli_query($conn, $query);
-
-    if (move_uploaded_file($tempname, $folder)) {
-      $success = 1;
-    } else {
-      $success = 0;
-    }
-  } else if ($status == 1) {
-
-    $folder  = './club_pics/' . $filename;
-    $query = "INSERT INTO club_pics(username,post) VALUES ('$username', '$filename')";
-    mysqli_query($conn, $query);
-
-    if (move_uploaded_file($tempname, $folder)) {
-      $success = 1;
-    } else {
-      $success = 0;
-    }
-
-  }
-
-}
 
 
 $sql = "SELECT count(follower_name) as following FROM followers WHERE account = '$username'";
@@ -180,13 +144,10 @@ if ($status == 0) {
       <br>
 
       <div class="w-75 m-auto">
-
-        <form action="" method="POST" enctype="multipart/form-data">
-          <div class="input-group ">
-            <input type="file" name="uploadfile" id="uploadfile" class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
-            <button class="btn btn-warning" type="submit" name="file_submit" id="inputGroupFileAddon04">Upload</button>
-          </div>
-        </form>
+        <a href="upload.php">
+          <i class="fa-solid fa-circle-plus"></i> New Post
+        </a>
+        
       </div>
 
     </div>
@@ -269,14 +230,14 @@ if ($status == 0) {
           <div class="modal-dialog">
             <div class="modal-content">
 
-              <div >
-                <img src="./profile_pics/<?php echo $pic ?>" class="m-2 text-start" alt="" style=" width: 50px; height: 50px; border-radius: 80px;"> 
+              <div>
+                <img src="./profile_pics/<?php echo $pic ?>" class="m-2 text-start" alt="" style=" width: 50px; height: 50px; border-radius: 80px;">
                 <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?> </span>
                 <a href="delete.php?id=<?php echo $data['id']; ?>&category=0&post=<?php echo $data['post']; ?>" class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
-        
+
               </div>
 
-             
+
 
               <div class="modal-body">
                 <img src="./uploads/<?php echo $data['post']; ?>" width="100%" height="100%" alt="">
@@ -309,8 +270,8 @@ if ($status == 0) {
           <div class="modal-dialog">
             <div class="modal-content">
 
-              <div >
-                <img src="./profile_pics/<?php echo $pic ?>" class="m-2 text-start " alt="" style=" width: 50px; height: 50px; border-radius: 80px;"> 
+              <div>
+                <img src="./profile_pics/<?php echo $pic ?>" class="m-2 text-start " alt="" style=" width: 50px; height: 50px; border-radius: 80px;">
                 <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?> </span>
                 <a href="delete.php?id=<?php echo $data['id']; ?>&category=1&post=<?php echo $data['post']; ?>" class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
               </div>
@@ -346,32 +307,6 @@ if ($status == 0) {
   <br><br> <br>
   <?php include('footer.php'); ?>
 
-  <script>
-    var success = <?php echo $success ?>
-
-    toastr.options = {
-      "closeButton": true,
-      "newestOnTop": false,
-      "progressBar": true,
-      "positionClass": "toast-top-center",
-      "preventDuplicates": false,
-      "onclick": null,
-      "showDuration": "300",
-      "hideDuration": "1000",
-      "timeOut": "5000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-    }
-
-    if (success == 1) {
-      toastr.success("Post uploaded - Successfully");
-    } else if (success == 0) {
-      toastr.error("Post uploaded - Failed");
-    }
-  </script>
 
 </body>
 
