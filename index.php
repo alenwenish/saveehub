@@ -223,8 +223,6 @@ if (isset($_POST['club_signup'])) {
 
             <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New Club </h1>
 
-            <h3 class="fs-6 text-center text-warning"> <?php echo $msg ?> </h3>
-
             <form action="" method="POST" class="m-2">
                 <div class="mb-3 ">
                     <label for="name" class="form-label "> <i class="fa-solid fa-user"></i> Club name: </label>
