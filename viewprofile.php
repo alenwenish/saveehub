@@ -87,17 +87,44 @@ if ($status == 0) {
     }
 
     #box1 {
-      border: 2px solid black;
       margin: 20px;
-      border-radius: 20em 1em 40em / 5em 30em;
-      background-image: linear-gradient(to bottom, #292f2f, #3b4141, #4f5454, #636868, #787d7d);
+      /* border-radius: 20em 1em 40em / 5em 30em; */
+      /* background-image: linear-gradient(to bottom, #292f2f, #3b4141, #4f5454, #636868, #787d7d); */
       /* background-image: linear-gradient(to bottom, #76e3e9, #8de5ea, #a1e7ea, #b3e9eb, #c4ebec); */
+      /* box-shadow: 0 0 10px 1px black; */
+    }
+
+    #part1 {
+      background-image: linear-gradient(to right, #76e3e9, #8de5ea, #a1e7ea, #b3e9eb, #c4ebec);
+      /* border-radius: 50px 0 0 50px; */
       box-shadow: 0 0 10px 1px black;
+      border: 1px solid black;
+    }
+
+    #part2 {
+      background-image: linear-gradient(to right, #011314, #081516, #0f1818, #141a1a, #181c1c);
+      /* border-radius: 0 90px 90px 0; */
+      margin: 20px 0 20px 0 ;
+      
+    
+
     }
 
     #followers,
     #following {
-      background-image: linear-gradient(to bottom, #656d6d, #525959, #3f4646, #2e3434, #1d2323);
+      /* background-image: linear-gradient(to bottom, #656d6d, #525959, #3f4646, #2e3434, #1d2323); */
+      /* background-image: linear-gradient(to bottom, #0d015b, #003b90, #006db9, #00a0d6, #11d2ec); */
+      background-image: linear-gradient(to right, #011314, #081516, #0f1818, #141a1a, #181c1c);
+
+    }
+
+    #followers {
+
+      border-radius: 0 0 100px 0px;
+    }
+
+    #following {
+      border-radius: 0 0 0 100px;
     }
   </style>
 </head>
@@ -105,7 +132,7 @@ if ($status == 0) {
 <body id="view_profile">
 
   <div class="row p-2" id="box1">
-    <div class="text-center col-4 text-warning ">
+    <div class="text-center col-4 text-dark" id="part1">
 
       <?php if ($pic == '') {  ?>
         <h1 style="font-size:72px"> <i class="fa-regular fa-user"></i> </h1>
@@ -118,21 +145,22 @@ if ($status == 0) {
       <div class="text-center">
         <spam class="fw-bolder"> <?php echo $name; ?></spam> <br>
         <spam><?php echo $bio; ?></spam> <br>
-        <a href="<?php echo $link ?>" class="text-white"> <?php echo $link; ?> </a>
+        <a href="<?php echo $link ?>" class="text-primary fw-bold"> <?php echo $link; ?> </a>
 
       </div>
       <br>
     </div>
 
-    <div class="col-8">
+    <div class="col-8 " id="part2">
       <div class="row text-center pt-3 pe-3 mx-auto">
 
-        <button class="col text-warning rounded-pill fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" id="followers">
+
+        <button class="col text-light fw-bolder fs-4 m-1 p-2 " class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" id="followers">
           Followers <br>
           <?php echo $follower; ?>
         </button>
 
-        <button class="col text-warning rounded-pill fw-bolder fs-4 m-1 p-2 shadow" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" id="following">
+        <button class="col text-light fw-bolder fs-4 m-1 p-2 " class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" id="following">
           Following <br>
           <?php echo $following; ?>
         </button>
@@ -140,14 +168,14 @@ if ($status == 0) {
       </div>
 
       <br>
-      <button class="btn btn-warning text-center mx-auto d-block w-75 " data-bs-toggle="modal" data-bs-target="#exampleModal2"> <a href="editprofile.php" class="text-decoration-none text-dark"> Edit Profile </a> </button>
+      <button class="btn btn-secondary text-center mx-auto d-block w-75 " data-bs-toggle="modal" data-bs-target="#exampleModal2"> <a href="editprofile.php" class="text-decoration-none text-white"> Edit Profile </a> </button>
       <br>
-
-      <div class="w-75 m-auto">
-        <a href="upload.php">
+      <br>
+      <div class="w-75 m-auto text-center">
+        <a href="upload.php" class="text-decoration-none fs-3 text-warning fw-normal">
           <i class="fa-solid fa-circle-plus"></i> New Post
         </a>
-        
+
       </div>
 
     </div>
@@ -292,16 +320,6 @@ if ($status == 0) {
     } ?>
 
   </div>
-
-
-
-
-
-
-
-
-
-
 
 
   <br><br> <br>
