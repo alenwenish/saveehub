@@ -269,11 +269,14 @@ if ($status == 0) {
           <div class="modal-dialog">
             <div class="modal-content">
 
-              <div class="modal-header">
-                <img src="./profile_pics/<?php echo $pic ?>" class="pt-2 " alt="" style=" width: 50px; height: 50px; border-radius: 80px;"> &nbsp; &nbsp;
-                <h5 class="modal-title" id="exampleModalLabel"><?php echo $data['username']; ?> </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div >
+                <img src="./profile_pics/<?php echo $pic ?>" class="m-2 text-start" alt="" style=" width: 50px; height: 50px; border-radius: 80px;"> 
+                <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?> </span>
+                <a href="delete.php?id=<?php echo $data['id']; ?>&category=0&post=<?php echo $data['post']; ?>" class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
+        
               </div>
+
+             
 
               <div class="modal-body">
                 <img src="./uploads/<?php echo $data['post']; ?>" width="100%" height="100%" alt="">
@@ -306,10 +309,10 @@ if ($status == 0) {
           <div class="modal-dialog">
             <div class="modal-content">
 
-              <div class="modal-header">
-                <img src="./profile_pics/<?php echo $pic ?>" class="pt-2 " alt="" style=" width: 50px; height: 50px; border-radius: 80px;"> &nbsp; &nbsp;
-                <h5 class="modal-title" id="exampleModalLabel"><?php echo $data['username']; ?> </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div >
+                <img src="./profile_pics/<?php echo $pic ?>" class="m-2 text-start " alt="" style=" width: 50px; height: 50px; border-radius: 80px;"> 
+                <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?> </span>
+                <a href="delete.php?id=<?php echo $data['id']; ?>&category=1&post=<?php echo $data['post']; ?>" class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
               </div>
 
               <div class="modal-body">
