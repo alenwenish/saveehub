@@ -63,8 +63,7 @@ while ($row = mysqli_fetch_array($res))
                 <?php echo $row['username']; ?>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <span>
-                    <i class="fa-solid fa-ellipsis-vertical btn"
-                    data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Save Post">
+                    <i class="fa-solid fa-ellipsis-vertical btn" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Save Post">
                     </i>
                 </span>
             </h4>
@@ -80,7 +79,20 @@ while ($row = mysqli_fetch_array($res))
                 <i class="fa-regular fa-comment text-primary"></i>
                 <span> 0 Comments</span>
             </h4>
+
+            <?php if ($row['caption'] != '') {  ?>
+
+                <div class="text-start fs-5 fw-light mx-auto" style="width: 300px; height:auto;">
+                    <span class="fw-bold"> <?php echo $row['username']; ?>:</span> <?php echo $row['caption'] ?>
+                </div>
+
+
+            <?php } ?>
+            
         </div>
+
+
+
         <hr>
 
     <?php } ?>

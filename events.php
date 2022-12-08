@@ -51,7 +51,7 @@ while ($row = mysqli_fetch_array($res))
                 $name = $row['username'];
                 $sql = "SELECT pic FROM club where club_name = '$name'";
                 $res = mysqli_query($conn, $sql);
-                
+
                 $pic = $res->fetch_array()['pic'];
                 if ($pic == '') { ?>
                     <i class="fa-regular fa-user"></i>
@@ -77,6 +77,16 @@ while ($row = mysqli_fetch_array($res))
                 <i class="fa-regular fa-comment text-primary"></i>
                 <span> 0 Comments</span>
             </h4>
+
+            <?php if ($row['caption'] != '') {  ?>
+
+               
+                <div class="text-start fs-5 fw-light mx-auto" style="width: 300px; height:auto;">
+                    <span class="fw-bold"> <?php echo $row['username']; ?>:</span> <?php echo $row['caption'] ?>
+                </div>
+
+            <?php } ?>
+
         </div>
         <hr>
 
