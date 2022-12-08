@@ -119,13 +119,21 @@ while ($row = mysqli_fetch_array($res1))
         var friends = document.getElementById('friends');
         var club = document.getElementById('club');
 
+       
+
+
+       
+
         function showfriend() {
+
+           
             friends.style.display = "block";
             club.style.display = "none";
 
         }
 
         function showclub() {
+
             friends.style.display = "none";
             club.style.display = "block";
         }

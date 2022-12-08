@@ -1,43 +1,8 @@
 <?php
 
+
 session_start();
 include('config/connect.php');
-
-
-
-$name = $email =  $password = ' ';
-if (isset($_POST['login'])) {
-
-
-    $email = stripslashes($_REQUEST['email']);
-    $email = mysqli_real_escape_string($conn, $email);
-
-    $password = stripslashes($_REQUEST['password']);
-    $password = mysqli_real_escape_string($conn, $password);
-
-
-    $query    = "SELECT username FROM login WHERE email='$email' AND  password='$password'";
-    $result   = mysqli_query($conn, $query);
-    $rows = mysqli_num_rows($result);
-    $name = $result->fetch_array()['username'];
-
-    $query1    = "SELECT club_name FROM club WHERE club_email='$email' AND  club_password='$password'";
-    $result1   = mysqli_query($conn, $query1);
-    $rows1 = mysqli_num_rows($result1);
-    $name1 = $result1->fetch_array()['club_name'];
-
-    if ($rows == 1) {
-        $_SESSION['name'] = $name;
-        $_SESSION['email'] = $email;
-        $_SESSION['is_club'] = 0;
-        header("Location: home.php");
-    } else if ($rows1 == 1) {
-        $_SESSION['name'] = $name1;
-        $_SESSION['email'] = $email;
-        $_SESSION['is_club'] = 1;
-        header("Location: home.php");
-    }
-}
 
 ?>
 
@@ -45,8 +10,12 @@ if (isset($_POST['login'])) {
 <html lang="en">
 
 <head>
+
+
     <title>Login</title>
+
     <?php include('header.php') ?>
+
     <style>
         #login_body {
             background-image: linear-gradient(to top, #121414, #1e2021, #2b2d2d, #383b3b, #454949);
@@ -113,12 +82,16 @@ if (isset($_POST['login'])) {
     </div>
 
     <div class="container position-relative">
+        <br>
         <img src="./images/logo1.png" alt="logo" width="40%" height="30%" class="mx-auto  d-block ">
+        <br>
+
         <div class="card mb-3 w-50 mx-auto p-3 border-secondary" id="login_card">
 
             <h1 class="fs-1 text-center text-secondary"> Login </h1>
 
             <form action="" method="POST" class="m-2">
+
 
                 <div class="mb-3">
                     <label for="email" class="form-label"> <i class="fa-solid fa-envelope"></i> Email: </label>
@@ -143,7 +116,84 @@ if (isset($_POST['login'])) {
         </div>
     </div>
 
+    <?php
+
+    function showtoast()
+    {
+        echo
+        '<script> 
+        toastr.options = {
+            "closeButton": true,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+          }
+          
+        
+              toastr.success("Registration Successful");
+
+            </script>';
+    }
+
+    ?>
+
 
 </body>
 
 </html>
+
+<?php
+
+
+$name = $email =  $password = ' ';
+if (isset($_POST['login'])) {
+
+
+    $email = stripslashes($_REQUEST['email']);
+    $email = mysqli_real_escape_string($conn, $email);
+
+    $password = stripslashes($_REQUEST['password']);
+    $password = mysqli_real_escape_string($conn, $password);
+
+
+    $query    = "SELECT username FROM login WHERE email='$email' AND  password='$password'";
+    $result   = mysqli_query($conn, $query);
+    $rows = mysqli_num_rows($result);
+
+
+    $query1    = "SELECT club_name FROM club WHERE club_email='$email' AND  club_password='$password'";
+    $result1   = mysqli_query($conn, $query1);
+    $rows1 = mysqli_num_rows($result1);
+
+
+
+    if ($rows == 1) {
+        $name = $result->fetch_array()['username'];
+        $_SESSION['name'] = $name;
+        $_SESSION['email'] = $email;
+        $_SESSION['is_club'] = 0;
+        showtoast();
+        // header("Location: home.php");
+
+    } else if ($rows1 == 1) {
+        $name1 = $result1->fetch_array()['club_name'];
+        $_SESSION['name'] = $name1;
+        $_SESSION['email'] = $email;
+        $_SESSION['is_club'] = 1;
+        showtoast();
+
+        // header("Location: home.php");
+    }
+}
+
+?>
