@@ -7,6 +7,9 @@ $status = $_SESSION['is_club'];
 
 $username = $_SESSION['name'];
 $name = $bio = $link = $pic = '';
+$success = '';
+
+echo $success;
 
 if (isset($_POST['file_submit'])) {
 
@@ -21,9 +24,9 @@ if (isset($_POST['file_submit'])) {
     mysqli_query($conn, $query);
 
     if (move_uploaded_file($tempname, $folder)) {
-      echo 'POST UPLOADED SUCCESSFULLY';
+      $success = 1;
     } else {
-      echo 'POST UPLOAD FAILED';
+      $success = 0;
     }
   } else if ($status == 1) {
 
@@ -32,11 +35,13 @@ if (isset($_POST['file_submit'])) {
     mysqli_query($conn, $query);
 
     if (move_uploaded_file($tempname, $folder)) {
-      echo 'POST UPLOADED SUCCESSFULLY';
+      $success = 1;
     } else {
-      echo 'POST UPLOAD FAILED';
+      $success = 0;
     }
+
   }
+
 }
 
 
@@ -337,6 +342,34 @@ if ($status == 0) {
 
   <br><br> <br>
   <?php include('footer.php'); ?>
+
+  <script>
+    var success = <?php echo $success ?>
+
+    toastr.options = {
+      "closeButton": true,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-center",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+
+    if (success == 1) {
+      toastr.success("Post uploaded - Successfully");
+    } else if (success == 0) {
+      toastr.error("Post uploaded - Failed");
+    }
+  </script>
+
 </body>
 
 </html>
