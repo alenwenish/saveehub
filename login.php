@@ -4,6 +4,46 @@
 session_start();
 include('config/connect.php');
 
+$name = $email =  $password = ' ';
+if (isset($_POST['login'])) {
+
+
+    $email = stripslashes($_REQUEST['email']);
+    $email = mysqli_real_escape_string($conn, $email);
+
+    $password = stripslashes($_REQUEST['password']);
+    $password = mysqli_real_escape_string($conn, $password);
+
+
+    $query    = "SELECT username FROM login WHERE email='$email' AND  password='$password'";
+    $result   = mysqli_query($conn, $query);
+    $rows = mysqli_num_rows($result);
+
+
+    $query1    = "SELECT club_name FROM club WHERE club_email='$email' AND  club_password='$password'";
+    $result1   = mysqli_query($conn, $query1);
+    $rows1 = mysqli_num_rows($result1);
+
+
+
+    if ($rows == 1) {
+        echo 'done';
+        $name = $result->fetch_array()['username'];
+        $_SESSION['name'] = $name;
+        $_SESSION['email'] = $email;
+        $_SESSION['is_club'] = 0;
+        header("Location: home.php");
+
+    } else if ($rows1 == 1) {
+        $name1 = $result1->fetch_array()['club_name'];
+        $_SESSION['name'] = $name1;
+        $_SESSION['email'] = $email;
+        $_SESSION['is_club'] = 1;
+        header("Location: home.php");
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -115,85 +155,6 @@ include('config/connect.php');
 
         </div>
     </div>
-
-    <?php
-
-    function showtoast()
-    {
-        echo
-        '<script> 
-        toastr.options = {
-            "closeButton": true,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-center",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-          }
-          
-        
-              toastr.success("Registration Successful");
-
-            </script>';
-    }
-
-    ?>
-
-
 </body>
 
 </html>
-
-<?php
-
-
-$name = $email =  $password = ' ';
-if (isset($_POST['login'])) {
-
-
-    $email = stripslashes($_REQUEST['email']);
-    $email = mysqli_real_escape_string($conn, $email);
-
-    $password = stripslashes($_REQUEST['password']);
-    $password = mysqli_real_escape_string($conn, $password);
-
-
-    $query    = "SELECT username FROM login WHERE email='$email' AND  password='$password'";
-    $result   = mysqli_query($conn, $query);
-    $rows = mysqli_num_rows($result);
-
-
-    $query1    = "SELECT club_name FROM club WHERE club_email='$email' AND  club_password='$password'";
-    $result1   = mysqli_query($conn, $query1);
-    $rows1 = mysqli_num_rows($result1);
-
-
-
-    if ($rows == 1) {
-        $name = $result->fetch_array()['username'];
-        $_SESSION['name'] = $name;
-        $_SESSION['email'] = $email;
-        $_SESSION['is_club'] = 0;
-        showtoast();
-        // header("Location: home.php");
-
-    } else if ($rows1 == 1) {
-        $name1 = $result1->fetch_array()['club_name'];
-        $_SESSION['name'] = $name1;
-        $_SESSION['email'] = $email;
-        $_SESSION['is_club'] = 1;
-        showtoast();
-
-        // header("Location: home.php");
-    }
-}
-
-?>

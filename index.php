@@ -3,8 +3,9 @@
 session_start();
 include('config/connect.php');
 
-$msg = '';
 $name = $email = $age = $number = $password = ' ';
+$success = '';
+
 if (isset($_POST['signup'])) {
 
 
@@ -38,9 +39,9 @@ if (isset($_POST['signup'])) {
     if ($rows == 1) {
         $_SESSION['name'] = $name;
         $_SESSION['email'] = $email;
-        $msg = "Registration Successful. Log in";
+        $success = 1;
     } else {
-        $msg = "Registration Failed. Retry";
+        $success = 0;
     }
 }
 
@@ -77,14 +78,15 @@ if (isset($_POST['club_signup'])) {
     if ($rows == 1) {
         $_SESSION['name'] = $club_name;
         $_SESSION['email'] = $club_email;
-        $msg = "Registration Successful. Log in";
+        $success = 1;
     } else {
-        $msg = "Registration Failed. Retry";
+        $success = 0;
     }
 }
 
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -177,7 +179,7 @@ if (isset($_POST['club_signup'])) {
 
             <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New User </h1>
 
-            <h3 class="fs-6 text-center text-warning"> <?php echo $msg ?> </h3>
+            
 
             <form action="" method="POST" class="m-2">
                 <div class="mb-3 ">
@@ -277,6 +279,32 @@ if (isset($_POST['club_signup'])) {
             user.style.display = "none";
             club.style.display = "block";
         }
+
+        var success = <?php echo $success ?>;
+
+        toastr.options = {
+            "closeButton": true,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        if (success == 1) {
+            toastr.success("Registration Successful. <br> Log in with your email and password");
+        } else if (success == 0) {
+            toastr.error("Registration Failed. Try again");
+        }
+
     </script>
 
 
