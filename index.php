@@ -94,7 +94,7 @@ if (isset($_POST['club_signup'])) {
 <head>
     <title>Login</title>
     <?php include('header.php') ?>
-    <link rel="stylesheet" href="./css/index.css">
+   
     <style>
         #signup_body {
             background-image: linear-gradient(to top, #080746, #003d7e, #0073aa, #00aaca, #57e2e2);
@@ -102,18 +102,14 @@ if (isset($_POST['club_signup'])) {
             background-attachment: fixed;
         }
 
-        #sign_up_card {
+        #sign_up_card,#sign_up_club_card {
             /* border-radius: 100px 100px 100px 100px; */
             box-shadow: 0 0 40px 1px #48abe0;
             /* animation: shadows 5s infinite; */
-
-
             background: linear-gradient(180deg,
                     rgb(255, 255, 113, 0.5),
                     rgba(255, 255, 113, 0.5),
                     transparent 70%);
-
-         
         }
 
     
@@ -380,17 +376,17 @@ if (isset($_POST['club_signup'])) {
                 </div>
 
                 <div class="mb-3 ">
-                    <label for="coord" class="form-label"> <i class="fa-solid fa-user-pen"></i> Student Coordinator:</label>
+                    <label for="coord" class="form-label "> <i class="fa-solid fa-user-pen"></i> Student Coordinator:</label>
                     <input type="text" class="form-control shadow" id="club_sc" name="club_sc" required>
                 </div>
 
                 <div class="mb-3 ">
-                    <label for="coord" class="form-label"> <i class="fa-solid fa-user-pen"></i> Faculty Coordinator:</label>
+                    <label for="coord" class="form-label text-white"> <i class="fa-solid fa-user-pen"></i> Faculty Coordinator:</label>
                     <input type="text" class="form-control shadow" id="club_fc" name="club_fc">
                 </div>
 
                 <div class="mb-3">
-                    <label for="password" class="form-label"> <i class="fa-solid fa-lock"></i> Password: </label>
+                    <label for="password" class="form-label text-white"> <i class="fa-solid fa-lock"></i> Password: </label>
                     <input type="password" class="form-control shadow" id="club_password" name="club_password" required>
                 </div>
 
@@ -404,6 +400,12 @@ if (isset($_POST['club_signup'])) {
                     <a href="login.php">Already a User? Log in</a>
                 </div>
             </form>
+
+            <span class="top"></span>
+            <span class="right"></span>
+            <span class="bottom"></span>
+            <span class="left"></span>
+
 
         </div>
 
@@ -423,7 +425,7 @@ if (isset($_POST['club_signup'])) {
             club.style.display = "block";
         }
 
-        var success = <?php echo $success ?>;
+        var success = <?php echo $success ?>
 
         toastr.options = {
             "closeButton": true,
