@@ -168,7 +168,7 @@ if ($status == 0) {
           <h5 class="modal-title" id="exampleModalLabel">Followers</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body ">
 
           <?php
           $query = "SELECT account from followers where follower_name = '$username'";
@@ -178,9 +178,23 @@ if ($status == 0) {
             $rows[] = $row;
           ?>
 
+
           <?php foreach ($rows as $row) { ?>
-            <h6 class="p-1 card text-center text-secondary "> <?php echo $row['account']; ?> </h6> <br>
+
+
+            <div class="d-flex justify-content-around">
+              <span class="p-1 text-center text-secondary w-50 border shadow "> <?php echo $row['account']; ?> </span>
+              <span> <button class="btn btn-secondary"> Unfollow</button></span>
+
+            </div>
+
+
+            <br>
+
+
           <?php } ?>
+
+
 
         </div>
 
@@ -207,7 +221,17 @@ if ($status == 0) {
           ?>
 
           <?php foreach ($rows as $row) { ?>
-            <h6 class="p-1 card text-center text-secondary "> <?php echo $row['follower_name']; ?> </h6> <br>
+
+            <div class="d-flex justify-content-around">
+
+              <span class="p-1 text-center text-secondary w-50 border shadow "> <?php echo $row['follower_name']; ?> </span>
+
+              <span> <button class="btn btn-secondary"> Unfollow</button></span>
+
+            </div>
+            <br>
+
+
           <?php } ?>
         </div>
 

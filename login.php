@@ -65,13 +65,14 @@ if (isset($_POST['login'])) {
         #login_card {
             border-radius: 100px 100px 100px 100px;
             box-shadow: 0 0 50px 1px black;
-            /* animation: shadows 2s infinite; */
+
             border: 2px solid gold;
 
             background: linear-gradient(90deg,
                     transparent 70%,
 
                     #009999);
+            animation: shadows 2s infinite;
         }
 
         @keyframes shadows {
@@ -138,12 +139,12 @@ if (isset($_POST['login'])) {
 
 
                 <div class="mb-3">
-                    <label for="email" class="form-label"> <i class="fa-solid fa-envelope"></i> Email: </label>
+                    <label for="email" class="form-label text-white"> <i class="fa-solid fa-envelope"></i> Email: </label>
                     <input type="email" class="form-control shadow" id="email" name="email" placeholder="example@gmail.com" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="password" class="form-label"> <i class="fa-solid fa-lock"></i> Password: </label>
+                    <label for="password" class="form-label text-white"> <i class="fa-solid fa-lock"></i> Password: </label>
                     <input type="password" class="form-control shadow" id="password" name="password" required>
                 </div>
 
@@ -153,7 +154,7 @@ if (isset($_POST['login'])) {
                 </div>
 
                 <div class="pt-3 pb-1 text-center  w-100">
-                    <a href="index.php" class="fw-bold">New User? Register Now !!!</a>
+                    <a href="index.php">New User? Register Now !!!</a>
                 </div>
             </form>
 

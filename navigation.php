@@ -6,7 +6,8 @@
   }
 
   #navigation{
-   background-image: linear-gradient(to bottom, #656d6d, #838b8b, #a3aaaa, #c4caca, #e6ebeb);
+   background-image: linear-gradient(to bottom, #656d6d, #838b8b, #a3aaaa, #c4caca, #e6ebeb); 
+   border-bottom: 1px solid lightgrey;
   }
 </style>
 <?php
@@ -29,7 +30,7 @@ $pic = $res->fetch_array()['pic'];
 
 <div>
 
-  <nav class="navbar navbar-expand-sm shadow  bg-dark navbar-inverse fixed-top  navbar-dark" style="background-color:#F5FCFF" id="navigation">
+  <nav class="navbar navbar-expand-sm shadow   navbar-inverse fixed-top  navbar-dark" style="background-color:#F5FCFF" id="navigation">
 
   &nbsp;
 
