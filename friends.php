@@ -53,8 +53,8 @@ while ($row = mysqli_fetch_array($res1))
         <h2 class="fs-2 fw-normal text-secondary pt-4 text-center"> Follow Requests</h2>
 
         <div class="text-center pt-3">
-            <button class="fs-5 fw-normal px-4 text-center btn btn-outline-secondary" id="friend_button" onclick=showfriend()> Friends</button>
-            <button class="fs-5 fw-normal px-4 text-center btn btn-outline-secondary" id="club_button" onclick=showclub()> Clubs</button>
+            <button class="fs-5 fw-normal px-4 text-center btn btn-outline-secondary" id="friend_button" > Friends</button>
+            <button class="fs-5 fw-normal px-4 text-center btn btn-outline-secondary" id="club_button" > Clubs</button>
         </div>
 
         <br>
@@ -63,7 +63,7 @@ while ($row = mysqli_fetch_array($res1))
             <table class="table w-50 mx-auto mt-3" id="friends">
                 <?php foreach ($rows as $row) { ?>
 
-                    <tr class="fs-4 shadow-sm">
+                    <tr class="fs-4 shadow-sm " style="background-image: linear-gradient(to right bottom, #13cad4, #5ed3d9, #85dbdf, #a6e3e5, #c4ebec);">
 
                         <?php if ($row['pic'] != '') { ?>
                             <td class="py-2 px-3"> <img src="./profile_pics/<?php echo $row['pic']; ?>" alt="" class="friends_pic"> </td>
@@ -78,6 +78,7 @@ while ($row = mysqli_fetch_array($res1))
                             </a>
                         </td>
                     </tr>
+                    
 
 
                 <?php } ?>
@@ -88,7 +89,7 @@ while ($row = mysqli_fetch_array($res1))
             <table class="container table w-50 mx-auto mt-3" id="club">
                 <?php foreach ($rows1 as $row) { ?>
 
-                    <tr class="fs-4 shadow-sm">
+                    <tr class="fs-4 shadow-sm" style="background-image: linear-gradient(to right bottom, #13cad4, #5ed3d9, #85dbdf, #a6e3e5, #c4ebec);">
 
                         <?php if ($row['pic'] != '') { ?>
                             <td class="py-2 px-3"> <img src="./club_pics/<?php echo $row['pic']; ?>" alt="" class="friends_pic"> </td>
@@ -119,24 +120,22 @@ while ($row = mysqli_fetch_array($res1))
         var friends = document.getElementById('friends');
         var club = document.getElementById('club');
 
-       
 
+        $(document).ready(function() {
+            $("#friend_button").click(function() {
+                $("#friends").fadeIn();
+                $("#club").fadeOut();
+            });
+        });
 
-       
+        
+        $(document).ready(function() {
+            $("#club_button").click(function() {
+                $("#club").fadeIn();
+                $("#friends").fadeOut();
+            });
+        });
 
-        function showfriend() {
-
-           
-            friends.style.display = "block";
-            club.style.display = "none";
-
-        }
-
-        function showclub() {
-
-            friends.style.display = "none";
-            club.style.display = "block";
-        }
     </script>
 </body>
 
