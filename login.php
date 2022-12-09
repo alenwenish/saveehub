@@ -33,7 +33,6 @@ if (isset($_POST['login'])) {
         $_SESSION['email'] = $email;
         $_SESSION['is_club'] = 0;
         header("Location: home.php");
-
     } else if ($rows1 == 1) {
         $name1 = $result1->fetch_array()['club_name'];
         $_SESSION['name'] = $name1;
@@ -65,9 +64,14 @@ if (isset($_POST['login'])) {
 
         #login_card {
             border-radius: 100px 100px 100px 100px;
-            box-shadow: 0 0 35px 1px black;
-            animation: shadows 2s infinite;
-            border: 1px solid gold;
+            box-shadow: 0 0 50px 1px black;
+            /* animation: shadows 2s infinite; */
+            border: 2px solid gold;
+
+            background: linear-gradient(90deg,
+                    transparent 70%,
+
+                    #009999);
         }
 
         @keyframes shadows {
@@ -128,7 +132,7 @@ if (isset($_POST['login'])) {
 
         <div class="card mb-3 w-50 mx-auto p-3 border-secondary" id="login_card">
 
-            <h1 class="fs-1 text-center text-secondary"> Login </h1>
+            <h1 class="fs-1 text-center text-white"> Login </h1>
 
             <form action="" method="POST" class="m-2">
 
@@ -149,7 +153,7 @@ if (isset($_POST['login'])) {
                 </div>
 
                 <div class="pt-3 pb-1 text-center  w-100">
-                    <a href="index.php">New User? Register Now !!!</a>
+                    <a href="index.php" class="fw-bold">New User? Register Now !!!</a>
                 </div>
             </form>
 
