@@ -6,7 +6,7 @@ $status = $_SESSION['is_club'];
 
 
 $username = $_SESSION['name'];
-$name = $bio = $link = $pic = '';
+$name = $bio = $link = $pic =  $count = '';
 
 
 $sql = "SELECT count(follower_name) as following FROM followers WHERE account = '$username'";
@@ -34,6 +34,10 @@ if ($status == 0) {
   $sql = "SELECT pic FROM login where username = '$username'";
   $res = mysqli_query($conn, $sql);
   $pic = $res->fetch_array()['pic'];
+
+  $sql = "SELECT COUNT(post) as count FROM image where username = '$username'";
+  $res = mysqli_query($conn, $sql);
+  $count = $res->fetch_array()['count'];
 } else if ($status == 1) {
 
 
@@ -52,6 +56,10 @@ if ($status == 0) {
   $sql = "SELECT pic FROM club where club_name = '$username'";
   $res = mysqli_query($conn, $sql);
   $pic = $res->fetch_array()['pic'];
+
+  $sql = "SELECT COUNT(post) as count FROM club_pics where username = '$username'";
+  $res = mysqli_query($conn, $sql);
+  $count = $res->fetch_array()['count'];
 }
 
 
@@ -101,7 +109,8 @@ if ($status == 0) {
     }
 
     #followers,
-    #following {
+    #following,
+    #posts {
       background-image: linear-gradient(to right, #011314, #081516, #0f1818, #141a1a, #181c1c);
     }
   </style>
@@ -130,15 +139,19 @@ if ($status == 0) {
     </div>
 
     <div class="col-8 " id="part2">
-      <div class="row text-center pt-3 pe-3 mx-auto">
+      <div class="d-flex justify-content-around text-center pt-3 pe-3 mx-auto">
 
+        <button class=" text-light fw-bolder fs-4 m-1 p-2 w-25" class="btn" id="posts">
+          Posts <br>
+          <?php echo $count; ?>
+        </button>
 
-        <button class="col text-light fw-bolder fs-4 m-1 p-2 " class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" id="followers">
+        <button class=" text-light fw-bolder fs-4 m-1 p-2 w-25 " class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" id="followers">
           Followers <br>
           <?php echo $follower; ?>
         </button>
 
-        <button class="col text-light fw-bolder fs-4 m-1 p-2 " class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" id="following">
+        <button class=" text-light fw-bolder fs-4 m-1 p-2 w-25" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" id="following">
           Following <br>
           <?php echo $following; ?>
         </button>
