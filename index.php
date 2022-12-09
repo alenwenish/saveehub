@@ -94,6 +94,7 @@ if (isset($_POST['club_signup'])) {
 <head>
     <title>Login</title>
     <?php include('header.php') ?>
+    <link rel="stylesheet" href="./css/index.css">
     <style>
         #signup_body {
             background-image: linear-gradient(to top, #080746, #003d7e, #0073aa, #00aaca, #57e2e2);
@@ -101,25 +102,33 @@ if (isset($_POST['club_signup'])) {
             background-attachment: fixed;
         }
 
-        #sign_up_card,
-        #sign_up_club_card {
-            border-radius: 100px 100px 100px 100px;
+        #sign_up_card {
+            /* border-radius: 100px 100px 100px 100px; */
             box-shadow: 0 0 40px 1px #48abe0;
-            animation: shadows 2s infinite;
-            border: 1px solid gold;
+            /* animation: shadows 5s infinite; */
+
+
+            background: linear-gradient(180deg,
+                    rgb(255, 255, 113, 0.5),
+                    rgba(255, 255, 113, 0.5),
+                    transparent 70%);
+
+         
         }
+
+    
 
         @keyframes shadows {
             0% {
-                text-shadow: gold 0 0 10px;
+                text-shadow: red 0 0 10px;
             }
 
             50% {
-                text-shadow: goldenrod 0 0 10px;
+                text-shadow: blue 0 0 10px;
             }
 
             75% {
-                text-shadow: darkorange 0 0 10px;
+                text-shadow: green 0 0 10px;
             }
 
             100% {
@@ -152,6 +161,137 @@ if (isset($_POST['club_signup'])) {
         .custom-shape-divider-top-1670231206 .shape-fill {
             fill: lightcyan;
         }
+
+
+        span {
+            position: absolute;
+            border-radius: 100vmax;
+        }
+
+        .top {
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 10px;
+            background: linear-gradient(90deg,
+                    transparent 50%,
+                    rgba(255, 49, 49, 0.5),
+                    rgb(255, 49, 49));
+        }
+
+        .bottom {
+            right: 0;
+            bottom: 0;
+            height: 10px;
+            background: linear-gradient(90deg,
+                    rgb(57, 255, 20),
+                    rgba(57, 255, 20, 0.5),
+                    transparent 50%);
+        }
+
+        .right {
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 0;
+            background: linear-gradient(180deg,
+                    transparent 30%,
+                    rgba(0, 255, 255, 0.5),
+                    rgb(0, 255, 255));
+        }
+
+        .left {
+            left: 0;
+            bottom: 0;
+            width: 10px;
+            height: 0;
+            background: linear-gradient(180deg,
+                    rgb(255, 255, 113),
+                    rgba(255, 255, 113, 0.5),
+                    transparent 70%);
+        }
+
+        .top {
+            animation: animateTop 5s ease-in-out 1;
+        }
+
+        .bottom {
+            animation: animateBottom 5s ease-in-out 1;
+        }
+
+        .right {
+            animation: animateRight 5s linear 1;
+        }
+
+        .left {
+            animation: animateLeft 5s ease-in-out 1;
+        }
+
+        @keyframes animateTop {
+            25% {
+                width: 100%;
+                opacity: 1;
+            }
+
+            30%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes animateBottom {
+
+            0%,
+            50% {
+                opacity: 0;
+                width: 0;
+            }
+
+            75% {
+                opacity: 1;
+                width: 100%;
+            }
+
+            76%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes animateRight {
+
+            0%,
+            25% {
+                opacity: 0;
+                height: 0;
+            }
+
+            50% {
+                opacity: 1;
+                height: 100%;
+            }
+
+            55%,
+            100% {
+                height: 100%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes animateLeft {
+
+            0%,
+            75% {
+                opacity: 0;
+                bottom: 0;
+                height: 0;
+            }
+
+            100% {
+                opacity: 1;
+                height: 100%;
+            }
+        }
     </style>
 
 
@@ -179,7 +319,7 @@ if (isset($_POST['club_signup'])) {
 
             <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New User </h1>
 
-            
+
 
             <form action="" method="POST" class="m-2">
                 <div class="mb-3 ">
@@ -215,6 +355,11 @@ if (isset($_POST['club_signup'])) {
                     <a href="login.php">Already a User? Log in</a>
                 </div>
             </form>
+
+            <span class="top"></span>
+            <span class="right"></span>
+            <span class="bottom"></span>
+            <span class="left"></span>
 
         </div>
 
@@ -302,7 +447,6 @@ if (isset($_POST['club_signup'])) {
         } else if (success == 0) {
             toastr.error("Registration Failed. Try again");
         }
-
     </script>
 
 
