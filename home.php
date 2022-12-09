@@ -8,7 +8,7 @@ $username = $_SESSION['name'];
 $status = $_SESSION['is_club'];
 
 
-$sql = "SELECT * FROM image where username IN (SELECT follower_name FROM followers WHERE account = '$username')";
+$sql = "SELECT * FROM image where username IN (SELECT follower_name FROM followers WHERE account = '$username') ORDER BY created_at DESC LIMIT 10";
 
 
 $res = mysqli_query($conn, $sql);
@@ -36,12 +36,17 @@ while ($row = mysqli_fetch_array($res))
             height: 40px;
             border-radius: 80px;
         }
+
+       
     </style>
 </head>
 
 <body>
     <?php include('navigation.php'); ?>
-    <br>
+    
+
+   
+
 
     <?php foreach ($rows as $row) { ?>
 

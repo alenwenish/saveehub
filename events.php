@@ -7,7 +7,7 @@ include('config/connect.php');
 
 $username = $_SESSION['name'];
 
-$sql = "SELECT * FROM club_pics where username IN (SELECT follower_name FROM followers WHERE account = '$username')";
+$sql = "SELECT * FROM club_pics where username IN (SELECT follower_name FROM followers WHERE account = '$username') ORDER BY created_at DESC LIMIT 10";
 
 
 $res = mysqli_query($conn, $sql);
@@ -40,7 +40,7 @@ while ($row = mysqli_fetch_array($res))
 <body>
     <?php include('navigation.php'); ?>
 
-    <br>
+    
 
     <?php foreach ($rows as $row) { ?>
 
