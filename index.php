@@ -212,11 +212,11 @@ if (isset($_POST['club_signup'])) {
         }
 
         .top {
-            animation: animateTop 5s ease-in-out 1;
+            animation: animateTop 5s ease-in-out infinite;
         }
 
         .bottom {
-            animation: animateBottom 5s ease-in-out 1;
+            animation: animateBottom 5s ease-in-out infinite;
         }
 
         .right {
@@ -338,12 +338,12 @@ if (isset($_POST['club_signup'])) {
                 </div>
 
                 <div class="mb-3 ">
-                    <label for="age" class="form-label"> <i class="fa-solid fa-user-pen"></i> Age:</label>
+                    <label for="age" class="form-label text-white"> <i class="fa-solid fa-user-pen"></i> Age:</label>
                     <input type="number" class="form-control shadow" id="age" name="age" required>
                 </div>
 
                 <div class="mb-3 ">
-                    <label for="number" class="form-label"> <i class="fa-solid fa-phone"></i> Phone Number:</label>
+                    <label for="number" class="form-label text-white"> <i class="fa-solid fa-phone"></i> Phone Number:</label>
                     <input type="text" class="form-control shadow" id="number" name="number">
                 </div>
 

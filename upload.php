@@ -76,10 +76,15 @@ if (isset($_POST['upload'])) {
 
             <div class=" mb-3 ">
                 <label for="Profile" class="form-label "> Post pic : </label> <br>
-                <input type="file" name="uploadfile" id="uploadfile" class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
+                <input type="file" name="uploadfile" id="uploadfile" onChange="imagePreview(this)"  class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
             </div>
 
             <br>
+
+            <div id="preview" class="text-center"></div>
+
+            <br>
+
             <div class="mb-3 ">
 
                 <input type="text" class="form-control shadow" id="caption" name="caption" placeholder="Write a caption..." required>
@@ -124,6 +129,21 @@ if (isset($_POST['upload'])) {
     } else if (success == 0) {
         toastr.error("Post uploaded - Failed");
     }
+
+    
+    function imagePreview(fileInput) {
+        if (fileInput.files && fileInput.files[0]) {
+            var fileReader = new FileReader();
+            fileReader.onload = function(event) {
+                $('#preview').html('<img src="' + event.target.result + '" width="300" height="auto"/>');
+            };
+            fileReader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+    $("#image").change(function() {
+
+        imagePreview(this);
+    });
 </script>
 
 </html>
