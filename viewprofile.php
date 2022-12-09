@@ -68,7 +68,6 @@ if ($status == 0) {
   <?php include('header.php'); ?>
   <style>
     #view_profile {
-      /* background-image: linear-gradient(to bottom, #e2f0f0, #e5f3f3, #e8f6f6, #ecf9f9, #effcfc); */
       background-repeat: no-repeat;
       background-attachment: fixed;
     }
@@ -88,43 +87,22 @@ if ($status == 0) {
 
     #box1 {
       margin: 20px;
-      /* border-radius: 20em 1em 40em / 5em 30em; */
-      /* background-image: linear-gradient(to bottom, #292f2f, #3b4141, #4f5454, #636868, #787d7d); */
-      /* background-image: linear-gradient(to bottom, #76e3e9, #8de5ea, #a1e7ea, #b3e9eb, #c4ebec); */
-      /* box-shadow: 0 0 10px 1px black; */
     }
 
     #part1 {
       background-image: linear-gradient(to right, #76e3e9, #8de5ea, #a1e7ea, #b3e9eb, #c4ebec);
-      /* border-radius: 50px 0 0 50px; */
       box-shadow: 0 0 10px 1px black;
       border: 1px solid black;
     }
 
     #part2 {
       background-image: linear-gradient(to right, #011314, #081516, #0f1818, #141a1a, #181c1c);
-      /* border-radius: 0 90px 90px 0; */
-      margin: 20px 0 20px 0 ;
-      
-    
-
+      margin: 20px 0 20px 0;
     }
 
     #followers,
     #following {
-      /* background-image: linear-gradient(to bottom, #656d6d, #525959, #3f4646, #2e3434, #1d2323); */
-      /* background-image: linear-gradient(to bottom, #0d015b, #003b90, #006db9, #00a0d6, #11d2ec); */
       background-image: linear-gradient(to right, #011314, #081516, #0f1818, #141a1a, #181c1c);
-
-    }
-
-    #followers {
-
-      border-radius: 0 0 100px 0px;
-    }
-
-    #following {
-      border-radius: 0 0 0 100px;
     }
   </style>
 </head>
