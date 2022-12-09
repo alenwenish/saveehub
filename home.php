@@ -90,7 +90,11 @@ while ($row = mysqli_fetch_array($res))
                 <span class="fs-6">
                     <?php
                     $dt = strtotime($row['created_at']);
-                    echo date("d", $dt); echo " "; echo date("M", $dt); echo " "; echo date("Y",$dt);
+                    echo date("d", $dt);
+                    echo " ";
+                    echo date("M", $dt);
+                    echo " ";
+                    echo date("Y", $dt);
                     ?>
                 </span>
             </div>

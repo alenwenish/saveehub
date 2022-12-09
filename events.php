@@ -80,12 +80,25 @@ while ($row = mysqli_fetch_array($res))
 
             <?php if ($row['caption'] != '') {  ?>
 
-               
+
                 <div class="text-start fs-5 fw-light mx-auto" style="width: 300px; height:auto;">
                     <span class="fw-bold"> <?php echo $row['username']; ?>:</span> <?php echo $row['caption'] ?>
                 </div>
 
             <?php } ?>
+
+            <div class="text-start text-secondary mx-auto" style="width: 300px; height:auto;">
+                <span class="fs-6">
+                    <?php
+                    $dt = strtotime($row['created_at']);
+                    echo date("d", $dt);
+                    echo " ";
+                    echo date("M", $dt);
+                    echo " ";
+                    echo date("Y", $dt);
+                    ?>
+                </span>
+            </div>
 
         </div>
         <hr>
