@@ -12,7 +12,21 @@ $comment = '';
 if (isset($_POST['post'])) {
     $comment = stripslashes($_REQUEST['comment']);
     $comment = mysqli_real_escape_string($conn, $comment);
+
+    $query    = "INSERT INTO image_comments (image_id,commenter,owner,comments)
+    VALUES ('$id', '$username', '$owner' , '$comment')";
+
+    $result   = mysqli_query($conn, $query);
 }
+
+$sql = "SELECT * FROM image_comments where image_id = '$id'";
+$res = mysqli_query($conn, $sql);
+$rows = array();
+while ($row = mysqli_fetch_array($res))
+    $rows[] = $row;
+
+
+
 
 ?>
 
@@ -25,17 +39,98 @@ if (isset($_POST['post'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Comments</title>
     <?php include('header.php') ?>
+    <style>
+        .friends_pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 80px;
+        }
+    </style>
 </head>
 
-<body>
+<body class="container">
     <?php include('navigation.php'); ?>
 
-    <div>
-        
+    <div class="justify-content-center text-center m-2">
+        <?php
+
+        $query = "SELECT * from image where id = '$id'";
+
+        $result = mysqli_query($conn, $query);
+
+        $row = array();
+        while ($r = mysqli_fetch_array($result))
+            $row[] = $r;
+
+
+        ?>
+
+
+        <a href="home.php" class="text-dark text-decoration-none fs-3 ms-5 float-start"><i class="fa-solid fa-arrow-left"></i> </a>
+
+        <h4 class="ps-3 ">
+            <?php
+            $picture = '';
+            $name = $row[0]['username'];
+            $sql = "SELECT pic FROM login where username = '$name'";
+            $res = mysqli_query($conn, $sql);
+            $picture = $res->fetch_array()['pic'];
+            if ($picture == '') { ?>
+                <i class="fa-regular fa-user"></i>
+            <?php } else { ?>
+                <img src="./profile_pics/<?php echo $picture; ?>" alt="" class="friends_pic">
+            <?php } ?>
+            <?php echo $row[0]['username']; ?>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <span>
+                <i class="fa-solid fa-ellipsis-vertical btn" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Save Post">
+                </i>
+            </span>
+        </h4>
+
+
+        <img src="./uploads/<?php echo $row[0]['post']; ?>" width="400px" class="p-3 shadow mx-auto" alt="">
+
+        <br>
+        <br>
+        <h4 class="p-1">
+            <a href="update.php?id=<?php echo $row[0]['id'] ?>&pic=1" class="text-decoration-none text-danger">
+                <i class="fa-regular fa-heart"> </i>
+            </a>
+            <?php echo $row[0]['likes']; ?> likes
+            &nbsp;
+            <i class="fa-regular fa-comment text-primary"></i>
+            <a href="comments.php?id=<?php echo $row[0]['id'] ?>&owner=<?php echo $row[0]['username']; ?>" class="text-decoration-none text-secondary"><span> 0 Comments</span></a>
+
+        </h4>
+
+        <?php if ($row[0]['caption'] != '') {  ?>
+            <div class="text-start fs-5 fw-light mx-auto" style="width: 300px; height:auto;">
+                <span class="fw-bold"> <?php echo $row[0]['username']; ?>:</span> <?php echo $row[0]['caption'] ?>
+            </div>
+        <?php } ?>
+
+        <div class="text-start text-secondary mx-auto" style="width: 300px; height:auto;">
+            <span class="fs-6">
+                <?php
+                $dt = strtotime($row[0]['created_at']);
+                echo date("d", $dt);
+                echo " ";
+                echo date("M", $dt);
+                echo " ";
+                echo date("Y", $dt);
+                ?>
+            </span>
+        </div>
+
+
+        <br>
+
+
         <form action="" method="POST" class="d-flex justify-content-center">
             <label for="comment" class="form-label">
                 <?php if ($pic == '') {  ?>
-                    <i class="fa-regular fa-user"></i>
+                    <i class="fs-3 fa-regular fa-user"></i>
                 <?php } else { ?>
                     <img src="./profile_pics/<?php echo $pic ?>" class="pt-2" alt="" id="profile_pic">
                 <?php } ?>
@@ -43,7 +138,65 @@ if (isset($_POST['post'])) {
             <input type="text" class="form-control w-25" name="comment" id="comment" placeholder="Add a comment..."> &nbsp;
             <button type="submit" class="btn btn-secondary" name="post" id="post">Post</button>
         </form>
+
     </div>
+
+
+    <?php foreach ($rows as $row) { ?>
+
+        <div class="mx-auto w-50  card border border-1 border-secondary d-flex p-2 shadow ">
+            <div class="">
+                <div class="float-start">
+
+                    <?php
+                    $comment_pic = '';
+                    $name = $row['commenter'];
+                    $sql = "SELECT pic FROM login where username = '$name'";
+                    $res = mysqli_query($conn, $sql);
+                    $comment_pic = $res->fetch_array()['pic'];
+                    
+                    if ($comment_pic == '') { ?>
+                        <i class="fs-3 fa-regular fa-user"></i>
+                    <?php } else { ?>
+                        <img src="./profile_pics/<?php echo $comment_pic; ?>" alt="" class="friends_pic">
+                    <?php } ?>
+
+
+
+
+        
+
+
+
+                    <span class="fs-5 fw-normal px-1"><?php echo $row['commenter'] ?></span>
+                </div>
+
+                <div class="float-end">
+                    <span class="fs-6 ">
+                        <?php
+                        $dt = strtotime($row['created_at']);
+                        echo date("d", $dt);
+                        echo " ";
+                        echo date("M", $dt);
+                        echo " ";
+                        echo date("Y", $dt);
+                        ?>
+                    </span>
+
+                </div>
+            </div>
+            <div class="px-5">
+                <span class="fs-5"><?php echo $row['comments'] ?></span>
+            </div>
+        </div>
+
+        <br>
+
+    <?php } ?>
+
+
+
+    <br><br>
 
 
 </body>
