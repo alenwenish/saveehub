@@ -197,7 +197,7 @@ if ($status == 0) {
 
             <div class="d-flex justify-content-around">
               <span class="p-1 text-center text-secondary w-50 border shadow "> <?php echo $row['account']; ?> </span>
-              <span> <a href="unfollow.php?follower_name=<?php echo $username?>&account=<?php echo $row['account']?>"><button class="btn btn-secondary"> Unfollow</button></a></span>
+              <span> <a href="unfollow.php?follower_name=<?php echo $username ?>&account=<?php echo $row['account'] ?>"><button class="btn btn-secondary"> Unfollow</button></a></span>
 
             </div>
 
@@ -239,7 +239,7 @@ if ($status == 0) {
 
               <span class="p-1 text-center text-secondary w-50 border shadow "> <?php echo $row['follower_name']; ?> </span>
 
-              <span> <a href="unfollow.php?follower_name=<?php echo $row['follower_name']?>&account=<?php echo $username?>"> <button class="btn btn-secondary"> Unfollow</button> </a></span>
+              <span> <a href="unfollow.php?follower_name=<?php echo $row['follower_name'] ?>&account=<?php echo $username ?>"> <button class="btn btn-secondary"> Unfollow</button> </a></span>
 
             </div>
             <br>
@@ -284,10 +284,34 @@ if ($status == 0) {
 
               <div class="modal-body">
                 <img src="./uploads/<?php echo $data['post']; ?>" width="100%" height="100%" alt="">
-                <br>
+                <br><br>
                 &nbsp;
                 <i class="fa-regular fa-heart text-danger fs-3"> </i> &nbsp;
                 <span class="fs-4"><?php echo $data['likes']; ?> likes </span>
+
+                &nbsp;
+                <i class="fa-regular fa-comment text-primary fs-3"></i> &nbsp;
+                <span class="fs-4"> 0 Comments</span>
+
+                <?php if ($data['caption'] != '') {  ?>
+
+                  <div class="text-start fs-5 fw-light mx-auto">
+                    &nbsp; <span class="fw-bold"> <?php echo $data['username']; ?>:</span> <?php echo $data['caption'] ?>
+                  </div>
+                <?php } ?>
+
+                <div class="text-start text-secondary mx-auto">
+                  &nbsp; <span class="fs-6">
+                    <?php
+                    $dt = strtotime($data['created_at']);
+                    echo date("d", $dt);
+                    echo " ";
+                    echo date("M", $dt);
+                    echo " ";
+                    echo date("Y", $dt);
+                    ?>
+                  </span>
+                </div>
 
               </div>
             </div>
@@ -321,10 +345,35 @@ if ($status == 0) {
 
               <div class="modal-body">
                 <img src="./club_pics/<?php echo $data['post']; ?>" width="100%" height="100%" alt="">
-                <br>
+                <br><br>
                 &nbsp;
                 <i class="fa-regular fa-heart text-danger fs-3"> </i> &nbsp;
                 <span class="fs-4"><?php echo $data['likes']; ?> likes </span>
+
+                &nbsp;
+                <i class="fa-regular fa-comment text-primary fs-3"></i> &nbsp;
+                <span class="fs-4"> 0 Comments</span>
+
+                <?php if ($data['caption'] != '') {  ?>
+
+                  <div class="text-start fs-5 fw-light mx-auto">
+                    &nbsp; <span class="fw-bold"> <?php echo $data['username']; ?>:</span> <?php echo $data['caption'] ?>
+                  </div>
+                <?php } ?>
+
+                <div class="text-start text-secondary mx-auto">
+                  &nbsp; <span class="fs-6">
+                    <?php
+                    $dt = strtotime($data['created_at']);
+                    echo date("d", $dt);
+                    echo " ";
+                    echo date("M", $dt);
+                    echo " ";
+                    echo date("Y", $dt);
+                    ?>
+                  </span>
+                </div>
+
 
               </div>
             </div>

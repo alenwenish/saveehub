@@ -155,7 +155,7 @@ while ($row = mysqli_fetch_array($res))
                 <?php echo $row['likes']; ?> likes
                 &nbsp;
                 <i class="fa-regular fa-comment text-primary"></i>
-                <span> 0 Comments</span>
+                <span > 0 Comments</span>
             </h4>
 
             <?php if ($row['caption'] != '') {  ?>
@@ -193,6 +193,7 @@ while ($row = mysqli_fetch_array($res))
         $(window).on("load", function() {
             $(".loader-wrapper").delay(1000).fadeOut("slow");
         });
+
 
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
         var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
