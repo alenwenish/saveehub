@@ -34,7 +34,7 @@ $pic = $res->fetch_array()['pic'];
 
   &nbsp;
 
-    <a class="nav-link text-black float-start text-warning fs-4 ps-4" href="">
+    <a class="nav-link text-black float-start text-warning fs-4 ps-4" href="viewprofile.php">
 
       <?php if ($pic == '') {  ?>
         <i class="fa-regular fa-user"></i>
