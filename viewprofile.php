@@ -142,7 +142,7 @@ if ($status == 0) {
       <div class="d-flex justify-content-around text-center pt-3 pe-3 mx-auto">
 
         <button class=" text-light fw-bolder fs-4 m-1 p-2 w-25" class="btn" id="posts">
-          Posts <br>
+          <a href="#posts" class="text-decoration-none text-white"> Posts </a> <br>
           <?php echo $count; ?>
         </button>
 
@@ -253,7 +253,7 @@ if ($status == 0) {
   </div>
 
 
-  <h3 class="text-secondary fw-normal text-center ">Your posts</h3>
+  <h3 class="text-secondary fw-normal text-center bg-light"  >Your posts</h3>
 
   <div class="container  p-1">
     <?php
