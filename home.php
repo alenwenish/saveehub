@@ -113,9 +113,9 @@ while ($row = mysqli_fetch_array($res))
 
 <body>
 
-    <!-- <div class="loader-wrapper">
+    <div class="loader-wrapper">
         <span class="loader"><span class="loader-inner"></span></span>
-    </div> -->
+    </div>
 
 
     <?php include('navigation.php'); ?>
@@ -158,7 +158,7 @@ while ($row = mysqli_fetch_array($res))
                 <?php echo $row['likes']; ?> likes
                 &nbsp;
                 <i class="fa-regular fa-comment text-primary"></i>
-                <a href="comments.php?id=<?php echo $row['id'] ?>&owner=<?php echo $row['username']; ?>" class="text-decoration-none text-secondary"><span>
+                <a href="comments.php?id=<?php echo $row['id'] ?>&owner=<?php echo $row['username']; ?>&comment_status=0" class="text-decoration-none text-secondary"><span>
 
                         <?php
                         $image_id = $row['id'];
@@ -206,9 +206,9 @@ while ($row = mysqli_fetch_array($res))
     <?php include('footer.php'); ?>
 
     <script>
-        // $(window).on("load", function() {
-        //     $(".loader-wrapper").delay(1000).fadeOut("slow");
-        // });
+        $(window).on("load", function() {
+            $(".loader-wrapper").delay(1000).fadeOut("slow");
+        });
 
 
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))

@@ -5,6 +5,8 @@ include('config/connect.php');
 
 
 $username = $_SESSION['name'];
+
+$status_of_comment = $_GET['comment_status'];
 $id = $_GET['id'];
 $owner = $_GET['owner'];
 
@@ -13,18 +15,35 @@ if (isset($_POST['post'])) {
     $comment = stripslashes($_REQUEST['comment']);
     $comment = mysqli_real_escape_string($conn, $comment);
 
-    $query    = "INSERT INTO image_comments (image_id,commenter,owner,comments)
+    if ($status_of_comment == 0) {
+
+        $query    = "INSERT INTO image_comments (image_id,commenter,owner,comments)
     VALUES ('$id', '$username', '$owner' , '$comment')";
 
-    $result   = mysqli_query($conn, $query);
+        $result   = mysqli_query($conn, $query);
+    } else if ($status_of_comment == 1) {
+        $query    = "INSERT INTO club_pics_comments (image_id,commenter,owner,comments)
+    VALUES ('$id', '$username', '$owner' , '$comment')";
+
+        $result   = mysqli_query($conn, $query);
+    }
 }
 
-$sql = "SELECT * FROM image_comments where image_id = '$id'";
-$res = mysqli_query($conn, $sql);
 $rows = array();
-while ($row = mysqli_fetch_array($res))
-    $rows[] = $row;
 
+if ($status_of_comment == 0) {
+    $sql = "SELECT * FROM image_comments where image_id = '$id'";
+    $res = mysqli_query($conn, $sql);
+
+    while ($row = mysqli_fetch_array($res))
+        $rows[] = $row;
+} else if ($status_of_comment == 1) {
+    $sql = "SELECT * FROM club_pics_comments where image_id = '$id'";
+    $res = mysqli_query($conn, $sql);
+
+    while ($row = mysqli_fetch_array($res))
+        $rows[] = $row;
+}
 
 
 
@@ -51,151 +70,318 @@ while ($row = mysqli_fetch_array($res))
 <body class="container">
     <?php include('navigation.php'); ?>
 
-    <div class="justify-content-center text-center m-2">
-        <?php
 
-        $query = "SELECT * from image where id = '$id'";
+    <?php if ($status_of_comment == 0) { ?>
 
-        $result = mysqli_query($conn, $query);
+        <div class="justify-content-center text-center m-2">
 
-        $row = array();
-        while ($r = mysqli_fetch_array($result))
-            $row[] = $r;
-
-
-        ?>
-
-
-        <a href="home.php" class="text-dark text-decoration-none fs-3 ms-5 float-start"><i class="fa-solid fa-arrow-left"></i> </a>
-
-        <h4 class="ps-3 ">
             <?php
-            $picture = '';
-            $name = $row[0]['username'];
-            $sql = "SELECT pic FROM login where username = '$name'";
-            $res = mysqli_query($conn, $sql);
-            $picture = $res->fetch_array()['pic'];
-            if ($picture == '') { ?>
-                <i class="fa-regular fa-user"></i>
-            <?php } else { ?>
-                <img src="./profile_pics/<?php echo $picture; ?>" alt="" class="friends_pic">
-            <?php } ?>
-            <?php echo $row[0]['username']; ?>
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <span>
-                <i class="fa-solid fa-ellipsis-vertical btn" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Save Post">
-                </i>
-            </span>
-        </h4>
+            $query = "SELECT * from image where id = '$id'";
+            $result = mysqli_query($conn, $query);
+            $row = array();
+            while ($r = mysqli_fetch_array($result))
+                $row[] = $r;
 
+            ?>
 
-        <img src="./uploads/<?php echo $row[0]['post']; ?>" width="400px" class="p-3 shadow mx-auto" alt="">
+            <a href="home.php" class="text-dark text-decoration-none fs-3 ms-5 float-start"><i class="fa-solid fa-arrow-left"></i> </a>
 
-        <br>
-        <br>
-        <h4 class="p-1">
-            <a href="update.php?id=<?php echo $row[0]['id'] ?>&pic=1" class="text-decoration-none text-danger">
-                <i class="fa-regular fa-heart"> </i>
-            </a>
-            <?php echo $row[0]['likes']; ?> likes
-            &nbsp;
-            <i class="fa-regular fa-comment text-primary"></i>
-            <a href="comments.php?id=<?php echo $row[0]['id'] ?>&owner=<?php echo $row[0]['username']; ?>" class="text-decoration-none text-secondary"><span>
-                    <?php
-                    $image_id = $row[0]['id'];
-                    $comment_query = "SELECT COUNT(comments)as count from image_comments where image_id='$image_id'";
-                    $res = mysqli_query($conn, $comment_query);
-
-                    echo $res->fetch_array()['count'];
-
-
-                    ?> Comments</span></a>
-
-        </h4>
-
-        <?php if ($row[0]['caption'] != '') {  ?>
-            <div class="text-start fs-5 fw-light mx-auto" style="width: 300px; height:auto;">
-                <span class="fw-bold"> <?php echo $row[0]['username']; ?>:</span> <?php echo $row[0]['caption'] ?>
-            </div>
-        <?php } ?>
-
-        <div class="text-start text-secondary mx-auto" style="width: 300px; height:auto;">
-            <span class="fs-6">
+            <h4 class="ps-3 ">
                 <?php
-                $dt = strtotime($row[0]['created_at']);
-                echo date("d", $dt);
-                echo " ";
-                echo date("M", $dt);
-                echo " ";
-                echo date("Y", $dt);
-                ?>
-            </span>
-        </div>
-
-
-        <br>
-
-
-        <form action="" method="POST" class="d-flex justify-content-center">
-            <label for="comment" class="form-label">
-                <?php if ($pic == '') {  ?>
-                    <i class="fs-3 fa-regular fa-user"></i>
+                $picture = '';
+                $name = $row[0]['username'];
+                $sql = "SELECT pic FROM login where username = '$name'";
+                $res = mysqli_query($conn, $sql);
+                $picture = $res->fetch_array()['pic'];
+                if ($picture == '') { ?>
+                    <i class="fa-regular fa-user"></i>
                 <?php } else { ?>
-                    <img src="./profile_pics/<?php echo $pic ?>" class="pt-2" alt="" id="profile_pic">
+                    <img src="./profile_pics/<?php echo $picture; ?>" alt="" class="friends_pic">
                 <?php } ?>
-            </label> &nbsp;
-            <input type="text" class="form-control w-25" name="comment" id="comment" placeholder="Add a comment..."> &nbsp;
-            <button type="submit" class="btn btn-secondary" name="post" id="post">Post</button>
-        </form>
+                <?php echo $row[0]['username']; ?>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <span>
+                    <i class="fa-solid fa-ellipsis-vertical btn" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Save Post">
+                    </i>
+                </span>
+            </h4>
 
-    </div>
+
+            <img src="./uploads/<?php echo $row[0]['post']; ?>" width="400px" class="p-3 shadow mx-auto" alt="">
+
+            <br>
+            <br>
+            <h4 class="p-1">
+                <a href="update.php?id=<?php echo $row[0]['id'] ?>&pic=1" class="text-decoration-none text-danger">
+                    <i class="fa-regular fa-heart"> </i>
+                </a>
+                <?php echo $row[0]['likes']; ?> likes
+                &nbsp;
+                <i class="fa-regular fa-comment text-primary"></i>
+                <a href="comments.php?id=<?php echo $row[0]['id'] ?>&owner=<?php echo $row[0]['username']; ?>&comment_status=0" class="text-decoration-none text-secondary"><span>
+                        <?php
+                        $image_id = $row[0]['id'];
+                        $comment_query = "SELECT COUNT(comments)as count from image_comments where image_id='$image_id'";
+                        $res = mysqli_query($conn, $comment_query);
+
+                        echo $res->fetch_array()['count'];
 
 
-    <?php foreach ($rows as $row) { ?>
+                        ?> Comments</span></a>
 
-        <div class="mx-auto w-50  card border border-1 border-secondary d-flex p-2 shadow ">
-            <div class="">
-                <div class="float-start">
+            </h4>
 
+            <?php if ($row[0]['caption'] != '') {  ?>
+                <div class="text-start fs-5 fw-light mx-auto" style="width: 300px; height:auto;">
+                    <span class="fw-bold"> <?php echo $row[0]['username']; ?>:</span> <?php echo $row[0]['caption'] ?>
+                </div>
+            <?php } ?>
+
+            <div class="text-start text-secondary mx-auto" style="width: 300px; height:auto;">
+                <span class="fs-6">
                     <?php
-                    $comment_pic = '';
-                    $name = $row['commenter'];
-                    $sql = "SELECT pic FROM login where username = '$name'";
-                    $res = mysqli_query($conn, $sql);
-                    $comment_pic = $res->fetch_array()['pic'];
+                    $dt = strtotime($row[0]['created_at']);
+                    echo date("d", $dt);
+                    echo " ";
+                    echo date("M", $dt);
+                    echo " ";
+                    echo date("Y", $dt);
+                    ?>
+                </span>
+            </div>
 
-                    if ($comment_pic == '') { ?>
+
+            <br>
+
+
+            <form action="" method="POST" class="d-flex justify-content-center">
+                <label for="comment" class="form-label">
+                    <?php if ($pic == '') {  ?>
                         <i class="fs-3 fa-regular fa-user"></i>
                     <?php } else { ?>
-                        <img src="./profile_pics/<?php echo $comment_pic; ?>" alt="" class="friends_pic">
+                        <img src="./profile_pics/<?php echo $pic ?>" class="pt-2" alt="" id="profile_pic">
                     <?php } ?>
+                </label> &nbsp;
+                <input type="text" class="form-control w-25" name="comment" id="comment" placeholder="Add a comment..."> &nbsp;
+                <button type="submit" class="btn btn-secondary" name="post" id="post">Post</button>
+            </form>
 
-
-                    <span class="fs-5 fw-normal px-1"><?php echo $row['commenter'] ?></span>
-                </div>
-
-                <div class="float-end">
-                    <span class="fs-6 ">
-                        <?php
-                        $dt = strtotime($row['created_at']);
-                        echo date("d", $dt);
-                        echo " ";
-                        echo date("M", $dt);
-                        echo " ";
-                        echo date("Y", $dt);
-                        ?>
-                    </span>
-
-                </div>
-            </div>
-            <div class="px-5">
-                <span class="fs-5"><?php echo $row['comments'] ?></span>
-            </div>
         </div>
 
-        <br>
+
+        <?php foreach ($rows as $row) { ?>
+
+            <div class="mx-auto w-50  card border border-1 border-secondary d-flex p-2 shadow ">
+                <div class="">
+                    <div class="float-start">
+
+                        <?php
+                        $comment_pic = '';
+                        $name = $row['commenter'];
+
+                        $sql = "SELECT pic FROM login where username = '$name'";
+                        $res = mysqli_query($conn, $sql);
+                        $c = mysqli_num_rows($res);
+                        if ($c == 1)
+                            $comment_pic = $res->fetch_array()['pic'];
+
+                        $sql = "SELECT pic FROM club where club_name = '$name'";
+                        $res = mysqli_query($conn, $sql);
+                        $c = mysqli_num_rows($res);
+                        if ($c == 1)
+                            $comment_pic = $res->fetch_array()['pic'];
+
+                        if ($comment_pic == '') { ?>
+                            <i class="fs-3 fa-regular fa-user"></i>
+                        <?php } else { ?>
+                            <img src="./profile_pics/<?php echo $comment_pic; ?>" alt="" class="friends_pic">
+                        <?php } ?>
+
+
+                        <span class="fs-5 fw-normal px-1"><?php echo $row['commenter'] ?></span>
+                    </div>
+
+                    <div class="float-end">
+                        <span class="fs-6 ">
+                            <?php
+                            $dt = strtotime($row['created_at']);
+                            echo date("d", $dt);
+                            echo " ";
+                            echo date("M", $dt);
+                            echo " ";
+                            echo date("Y", $dt);
+                            ?>
+                        </span>
+
+                    </div>
+                </div>
+                <div class="px-5">
+                    <span class="fs-5"><?php echo $row['comments'] ?></span>
+                </div>
+            </div>
+
+            <br>
+
+        <?php } ?>
+
+    <?php } else if ($status_of_comment == 1) { ?>
+
+        <div class="justify-content-center text-center m-2">
+
+            <?php
+            $query = "SELECT * from club_pics where id = '$id'";
+            $result = mysqli_query($conn, $query);
+            $row = array();
+            while ($r = mysqli_fetch_array($result))
+                $row[] = $r;
+
+            ?>
+
+            <a href="home.php" class="text-dark text-decoration-none fs-3 ms-5 float-start"><i class="fa-solid fa-arrow-left"></i> </a>
+
+            <h4 class="ps-3 ">
+                <?php
+                $picture = '';
+                $name = $row[0]['username'];
+                $sql = "SELECT pic FROM club where club_name = '$name'";
+                $res = mysqli_query($conn, $sql);
+                $picture = $res->fetch_array()['pic'];
+                if ($picture == '') { ?>
+                    <i class="fa-regular fa-user"></i>
+                <?php } else { ?>
+                    <img src="./profile_pics/<?php echo $picture; ?>" alt="" class="friends_pic">
+                <?php } ?>
+                <?php echo $row[0]['username']; ?>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <span>
+                    <i class="fa-solid fa-ellipsis-vertical btn" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Save Post">
+                    </i>
+                </span>
+            </h4>
+
+
+            <img src="./club_pics/<?php echo $row[0]['post']; ?>" width="400px" class="p-3 shadow mx-auto" alt="">
+
+            <br>
+            <br>
+            <h4 class="p-1">
+                <a href="update.php?id=<?php echo $row[0]['id'] ?>&pic=1" class="text-decoration-none text-danger">
+                    <i class="fa-regular fa-heart"> </i>
+                </a>
+                <?php echo $row[0]['likes']; ?> likes
+                &nbsp;
+                <i class="fa-regular fa-comment text-primary"></i>
+                <a href="comments.php?id=<?php echo $row[0]['id'] ?>&owner=<?php echo $row[0]['username']; ?>&comment_status=1" class="text-decoration-none text-secondary"><span>
+                        <?php
+                        $image_id = $row[0]['id'];
+                        $comment_query = "SELECT COUNT(comments)as count from club_pics_comments where image_id='$image_id'";
+                        $res = mysqli_query($conn, $comment_query);
+
+                        echo $res->fetch_array()['count'];
+
+
+                        ?> Comments</span></a>
+
+            </h4>
+
+            <?php if ($row[0]['caption'] != '') {  ?>
+                <div class="text-start fs-5 fw-light mx-auto" style="width: 300px; height:auto;">
+                    <span class="fw-bold"> <?php echo $row[0]['username']; ?>:</span> <?php echo $row[0]['caption'] ?>
+                </div>
+            <?php } ?>
+
+            <div class="text-start text-secondary mx-auto" style="width: 300px; height:auto;">
+                <span class="fs-6">
+                    <?php
+                    $dt = strtotime($row[0]['created_at']);
+                    echo date("d", $dt);
+                    echo " ";
+                    echo date("M", $dt);
+                    echo " ";
+                    echo date("Y", $dt);
+                    ?>
+                </span>
+            </div>
+
+
+            <br>
+
+
+            <form action="" method="POST" class="d-flex justify-content-center">
+                <label for="comment" class="form-label">
+                    <?php if ($pic == '') {  ?>
+                        <i class="fs-3 fa-regular fa-user"></i>
+                    <?php } else { ?>
+                        <img src="./profile_pics/<?php echo $pic ?>" class="pt-2" alt="" id="profile_pic">
+                    <?php } ?>
+                </label> &nbsp;
+                <input type="text" class="form-control w-25" name="comment" id="comment" placeholder="Add a comment..."> &nbsp;
+                <button type="submit" class="btn btn-secondary" name="post" id="post">Post</button>
+            </form>
+
+        </div>
+
+
+        <?php foreach ($rows as $row) { ?>
+
+            <div class="mx-auto w-50  card border border-1 border-secondary d-flex p-2 shadow ">
+                <div class="">
+                    <div class="float-start">
+
+                        <?php
+                        $comment_pic = '';
+                        $name = $row['commenter'];
+
+                        $sql = "SELECT pic FROM login where username = '$name'";
+                        $res = mysqli_query($conn, $sql);
+                        $c = mysqli_num_rows($res);
+                        if ($c == 1)
+                            $comment_pic = $res->fetch_array()['pic'];
+
+                        $sql = "SELECT pic FROM club where club_name = '$name'";
+                        $res = mysqli_query($conn, $sql);
+                        $c = mysqli_num_rows($res);
+                        if ($c == 1)
+                            $comment_pic = $res->fetch_array()['pic'];
+
+                        if ($comment_pic == '') { ?>
+                            <i class="fs-3 fa-regular fa-user"></i>
+                        <?php } else { ?>
+                            <img src="./profile_pics/<?php echo $comment_pic; ?>" alt="" class="friends_pic">
+                        <?php } ?>
+
+
+                        <span class="fs-5 fw-normal px-1"><?php echo $row['commenter'] ?></span>
+                    </div>
+
+                    <div class="float-end">
+                        <span class="fs-6 ">
+                            <?php
+                            $dt = strtotime($row['created_at']);
+                            echo date("d", $dt);
+                            echo " ";
+                            echo date("M", $dt);
+                            echo " ";
+                            echo date("Y", $dt);
+                            ?>
+                        </span>
+
+                    </div>
+                </div>
+                <div class="px-5">
+                    <span class="fs-5"><?php echo $row['comments'] ?></span>
+                </div>
+            </div>
+
+            <br>
+
+        <?php } ?>
+
 
     <?php } ?>
+
+
+
 
 
 

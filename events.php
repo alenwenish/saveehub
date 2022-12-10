@@ -10,8 +10,8 @@ $username = $_SESSION['name'];
 $sql = "SELECT * FROM club_pics where username IN (SELECT follower_name FROM followers WHERE account = '$username') ORDER BY created_at DESC LIMIT 10";
 
 
-$res = mysqli_query($conn, $sql);
 $rows = array();
+$res = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_array($res))
     $rows[] = $row;
 
@@ -40,7 +40,7 @@ while ($row = mysqli_fetch_array($res))
 <body>
     <?php include('navigation.php'); ?>
 
-    
+
 
     <?php foreach ($rows as $row) { ?>
 
@@ -75,7 +75,19 @@ while ($row = mysqli_fetch_array($res))
                 <?php echo $row['likes']; ?> likes
                 &nbsp;
                 <i class="fa-regular fa-comment text-primary"></i>
-                <span> 0 Comments</span>
+                <a href="comments.php?id=<?php echo $row['id'] ?>&owner=<?php echo $row['username']; ?>&comment_status=1" class="text-decoration-none text-secondary"><span>
+
+                        <?php
+                        $image_id = $row['id'];
+                        $comment_query = "SELECT COUNT(comments)as count from club_pics_comments where image_id='$image_id'";
+                        $res = mysqli_query($conn, $comment_query);
+
+                        echo $res->fetch_array()['count'];
+
+
+                        ?>
+
+                        Comments</span></a>
             </h4>
 
             <?php if ($row['caption'] != '') {  ?>
