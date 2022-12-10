@@ -17,7 +17,6 @@ while ($row = mysqli_fetch_array($res))
     $rows[] = $row;
 
 
-
 ?>
 
 <!DOCTYPE html>
@@ -114,29 +113,31 @@ while ($row = mysqli_fetch_array($res))
 
 <body>
 
-    <div class="loader-wrapper">
+    <!-- <div class="loader-wrapper">
         <span class="loader"><span class="loader-inner"></span></span>
-    </div>
+    </div> -->
 
 
     <?php include('navigation.php'); ?>
 
+    
+
     <?php foreach ($rows as $row) { ?>
 
-        <div class="text-center">
+        <div class="text-center ">
 
 
-            <h4 class="ps-3">
+            <h4 class="ps-3 ">
                 <?php
-                $pic = '';
+                $picture = '';
                 $name = $row['username'];
                 $sql = "SELECT pic FROM login where username = '$name'";
                 $res = mysqli_query($conn, $sql);
-                $pic = $res->fetch_array()['pic'];
-                if ($pic == '') { ?>
+                $picture = $res->fetch_array()['pic'];
+                if ($picture == '') { ?>
                     <i class="fa-regular fa-user"></i>
                 <?php } else { ?>
-                    <img src="./profile_pics/<?php echo $pic; ?>" alt="" class="friends_pic">
+                    <img src="./profile_pics/<?php echo $picture; ?>" alt="" class="friends_pic">
                 <?php } ?>
                 <?php echo $row['username']; ?>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -148,6 +149,8 @@ while ($row = mysqli_fetch_array($res))
 
 
             <img src="./uploads/<?php echo $row['post']; ?>" width="300px" class="p-3 shadow mx-auto" alt="">
+
+
             <h4 class="p-1">
                 <a href="update.php?id=<?php echo $row['id'] ?>&pic=1" class="text-decoration-none text-danger">
                     <i class="fa-regular fa-heart"> </i>
@@ -155,7 +158,8 @@ while ($row = mysqli_fetch_array($res))
                 <?php echo $row['likes']; ?> likes
                 &nbsp;
                 <i class="fa-regular fa-comment text-primary"></i>
-                <span > 0 Comments</span>
+                <a href="comments.php?id=<?php echo $row['id'] ?>&owner=<?php echo $row['username']; ?>" class="text-decoration-none text-secondary"><span> 0 Comments</span></a>
+
             </h4>
 
             <?php if ($row['caption'] != '') {  ?>
@@ -177,6 +181,7 @@ while ($row = mysqli_fetch_array($res))
                 </span>
             </div>
 
+
         </div>
 
 
@@ -190,9 +195,9 @@ while ($row = mysqli_fetch_array($res))
     <?php include('footer.php'); ?>
 
     <script>
-        $(window).on("load", function() {
-            $(".loader-wrapper").delay(1000).fadeOut("slow");
-        });
+        // $(window).on("load", function() {
+        //     $(".loader-wrapper").delay(1000).fadeOut("slow");
+        // });
 
 
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
