@@ -100,7 +100,16 @@ while ($row = mysqli_fetch_array($res))
             <?php echo $row[0]['likes']; ?> likes
             &nbsp;
             <i class="fa-regular fa-comment text-primary"></i>
-            <a href="comments.php?id=<?php echo $row[0]['id'] ?>&owner=<?php echo $row[0]['username']; ?>" class="text-decoration-none text-secondary"><span> 0 Comments</span></a>
+            <a href="comments.php?id=<?php echo $row[0]['id'] ?>&owner=<?php echo $row[0]['username']; ?>" class="text-decoration-none text-secondary"><span>
+                    <?php
+                    $image_id = $row[0]['id'];
+                    $comment_query = "SELECT COUNT(comments)as count from image_comments where image_id='$image_id'";
+                    $res = mysqli_query($conn, $comment_query);
+
+                    echo $res->fetch_array()['count'];
+
+
+                    ?> Comments</span></a>
 
         </h4>
 
@@ -154,18 +163,12 @@ while ($row = mysqli_fetch_array($res))
                     $sql = "SELECT pic FROM login where username = '$name'";
                     $res = mysqli_query($conn, $sql);
                     $comment_pic = $res->fetch_array()['pic'];
-                    
+
                     if ($comment_pic == '') { ?>
                         <i class="fs-3 fa-regular fa-user"></i>
                     <?php } else { ?>
                         <img src="./profile_pics/<?php echo $comment_pic; ?>" alt="" class="friends_pic">
                     <?php } ?>
-
-
-
-
-        
-
 
 
                     <span class="fs-5 fw-normal px-1"><?php echo $row['commenter'] ?></span>

@@ -120,7 +120,7 @@ while ($row = mysqli_fetch_array($res))
 
     <?php include('navigation.php'); ?>
 
-    
+
 
     <?php foreach ($rows as $row) { ?>
 
@@ -158,8 +158,19 @@ while ($row = mysqli_fetch_array($res))
                 <?php echo $row['likes']; ?> likes
                 &nbsp;
                 <i class="fa-regular fa-comment text-primary"></i>
-                <a href="comments.php?id=<?php echo $row['id'] ?>&owner=<?php echo $row['username']; ?>" class="text-decoration-none text-secondary"><span> 0 Comments</span></a>
+                <a href="comments.php?id=<?php echo $row['id'] ?>&owner=<?php echo $row['username']; ?>" class="text-decoration-none text-secondary"><span>
 
+                        <?php
+                        $image_id = $row['id'];
+                        $comment_query = "SELECT COUNT(comments)as count from image_comments where image_id='$image_id'";
+                        $res = mysqli_query($conn, $comment_query);
+                        
+                        echo $res->fetch_array()['count'];
+
+
+                        ?>
+
+                        Comments</span></a>
             </h4>
 
             <?php if ($row['caption'] != '') {  ?>
