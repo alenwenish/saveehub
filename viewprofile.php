@@ -142,7 +142,7 @@ if ($status == 0) {
       <div class="d-flex justify-content-around text-center pt-3 pe-3 mx-auto">
 
         <button class=" text-light fw-bolder fs-4 m-1 p-2 w-25" class="btn" id="posts">
-          <a href="#posts" class="text-decoration-none text-white"> Posts </a> <br>
+          <a href="#post" class="text-decoration-none text-white"> Posts </a> <br>
           <?php echo $count; ?>
         </button>
 
@@ -197,7 +197,7 @@ if ($status == 0) {
 
             <div class="d-flex justify-content-around">
               <span class="p-1 text-center text-secondary w-50 border shadow "> <?php echo $row['account']; ?> </span>
-              <span> <button class="btn btn-secondary"> Unfollow</button></span>
+              <span> <a href="unfollow.php?follower_name=<?php echo $username?>&account=<?php echo $row['account']?>"><button class="btn btn-secondary"> Unfollow</button></a></span>
 
             </div>
 
@@ -239,7 +239,7 @@ if ($status == 0) {
 
               <span class="p-1 text-center text-secondary w-50 border shadow "> <?php echo $row['follower_name']; ?> </span>
 
-              <span> <button class="btn btn-secondary"> Unfollow</button></span>
+              <span> <a href="unfollow.php?follower_name=<?php echo $row['follower_name']?>&account=<?php echo $username?>"> <button class="btn btn-secondary"> Unfollow</button> </a></span>
 
             </div>
             <br>
@@ -253,9 +253,9 @@ if ($status == 0) {
   </div>
 
 
-  <h3 class="text-secondary fw-normal text-center bg-light"  >Your posts</h3>
+  <h3 class="text-secondary fw-normal text-center ">Your posts</h3>
 
-  <div class="container  p-1">
+  <div class="container  p-1" id="post">
     <?php
 
     if ($status == 0) {
