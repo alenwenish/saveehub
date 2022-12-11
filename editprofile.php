@@ -56,6 +56,18 @@ if (isset($_POST['update'])) {
         $query    = " UPDATE image SET username = '$user' WHERE username = '$username'";
         $result   = mysqli_query($conn, $query);
 
+        $query = "UPDATE image_comments SET commenter = '$user' WHERE commenter = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query = "UPDATE image_comments SET owner = '$user' WHERE owner = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query = "UPDATE club_pics_comments SET commenter = '$user' WHERE commenter = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query = "UPDATE club_pics_comments SET owner = '$user' WHERE owner = '$username'";
+        $result   = mysqli_query($conn, $query);
+
         $query    = " UPDATE login SET username = '$user' WHERE username = '$username'";
         $result   = mysqli_query($conn, $query);
 
@@ -88,6 +100,19 @@ if (isset($_POST['update'])) {
 
         $query    = " UPDATE club_pics SET username = '$user' WHERE username = '$username'";
         $result   = mysqli_query($conn, $query);
+
+        $query = "UPDATE image_comments SET commenter = '$user' WHERE commenter = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query = "UPDATE image_comments SET owner = '$user' WHERE owner = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query = "UPDATE club_pics_comments SET commenter = '$user' WHERE commenter = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query = "UPDATE club_pics_comments SET owner = '$user' WHERE owner = '$username'";
+        $result   = mysqli_query($conn, $query);
+        
 
         $query    = " UPDATE club SET username = '$user' WHERE  club_name = '$username'";
         $result   = mysqli_query($conn, $query);

@@ -291,7 +291,20 @@ if ($status == 0) {
 
                 &nbsp;
                 <i class="fa-regular fa-comment text-primary fs-3"></i> &nbsp;
-                <span class="fs-4"> 0 Comments</span>
+                <a href="comments.php?id=<?php echo $data['id'] ?>&owner=<?php echo $data['username']; ?>&comment_status=0" class="text-decoration-none fs-4 text-secondary"><span>
+
+                    <?php
+                    $image_id = $data['id'];
+                    $comment_query = "SELECT COUNT(comments)as count from image_comments where image_id='$image_id'";
+                    $res = mysqli_query($conn, $comment_query);
+
+                    echo $res->fetch_array()['count'];
+
+
+                    ?>
+
+                    Comments</span>
+                </a>
 
                 <?php if ($data['caption'] != '') {  ?>
 
@@ -352,7 +365,20 @@ if ($status == 0) {
 
                 &nbsp;
                 <i class="fa-regular fa-comment text-primary fs-3"></i> &nbsp;
-                <span class="fs-4"> 0 Comments</span>
+                <a href="comments.php?id=<?php echo $data['id'] ?>&owner=<?php echo $data['username']; ?>&comment_status=1" class="text-decoration-none text-secondary fs-4"><span>
+
+                    <?php
+                    $image_id = $data['id'];
+                    $comment_query = "SELECT COUNT(comments)as count from club_pics_comments where image_id='$image_id'";
+                    $res = mysqli_query($conn, $comment_query);
+
+                    echo $res->fetch_array()['count'];
+
+
+                    ?>
+
+                    Comments</span>
+                </a>
 
                 <?php if ($data['caption'] != '') {  ?>
 
