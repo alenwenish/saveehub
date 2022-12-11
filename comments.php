@@ -84,7 +84,7 @@ if ($status_of_comment == 0) {
 
             ?>
 
-            <a href="home.php" class="text-dark text-decoration-none fs-3 ms-5 float-start"><i class="fa-solid fa-arrow-left"></i> </a>
+            <a href="javascript:history.go(-1)" class="text-dark text-decoration-none fs-3 ms-5 float-start"><i class="fa-solid fa-arrow-left"></i> </a>
 
             <h4 class="ps-3 ">
                 <?php
@@ -213,10 +213,15 @@ if ($status_of_comment == 0) {
                             ?>
                         </span>
 
+                        <?php if ($username == $row['commenter']) { ?>
+                            <button type="submit" class="btn" name="delete_comment_user">
+                                <i class="fa-solid fa-trash fs-6 text-danger"></i>
+                            </button>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="px-5">
-                    <span class="fs-5"><?php echo $row['comments'] ?></span>
+                    <span class="fs-5 text-secondary"><?php echo $row['comments'] ?></span>
                 </div>
             </div>
 
@@ -237,7 +242,7 @@ if ($status_of_comment == 0) {
 
             ?>
 
-            <a href="home.php" class="text-dark text-decoration-none fs-3 ms-5 float-start"><i class="fa-solid fa-arrow-left"></i> </a>
+            <a href="javascript:history.go(-1)" class="text-dark text-decoration-none fs-3 ms-5 float-start"><i class="fa-solid fa-arrow-left"></i> </a>
 
             <h4 class="ps-3 ">
                 <?php
@@ -365,6 +370,12 @@ if ($status_of_comment == 0) {
                             echo date("Y", $dt);
                             ?>
                         </span>
+
+                        <?php if ($username == $row['commenter']) { ?>
+                            <button type="submit" class="btn" name="delete_comment_club">
+                                <i class="fa-solid fa-trash fs-6 text-danger"></i>
+                            </button>
+                        <?php } ?>
 
                     </div>
                 </div>
