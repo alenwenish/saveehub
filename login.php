@@ -4,7 +4,7 @@
 session_start();
 include('config/connect.php');
 
-$name = $email =  $password = ' ';
+$name = $email =  $password = $fail = ' ';
 if (isset($_POST['login'])) {
 
 
@@ -39,6 +39,8 @@ if (isset($_POST['login'])) {
         $_SESSION['email'] = $email;
         $_SESSION['is_club'] = 1;
         header("Location: home.php");
+    } else {
+        $fail = 1;
     }
 }
 
@@ -161,5 +163,30 @@ if (isset($_POST['login'])) {
         </div>
     </div>
 </body>
+
+<script>
+    var fail = <?php echo $fail ?>
+
+    toastr.options = {
+        "closeButton": true,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    if (fail == 1) {
+        toastr.error("Invalid credentials. Try again");
+    }
+</script>
 
 </html>
