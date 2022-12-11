@@ -112,9 +112,9 @@ if (isset($_POST['update'])) {
 
         $query = "UPDATE club_pics_comments SET owner = '$user' WHERE owner = '$username'";
         $result   = mysqli_query($conn, $query);
-        
 
-        $query    = " UPDATE club SET username = '$user' WHERE  club_name = '$username'";
+
+        $query    = "UPDATE club SET club_name = '$user' WHERE  club_name = '$username'";
         $result   = mysqli_query($conn, $query);
 
 

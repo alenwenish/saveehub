@@ -38,9 +38,11 @@ if ($status == 0) {
   $sql = "SELECT COUNT(post) as count FROM image where username = '$username'";
   $res = mysqli_query($conn, $sql);
   $count = $res->fetch_array()['count'];
+
 } else if ($status == 1) {
 
 
+  
   $sql = "SELECT name  FROM club WHERE club_name = '$username'";
   $res = mysqli_query($conn, $sql);
   $name = $res->fetch_array()['name'];
@@ -132,7 +134,7 @@ if ($status == 0) {
       <div class="text-center">
         <spam class="fw-bolder"> <?php echo $name; ?></spam> <br>
         <spam><?php echo $bio; ?></spam> <br>
-        <a href="<?php echo $link ?>" class="text-primary fw-bold"> <?php echo $link; ?> </a>
+        <a href="https://<?php echo $link ?>" class="text-primary fw-bold"> <?php echo $link; ?> </a>
 
       </div>
       <br>
@@ -160,7 +162,7 @@ if ($status == 0) {
 
       <br>
       <button class="btn btn-secondary text-center mx-auto d-block w-75 " data-bs-toggle="modal" data-bs-target="#exampleModal2"> <a href="editprofile.php" class="text-decoration-none text-white"> Edit Profile </a> </button>
-      <br>
+      
       <br>
       <div class="w-75 m-auto text-center">
         <a href="upload.php" class="text-decoration-none fs-3 text-warning fw-normal">
@@ -168,6 +170,7 @@ if ($status == 0) {
         </a>
 
       </div>
+      <br>
 
     </div>
   </div>
