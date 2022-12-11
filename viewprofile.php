@@ -38,11 +38,10 @@ if ($status == 0) {
   $sql = "SELECT COUNT(post) as count FROM image where username = '$username'";
   $res = mysqli_query($conn, $sql);
   $count = $res->fetch_array()['count'];
-
 } else if ($status == 1) {
 
 
-  
+
   $sql = "SELECT name  FROM club WHERE club_name = '$username'";
   $res = mysqli_query($conn, $sql);
   $name = $res->fetch_array()['name'];
@@ -162,7 +161,7 @@ if ($status == 0) {
 
       <br>
       <button class="btn btn-secondary text-center mx-auto d-block w-75 " data-bs-toggle="modal" data-bs-target="#exampleModal2"> <a href="editprofile.php" class="text-decoration-none text-white"> Edit Profile </a> </button>
-      
+
       <br>
       <div class="w-75 m-auto text-center">
         <a href="upload.php" class="text-decoration-none fs-3 text-warning fw-normal">
@@ -264,10 +263,15 @@ if ($status == 0) {
     if ($status == 0) {
 
       $sql = "SELECT * FROM image where username = '$username'";
-      $res = mysqli_query($conn, $sql);
-      while ($data = mysqli_fetch_assoc($res)) {
-    ?>
 
+      $res = mysqli_query($conn, $sql);
+
+      $my_pics = array();
+      while ($row = mysqli_fetch_array($res))
+        $my_pics[] = $row;
+
+      foreach ($my_pics as $data) {
+    ?>
 
 
         <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="10%" alt="" class="btn d-inline" data-bs-toggle="modal" data-bs-target="#<?php echo $data['username']; ?><?php echo $data['id']; ?>">
@@ -277,7 +281,11 @@ if ($status == 0) {
             <div class="modal-content">
 
               <div>
-                <img src="./profile_pics/<?php echo $pic ?>" class="m-2 text-start" alt="" style=" width: 50px; height: 50px; border-radius: 80px;">
+                <?php if ($pic != '') { ?>
+                  <img src="./profile_pics/<?php echo $pic ?>" class="m-2 text-start" alt="" style=" width: 50px; height: 50px; border-radius: 80px;">
+                <?php } else { ?>
+                  <i class="fa-regular fa-user m-2 text-start fs-3"></i>
+                <?php } ?>
                 <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?> </span>
                 <a href="delete.php?id=<?php echo $data['id']; ?>&category=0&post=<?php echo $data['post']; ?>" class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
 
@@ -343,7 +351,13 @@ if ($status == 0) {
 
       $sql = "SELECT * FROM club_pics where username = '$username'";
       $res = mysqli_query($conn, $sql);
-      while ($data = mysqli_fetch_assoc($res)) {
+      
+      $my_pics = array();
+      while ($row = mysqli_fetch_array($res))
+        $my_pics[] = $row;
+
+      foreach ($my_pics as $data) {
+
 
       ?>
         <img src="./club_pics/<?php echo $data['post']; ?>" width="25%" height="10%" alt="" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $data['username'][0]; ?><?php echo $data['id']; ?>">
