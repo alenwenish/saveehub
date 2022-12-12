@@ -94,7 +94,7 @@ if (isset($_POST['club_signup'])) {
 <head>
     <title>Login</title>
     <?php include('header.php') ?>
-   
+
     <style>
         #signup_body {
             background-image: linear-gradient(to top, #080746, #003d7e, #0073aa, #00aaca, #57e2e2);
@@ -102,7 +102,8 @@ if (isset($_POST['club_signup'])) {
             background-attachment: fixed;
         }
 
-        #sign_up_card,#sign_up_club_card {
+        #sign_up_card,
+        #sign_up_club_card {
             /* border-radius: 100px 100px 100px 100px; */
             box-shadow: 0 0 40px 1px #48abe0;
             /* animation: shadows 5s infinite; */
@@ -112,7 +113,7 @@ if (isset($_POST['club_signup'])) {
                     transparent 70%);
         }
 
-    
+
 
         @keyframes shadows {
             0% {
@@ -288,6 +289,72 @@ if (isset($_POST['club_signup'])) {
                 height: 100%;
             }
         }
+
+        .tilt-in-fwd-tr {
+            -webkit-animation: tilt-in-fwd-tr 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            animation: tilt-in-fwd-tr 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @-webkit-keyframes tilt-in-fwd-tr {
+            0% {
+                -webkit-transform: rotateY(20deg) rotateX(35deg) translate(300px, -300px) skew(-35deg, 10deg);
+                transform: rotateY(20deg) rotateX(35deg) translate(300px, -300px) skew(-35deg, 10deg);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+                transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes tilt-in-fwd-tr {
+            0% {
+                -webkit-transform: rotateY(20deg) rotateX(35deg) translate(300px, -300px) skew(-35deg, 10deg);
+                transform: rotateY(20deg) rotateX(35deg) translate(300px, -300px) skew(-35deg, 10deg);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+                transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+                opacity: 1;
+            }
+        }
+
+        .tilt-in-fwd-tl {
+            -webkit-animation: tilt-in-fwd-tl 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            animation: tilt-in-fwd-tl 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @-webkit-keyframes tilt-in-fwd-tl {
+            0% {
+                -webkit-transform: rotateY(-20deg) rotateX(35deg) translate(-300px, -300px) skew(35deg, -10deg);
+                transform: rotateY(-20deg) rotateX(35deg) translate(-300px, -300px) skew(35deg, -10deg);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+                transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes tilt-in-fwd-tl {
+            0% {
+                -webkit-transform: rotateY(-20deg) rotateX(35deg) translate(-300px, -300px) skew(35deg, -10deg);
+                transform: rotateY(-20deg) rotateX(35deg) translate(-300px, -300px) skew(35deg, -10deg);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+                transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+                opacity: 1;
+            }
+        }
     </style>
 
 
@@ -311,7 +378,7 @@ if (isset($_POST['club_signup'])) {
         </div>
 
         <br>
-        <div class="card mb-3 w-50 mx-auto p-3 " id="sign_up_card">
+        <div class="tilt-in-fwd-tr card mb-3 w-50 mx-auto p-3 " id="sign_up_card">
 
             <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New User </h1>
 
@@ -360,7 +427,7 @@ if (isset($_POST['club_signup'])) {
         </div>
 
 
-        <div class="card mb-3 w-50 mx-auto p-3 " id="sign_up_club_card">
+        <div class="tilt-in-fwd-tl card mb-3 w-50 mx-auto p-3 " id="sign_up_club_card">
 
             <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New Club </h1>
 

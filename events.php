@@ -34,6 +34,39 @@ while ($row = mysqli_fetch_array($res))
             height: 40px;
             border-radius: 80px;
         }
+
+        .roll-in-left {
+            -webkit-animation: roll-in-left 1s ease-out both;
+            animation: roll-in-left 1s ease-out both;
+        }
+
+        @-webkit-keyframes roll-in-left {
+            0% {
+                -webkit-transform: translateX(-800px) rotate(-540deg);
+                transform: translateX(-800px) rotate(-540deg);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: translateX(0) rotate(0deg);
+                transform: translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes roll-in-left {
+            0% {
+                -webkit-transform: translateX(-800px) rotate(-540deg);
+                transform: translateX(-800px) rotate(-540deg);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: translateX(0) rotate(0deg);
+                transform: translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -67,7 +100,7 @@ while ($row = mysqli_fetch_array($res))
                     </i>
                 </span>
             </h4>
-            <img src="./club_pics/<?php echo $row['post']; ?>" width="300px" class="p-3 shadow mx-auto" alt="">
+            <img src="./club_pics/<?php echo $row['post']; ?>" width="300px" class="roll-in-left p-3 shadow mx-auto" alt="">
             <h4 class="p-1">
                 <a href="update.php?id=<?php echo $row['id'] ?>&pic=0" class="text-decoration-none text-danger">
                     <i class="fa-regular fa-heart"> </i>

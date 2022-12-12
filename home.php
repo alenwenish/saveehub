@@ -108,6 +108,39 @@ while ($row = mysqli_fetch_array($res))
                 height: 0%;
             }
         }
+
+        .swirl-in-fwd {
+            -webkit-animation: swirl-in-fwd 1.2s ease-out both;
+            animation: swirl-in-fwd 1.2s ease-out both;
+        }
+
+        @-webkit-keyframes swirl-in-fwd {
+            0% {
+                -webkit-transform: rotate(-540deg) scale(0);
+                transform: rotate(-540deg) scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: rotate(0) scale(1);
+                transform: rotate(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes swirl-in-fwd {
+            0% {
+                -webkit-transform: rotate(-540deg) scale(0);
+                transform: rotate(-540deg) scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: rotate(0) scale(1);
+                transform: rotate(0) scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -148,7 +181,7 @@ while ($row = mysqli_fetch_array($res))
             </h4>
 
 
-            <img src="./uploads/<?php echo $row['post']; ?>" width="300px" class="p-3 shadow mx-auto" alt="">
+            <img src="./uploads/<?php echo $row['post']; ?>" width="300px" class="swirl-in-fwd p-3 shadow mx-auto" alt="">
 
 
             <h4 class="p-1">
@@ -164,7 +197,7 @@ while ($row = mysqli_fetch_array($res))
                         $image_id = $row['id'];
                         $comment_query = "SELECT COUNT(comments)as count from image_comments where image_id='$image_id'";
                         $res = mysqli_query($conn, $comment_query);
-                        
+
                         echo $res->fetch_array()['count'];
 
 

@@ -114,6 +114,39 @@ if ($status == 0) {
     #posts {
       background-image: linear-gradient(to right, #011314, #081516, #0f1818, #141a1a, #181c1c);
     }
+
+    .tilt-in-top-1 {
+      -webkit-animation: tilt-in-top-1 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      animation: tilt-in-top-1 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
+    @-webkit-keyframes tilt-in-top-1 {
+      0% {
+        -webkit-transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+        transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+        opacity: 0;
+      }
+
+      100% {
+        -webkit-transform: rotateY(0deg) translateY(0) skewY(0deg);
+        transform: rotateY(0deg) translateY(0) skewY(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes tilt-in-top-1 {
+      0% {
+        -webkit-transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+        transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+        opacity: 0;
+      }
+
+      100% {
+        -webkit-transform: rotateY(0deg) translateY(0) skewY(0deg);
+        transform: rotateY(0deg) translateY(0) skewY(0deg);
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 
@@ -199,7 +232,7 @@ if ($status == 0) {
 
             <div class="d-flex justify-content-around">
               <span class="p-1 text-center text-secondary w-50 border shadow "> <?php echo $row['account']; ?> </span>
-              <span> <a href="unfollow.php?follower_name=<?php echo $username ?>&account=<?php echo $row['account'] ?>"><button class="btn btn-secondary"> Unfollow</button></a></span>
+              <span> <a href="unfollow.php?follower_name=<?php echo $username ?>&account=<?php echo $row['account'] ?>"><button class="btn btn-secondary"> Remove </button></a></span>
 
             </div>
 
@@ -293,7 +326,7 @@ if ($status == 0) {
 
 
 
-              <div class="modal-body">
+              <div class="tilt-in-top-1 modal-body">
                 <img src="./uploads/<?php echo $data['post']; ?>" width="100%" height="100%" alt="">
                 <br><br>
                 &nbsp;
@@ -351,7 +384,7 @@ if ($status == 0) {
 
       $sql = "SELECT * FROM club_pics where username = '$username'";
       $res = mysqli_query($conn, $sql);
-      
+
       $my_pics = array();
       while ($row = mysqli_fetch_array($res))
         $my_pics[] = $row;
