@@ -44,7 +44,6 @@ if ($status_of_comment == 0) {
 
     while ($r = mysqli_fetch_array($result))
         $row_of_pic[] = $r;
-
 } else if ($status_of_comment == 1) {
     $sql = "SELECT * FROM club_pics_comments where image_id = '$id'";
     $res = mysqli_query($conn, $sql);
@@ -220,9 +219,23 @@ if ($status_of_comment == 0) {
                         </span>
 
                         <?php if ($username == $row['commenter'] || $username == $row_of_pic[0]['username']) { ?>
-                            <button type="submit" class="btn" name="delete_comment_user">
-                                <i class="fa-solid fa-trash fs-6 text-danger"></i>
-                            </button>
+
+                            <!-- <form action="" method="POST"> -->
+                                <button type="submit" class="btn" name="delete_comment_user_<?php echo $row['comment_id'] ?>">
+                                    <i class="fa-solid fa-trash fs-6 text-danger"></i>
+                                </button>
+                            <!-- </form> -->
+
+                            <!-- <?php
+
+                            $variable = 'delete_comment_user_'.$row['comment_id'];
+                            if (isset($_POST[$variable])) {
+                                echo $row['commenter'];
+                            }
+                            ?> -->
+
+
+
                         <?php } ?>
                     </div>
                 </div>
@@ -369,7 +382,7 @@ if ($status_of_comment == 0) {
                             ?>
                         </span>
 
-                        <?php if ($username == $row['commenter']  || $username == $row_of_pic[0]['username'] ) { ?>
+                        <?php if ($username == $row['commenter']  || $username == $row_of_pic[0]['username']) { ?>
                             <button type="submit" class="btn" name="delete_comment_club">
                                 <i class="fa-solid fa-trash fs-6 text-danger"></i>
                             </button>
