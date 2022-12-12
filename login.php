@@ -77,7 +77,7 @@ if (isset($_POST['login'])) {
             /* animation: shadows 2s infinite; */
         }
 
-        @keyframes shadows {
+        /* @keyframes shadows {
             0% {
                 text-shadow: gold 0 0 10px;
             }
@@ -94,7 +94,7 @@ if (isset($_POST['login'])) {
                 text-shadow: yellow 0 0 100px;
             }
 
-        }
+        } */
 
         .custom-shape-divider-bottom-1670230400 {
             position: absolute;

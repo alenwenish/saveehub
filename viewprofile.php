@@ -330,7 +330,9 @@ if ($status == 0) {
                 <img src="./uploads/<?php echo $data['post']; ?>" width="100%" height="100%" alt="">
                 <br><br>
                 &nbsp;
-                <i class="fa-regular fa-heart text-danger fs-3"> </i> &nbsp;
+                <a href="update.php?id=<?php echo $data['id'] ?>&pic=1" class="text-decoration-none text-danger">
+                  <i class="fa-regular fa-heart fs-3"> </i>
+                </a> &nbsp;
                 <span class="fs-4"><?php echo $data['likes']; ?> likes </span>
 
                 &nbsp;
@@ -410,7 +412,9 @@ if ($status == 0) {
                 <img src="./club_pics/<?php echo $data['post']; ?>" width="100%" height="100%" alt="">
                 <br><br>
                 &nbsp;
-                <i class="fa-regular fa-heart text-danger fs-3"> </i> &nbsp;
+                <a href="update.php?id=<?php echo $data['id'] ?>&pic=0" class="text-decoration-none text-danger">
+                  <i class="fa-regular fa-heart fs-3"> </i>
+                </a> &nbsp;
                 <span class="fs-4"><?php echo $data['likes']; ?> likes </span>
 
                 &nbsp;
