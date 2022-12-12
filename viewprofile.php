@@ -408,7 +408,7 @@ if ($status == 0) {
                 <a href="delete.php?id=<?php echo $data['id']; ?>&category=1&post=<?php echo $data['post']; ?>" class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
               </div>
 
-              <div class="modal-body">
+              <div class="tilt-in-top-1 modal-body">
                 <img src="./club_pics/<?php echo $data['post']; ?>" width="100%" height="100%" alt="">
                 <br><br>
                 &nbsp;
