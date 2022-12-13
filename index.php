@@ -355,6 +355,8 @@ if (isset($_POST['club_signup'])) {
                 opacity: 1;
             }
         }
+
+        
     </style>
 
 

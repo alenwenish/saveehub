@@ -241,7 +241,8 @@ while ($row = mysqli_fetch_array($res))
     <script>
         $(window).on("load", function() {
             $(".loader-wrapper").delay(1000).fadeOut("slow");
-        });
+        }
+        );
 
 
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
