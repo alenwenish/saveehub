@@ -151,8 +151,14 @@ if (isset($_POST['update'])) {
 
             <div class=" mb-3 ">
                 <label for="Profile" class="form-label "> Profile Pic: </label> <br>
-                <input type="file" name="uploadpic" id="uploadpic" class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
+                <input type="file" onChange="imagePreview(this)"  name="uploadpic" id="uploadpic" class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
             </div>
+
+            <br>
+
+            <div id="preview" class="text-center"></div>
+
+
 
             <div class="mb-3 ">
                 <label for="username" class="form-label "> Username/Clubname: </label>
@@ -181,5 +187,22 @@ if (isset($_POST['update'])) {
     </div>
 
 </body>
+
+<script>
+    function imagePreview(fileInput) {
+        if (fileInput.files && fileInput.files[0]) {
+            var fileReader = new FileReader();
+            fileReader.onload = function(event) {
+                $('#preview').html('<img src="' + event.target.result + '" width="300" height="auto"/>');
+            };
+            fileReader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+    $("#image").change(function() {
+
+        imagePreview(this);
+    });
+
+</script>
 
 </html>
