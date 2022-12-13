@@ -356,7 +356,170 @@ if (isset($_POST['club_signup'])) {
             }
         }
 
-        
+        /* -------------------------------------- */
+
+        button {
+            position: relative;
+            width: 11em;
+            height: 4em;
+            outline: none;
+            transition: 0.1s;
+            background-color: transparent;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ddebf0;
+        }
+
+        #clip {
+            --color: #2761c3;
+            position: absolute;
+            top: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            border: 5px double var(--color);
+            box-shadow: inset 0px 0px 15px #195480;
+            -webkit-clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+        }
+
+        .arrow {
+            position: absolute;
+            transition: 0.2s;
+            background-color: #2761c3;
+            top: 35%;
+            width: 11%;
+            height: 30%;
+        }
+
+        #leftArrow {
+            left: -13.5%;
+            -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%);
+        }
+
+        #rightArrow {
+            -webkit-clip-path: polygon(100% 49%, 0 0, 0 100%);
+            left: 102%;
+        }
+
+        button:hover #rightArrow {
+            background-color: #27c39f;
+            left: -15%;
+            animation: 0.6s ease-in-out both infinite alternate rightArrow8;
+        }
+
+        button:hover #leftArrow {
+            background-color: #27c39f;
+            left: 103%;
+            animation: 0.6s ease-in-out both infinite alternate leftArrow8;
+        }
+
+        .corner {
+            position: absolute;
+            width: 4em;
+            height: 4em;
+            background-color: #2761c3;
+            box-shadow: inset 1px 1px 8px #2781c3;
+            transform: scale(1) rotate(45deg);
+            transition: 0.2s;
+        }
+
+        #rightTop {
+            top: -1.98em;
+            left: 91%;
+        }
+
+        #leftTop {
+            top: -1.96em;
+            left: -3.0em;
+        }
+
+        #leftBottom {
+            top: 2.10em;
+            left: -2.15em;
+        }
+
+        #rightBottom {
+            top: 45%;
+            left: 88%;
+        }
+
+        button:hover #leftTop {
+            animation: 0.1s ease-in-out 0.05s both changeColor8,
+                0.2s linear 0.4s both lightEffect8;
+        }
+
+        button:hover #rightTop {
+            animation: 0.1s ease-in-out 0.15s both changeColor8,
+                0.2s linear 0.4s both lightEffect8;
+        }
+
+        button:hover #rightBottom {
+            animation: 0.1s ease-in-out 0.25s both changeColor8,
+                0.2s linear 0.4s both lightEffect8;
+        }
+
+        button:hover #leftBottom {
+            animation: 0.1s ease-in-out 0.35s both changeColor8,
+                0.2s linear 0.4s both lightEffect8;
+        }
+
+        button:hover .corner {
+            transform: scale(1.25) rotate(45deg);
+        }
+
+        button:hover #clip {
+            animation: 0.2s ease-in-out 0.55s both greenLight8;
+            --color: #27c39f;
+        }
+
+        @keyframes changeColor8 {
+            from {
+                background-color: #2781c3;
+            }
+
+            to {
+                background-color: #27c39f;
+            }
+        }
+
+        @keyframes lightEffect8 {
+            from {
+                box-shadow: 1px 1px 5px #27c39f;
+            }
+
+            to {
+                box-shadow: 0 0 2px #27c39f;
+            }
+        }
+
+        @keyframes greenLight8 {
+            from {}
+
+            to {
+                box-shadow: inset 0px 0px 32px #27c39f;
+            }
+        }
+
+        @keyframes leftArrow8 {
+            from {
+                transform: translate(0px);
+            }
+
+            to {
+                transform: translateX(10px);
+            }
+        }
+
+        @keyframes rightArrow8 {
+            from {
+                transform: translate(0px);
+            }
+
+            to {
+                transform: translateX(-10px);
+            }
+        }
     </style>
 
 
@@ -375,11 +538,11 @@ if (isset($_POST['club_signup'])) {
         <img src="./images/logo1.png" alt="logo" width="15%" height="30%" class="mx-auto  d-block">
 
         <div class="text-center m-2">
-            <button class="btn btn-outline-dark" onclick=showUser() id="student_button"> Join as a Student</button>
-            <button class="btn btn-outline-dark" onclick=showClub() id="club_button"> Join as a Club</button>
+            <p class="btn btn-outline-dark" onclick=showUser() id="student_button"> Join as a Student </p>
+            <p class="btn btn-outline-dark" onclick=showClub() id="club_button"> Join as a Club</p>
         </div>
 
-        <br>
+        
         <div class="tilt-in-fwd-tr card mb-3 w-50 mx-auto p-3 " id="sign_up_card">
 
             <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New User </h1>
@@ -412,8 +575,20 @@ if (isset($_POST['club_signup'])) {
                     <input type="text" class="form-control shadow" id="number" name="number">
                 </div>
 
-                <div class="pt-3  text-center  w-100">
-                    <input type="submit" value="Register" id="Sign Up" name="signup" class="btn btn-light btn-outline-primary shadow-sm">
+                <div class="pt-3  text-center ">
+                    <!-- <input type="submit" value="Register" id="Sign Up" name="signup" class="btn btn-light btn-outline-primary shadow-sm"> -->
+
+                    <button class="text-white text-center" type="submit" id="Sign Up" name="signup">
+                        &nbsp; &nbsp;REGISTER
+                        <div id="clip">
+                            <div id="leftTop" class="corner"></div>
+                            <div id="rightBottom" class="corner"></div>
+                            <div id="rightTop" class="corner"></div>
+                            <div id="leftBottom" class="corner"></div>
+                        </div>
+                        <span id="rightArrow" class="arrow"></span>
+                        <span id="leftArrow" class="arrow"></span>
+                    </button>
                 </div>
 
                 <div class="pt-3 pb-1 text-center  w-100">
@@ -461,8 +636,21 @@ if (isset($_POST['club_signup'])) {
 
 
 
-                <div class="pt-3  text-center  w-100">
-                    <input type="submit" value="Register" id="club Sign Up" name="club_signup" class="btn btn-light btn-outline-primary shadow-sm">
+                <div class="pt-3  text-center">
+                    <!-- <input type="submit" value="Register" id="club Sign Up" name="club_signup" class="btn btn-light btn-outline-primary shadow-sm"> -->
+
+                    <button class="text-white text-center" type="submit" id="club Sign Up" name="club_signup">
+                        &nbsp; &nbsp;REGISTER
+                        <div id="clip">
+                            <div id="leftTop" class="corner"></div>
+                            <div id="rightBottom" class="corner"></div>
+                            <div id="rightTop" class="corner"></div>
+                            <div id="leftBottom" class="corner"></div>
+                        </div>
+                        <span id="rightArrow" class="arrow"></span>
+                        <span id="leftArrow" class="arrow"></span>
+                    </button>
+
                 </div>
 
                 <div class="pt-3 pb-1 text-center  w-100">

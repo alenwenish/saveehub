@@ -112,6 +112,7 @@ if ($status == 0) {
     #followers,
     #following,
     #posts {
+      border: 1px solid #0f0;
       background-image: linear-gradient(to right, #011314, #081516, #0f1818, #141a1a, #181c1c);
     }
 
@@ -147,6 +148,62 @@ if ($status == 0) {
         opacity: 1;
       }
     }
+
+    /* ------------------ */
+
+    .effects {
+      cursor: pointer;
+      background: transparent;
+      position: relative;
+      display: inline-block;
+      padding: 15px 30px;
+      outline: none;
+      border: 2px solid #0f0;
+     
+      text-transform: uppercase;
+      font-weight: 900;
+      text-decoration: none;
+      letter-spacing: 2px;
+      color: #fff;
+      
+    }
+
+  
+    .effects span {
+      position: relative;
+      z-index: 100;
+    }
+
+    .effects::before {
+      content: "";
+      position: absolute;
+      left: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 2px;
+      box-shadow: 5px -8px 0 #0f0,
+        5px 8px 0 #0f0;
+      
+    }
+
+    
+
+    .effects::after {
+      content: "";
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 2px;
+      
+      box-shadow: -5px -8px 0 #0f0,
+        -5px 8px 0 #0f0;
+      }
+
+   
+
   </style>
 </head>
 
@@ -172,20 +229,20 @@ if ($status == 0) {
       <br>
     </div>
 
-    <div class="col-8 " id="part2">
+    <div class=" col-8 " id="part2">
       <div class="d-flex justify-content-around text-center pt-3 pe-3 mx-auto">
 
-        <button class=" text-light fw-bolder fs-4 m-1 p-2 w-25" class="btn" id="posts">
+        <button class="effects text-light fw-bolder fs-5 m-1 p-2 w-25" class="btn" id="posts">
           <a href="#post" class="text-decoration-none text-white"> Posts </a> <br>
           <?php echo $count; ?>
         </button>
 
-        <button class=" text-light fw-bolder fs-4 m-1 p-2 w-25 " class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" id="followers">
+        <button class="effects text-light fw-bolder fs-5 m-1 p-2 w-25 " class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" id="followers">
           Followers <br>
           <?php echo $follower; ?>
         </button>
 
-        <button class=" text-light fw-bolder fs-4 m-1 p-2 w-25" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" id="following">
+        <button class="effects text-light fw-bolder fs-5 m-1 p-2 w-25" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" id="following">
           Following <br>
           <?php echo $following; ?>
         </button>
@@ -193,7 +250,7 @@ if ($status == 0) {
       </div>
 
       <br>
-      <button class="btn btn-secondary text-center mx-auto d-block w-75 " data-bs-toggle="modal" data-bs-target="#exampleModal2"> <a href="editprofile.php" class="text-decoration-none text-white"> Edit Profile </a> </button>
+      <button class="effects btn text-center mx-auto d-block w-75 " data-bs-toggle="modal" data-bs-target="#exampleModal2"> <a href="editprofile.php" class="text-decoration-none text-white"> Edit Profile </a> </button>
 
       <br>
       <div class="w-75 m-auto text-center">
