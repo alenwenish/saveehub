@@ -174,8 +174,8 @@ while ($row = mysqli_fetch_array($res))
                 <?php } ?>
                 <?php echo $row['username']; ?>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <span>
-                    <i class="fa-solid fa-ellipsis-vertical btn" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Save Post">
+                <span> 
+                    <i class="fa-solid fa-ellipsis-vertical btn" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content=  "Save Post" >
                     </i>
                 </span>
             </h4>

@@ -99,9 +99,11 @@ if ($status == 0) {
     }
 
     #part1 {
+    
       background-image: linear-gradient(to right, #76e3e9, #8de5ea, #a1e7ea, #b3e9eb, #c4ebec);
       box-shadow: 0 0 10px 1px black;
       border: 1px solid black;
+   
     }
 
     #part2 {
@@ -114,6 +116,7 @@ if ($status == 0) {
     #posts {
       border: 1px solid #0f0;
       background-image: linear-gradient(to right, #011314, #081516, #0f1818, #141a1a, #181c1c);
+      border-radius: 10px;
     }
 
     .tilt-in-top-1 {

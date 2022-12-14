@@ -158,8 +158,6 @@ if (isset($_POST['update'])) {
 
             <div id="preview" class="text-center"></div>
 
-
-
             <div class="mb-3 ">
                 <label for="username" class="form-label "> Username/Clubname: </label>
                 <input type="text" class="form-control shadow" id="username" name="username" value="<?php echo $username ?>" required>
