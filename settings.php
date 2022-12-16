@@ -36,16 +36,19 @@ while ($row = mysqli_fetch_array($res))
     <?php include('header.php') ?>
 
     <style>
-        #save_pics{
+        #save_pics {
             display: none;
         }
     </style>
 </head>
 
-<body class="container">
+<body class="container bg-light">
 
+    <br>
+    <a href="javascript:history.go(-1)" class="text-dark text-decoration-none fs-3 ms-5 float-start"><i class="fa-solid fa-arrow-left"></i> &nbsp; Settings </a>
+    <br>
 
-    <div class="mx-auto w-75 mt-5">
+    <div class="mx-auto w-75 mt-5 shadow">
         <ul class="list-group ">
             <li class="list-group-item d-flex justify-content-between fs-3 align-items-center ">
                 <i class="fa-solid fa-bookmark"></i> Saved posts
@@ -53,7 +56,7 @@ while ($row = mysqli_fetch_array($res))
                 </span>
             </li>
 
-            <div class="p-2 border border-light shadow m-3 " id="save_pics">
+            <div class="p-2 border border-light shadow m-3 bg-white" id="save_pics">
                 <?php foreach ($saved_pics as $data) { ?>
                     <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="30%" alt="" class="p-2">
                 <?php } ?>
@@ -77,7 +80,7 @@ while ($row = mysqli_fetch_array($res))
     <br><br>
     <?php include('footer.php'); ?>
 
-    
+
 
 
 
@@ -86,11 +89,10 @@ while ($row = mysqli_fetch_array($res))
 
 <script>
     $(document).ready(function() {
-      $("#saved_post").click(function() {
-        $("#save_pics").slideToggle("slow");
-      });
+        $("#saved_post").click(function() {
+            $("#save_pics").slideToggle("slow");
+        });
     });
-
 </script>
 
 </html>
