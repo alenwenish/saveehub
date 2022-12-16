@@ -47,8 +47,9 @@ $pic = $res->fetch_array()['pic'];
       <?php echo  $_SESSION['name'] ?> </a>
 
     <img src="images/logo1.png" class="d-block mx-auto" width="100px" height="10%">
-    <a class="nav-link text-black float-end text-warning fs-3" href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+    <a class="nav-link text-black float-end text-warning fs-3 " href="settings.php"> <i class="fa-solid fa-gear"></i></a>
 
+    
   </nav>
 </div>
 <br><br><br><br>

@@ -12,8 +12,6 @@ $status = $_SESSION['is_club'];
 $rows = array();
 
 $sql = "SELECT * FROM image where username IN (SELECT follower_name FROM followers WHERE account = '$username') ORDER BY created_at DESC LIMIT 10";
-
-
 $res = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_array($res))
     $rows[] = $row;
@@ -26,10 +24,6 @@ if (isset($_POST['savepost'])) {
     $query    = "INSERT INTO saved_pics (post_id,username)VALUES ('$id', '$username')";
     $result   = mysqli_query($conn, $query);
 
-    $sql = "SELECT * FROM image where username IN (SELECT follower_name FROM followers WHERE account = '$username') ORDER BY created_at DESC LIMIT 10";
-    $res = mysqli_query($conn, $sql);
-    while ($row = mysqli_fetch_array($res))
-        $rows[] = $row;
 
 
 }

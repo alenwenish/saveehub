@@ -16,6 +16,13 @@ while ($row = mysqli_fetch_array($res))
     $rows[] = $row;
 
 
+if (isset($_POST['savepost'])) {
+    $id = stripslashes($_REQUEST['savepost']);
+    $query    = "INSERT INTO saved_clubpics (clubpost_id,username)VALUES ('$id', '$username')";
+    $result   = mysqli_query($conn, $query);
+}
+
+
 
 ?>
 
@@ -96,19 +103,20 @@ while ($row = mysqli_fetch_array($res))
                 <?php echo $row['username']; ?>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <span>
-                    <i class="fa-solid fa-ellipsis-vertical btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fa-solid fa-ellipsis-vertical btn" data-bs-toggle="modal" data-bs-target="#I<?php echo  $row['id']; ?>">
                     </i>
                 </span>
 
-                <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade " id="I<?php echo  $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog ">
                         <div class="modal-content ">
-
                             <div class="modal-body d-flex justify-content-between bg-secondary">
 
-                                <button class="btn text-start text-light">
-                                    <i class="fs-4 fa-regular fa-bookmark" ></i>
-                                </button>
+                                <form method="POST">
+                                    <button class="btn text-start text-light" type="submit" value=<?php echo  $row['id']; ?> name="savepost">
+                                        <i class="fs-4 fa-regular fa-bookmark"></i>
+                                    </button>
+                                </form>
 
                                 <h3 class="text-secondary fs-4 float-end pt-1 text-light pe-3">Save Post</h3>
 
