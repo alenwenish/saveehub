@@ -17,14 +17,23 @@ while ($row = mysqli_fetch_array($res))
     $rows[] = $row;
 
 
+$info = '';
+
 if (isset($_POST['savepost'])) {
 
     $id = stripslashes($_REQUEST['savepost']);
 
-    $query    = "INSERT INTO saved_pics (post_id,username)VALUES ('$id', '$username')";
+    $query    = "SELECT * FROM saved_pics where post_id = '$id' and username = '$username' ";
     $result   = mysqli_query($conn, $query);
+    $c = mysqli_num_rows($result);
 
-
+    if ($c >= 1) {
+        $info = 0;
+    } else {
+        $query    = "INSERT INTO saved_pics (post_id,username)VALUES ('$id', '$username')";
+        $result   = mysqli_query($conn, $query);
+        $info = 1;
+    }
 
 }
 
@@ -280,10 +289,32 @@ if (isset($_POST['savepost'])) {
         });
 
 
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-        var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
-            return new bootstrap.Popover(popoverTriggerEl)
-        })
+
+
+        var info = <?php echo $info ?>
+
+        toastr.options = {
+            "closeButton": true,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        if (info == 1) {
+            toastr.success("Post Saved");
+        } else if (info == 0) {
+            toastr.error("Post Already Saved");
+        }
     </script>
 
 

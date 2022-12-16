@@ -37,7 +37,7 @@ while ($row = mysqli_fetch_array($res))
 
     <style>
         #save_pics{
-            /* display: none; */
+            display: none;
         }
     </style>
 </head>
