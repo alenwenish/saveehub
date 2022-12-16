@@ -520,6 +520,8 @@ if (isset($_POST['club_signup'])) {
                 transform: translateX(-10px);
             }
         }
+
+
     </style>
 
 
@@ -538,11 +540,11 @@ if (isset($_POST['club_signup'])) {
         <img src="./images/logo1.png" alt="logo" width="15%" height="30%" class="mx-auto  d-block">
 
         <div class="text-center m-2">
-            <p class="btn btn-outline-dark" onclick=showUser() id="student_button"> Join as a Student </p>
-            <p class="btn btn-outline-dark" onclick=showClub() id="club_button"> Join as a Club</p>
+            <p class="two_buttons btn btn-outline-dark" onclick=showUser() id="student_button"> Join as a Student </p>
+            <p class="two_buttons btn btn-outline-dark" onclick=showClub() id="club_button"> Join as a Club</p>
         </div>
 
-        
+
         <div class="tilt-in-fwd-tr card mb-3 w-50 mx-auto p-3 " id="sign_up_card">
 
             <h1 class="fs-2 text-center text-secondary"> <i class="fa-solid fa-user-plus"></i> New User </h1>
@@ -575,8 +577,8 @@ if (isset($_POST['club_signup'])) {
                     <input type="text" class="form-control shadow" id="number" name="number">
                 </div>
 
-                <div class="pt-3  text-center ">    
-                  
+                <div class="pt-1 text-center ">
+
                     <button class="text-white text-center" type="submit" id="Sign Up" name="signup">
                         &nbsp; &nbsp;REGISTER
                         <div id="clip">
@@ -635,8 +637,8 @@ if (isset($_POST['club_signup'])) {
 
 
 
-                <div class="pt-3  text-center">
-                   
+                <div class="pt-1  text-center">
+
                     <button class="text-white text-center" type="submit" id="club Sign Up" name="club_signup">
                         &nbsp; &nbsp;REGISTER
                         <div id="clip">

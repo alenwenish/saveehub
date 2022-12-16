@@ -50,7 +50,7 @@ while ($row = mysqli_fetch_array($res))
 
     <div class="mx-auto w-75 mt-5 shadow">
         <ul class="list-group ">
-            <li class="list-group-item d-flex justify-content-between fs-3 align-items-center ">
+            <li class="list-group-item d-flex text-secondary justify-content-between fs-3 align-items-center ">
                 <i class="fa-solid fa-bookmark"></i> Saved posts
                 <span class="badge text-primary  fs-4 rounded-pill"> <i class="fa-solid fa-angle-down" id="saved_post"></i>
                 </span>
@@ -65,10 +65,10 @@ while ($row = mysqli_fetch_array($res))
                 <?php } ?>
             </div>
 
-            <li class="list-group-item d-flex justify-content-between fs-3 align-items-center">
+            <li class="list-group-item d-flex text-secondary justify-content-between fs-3 align-items-center">
 
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                <a class="nav-link text-black float-end text-warning fs-3" href="logout.php"> Logout </a>
+                <a class="nav-link text-secondary float-end  fs-3" href="logout.php"> Logout </a>
                 <span class="badge text-primary fs-4 rounded-pill">
 
             </li>
