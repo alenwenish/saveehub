@@ -56,6 +56,14 @@ if (isset($_POST['update'])) {
         $query    = " UPDATE image SET username = '$user' WHERE username = '$username'";
         $result   = mysqli_query($conn, $query);
 
+        $query    = " UPDATE saved_pics SET username = '$user' WHERE username = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query    = " UPDATE saved_clubpics SET username = '$user' WHERE username = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+
+
         $query = "UPDATE image_comments SET commenter = '$user' WHERE commenter = '$username'";
         $result   = mysqli_query($conn, $query);
 
@@ -67,6 +75,9 @@ if (isset($_POST['update'])) {
 
         $query = "UPDATE club_pics_comments SET owner = '$user' WHERE owner = '$username'";
         $result   = mysqli_query($conn, $query);
+
+
+
 
         $query    = " UPDATE login SET username = '$user' WHERE username = '$username'";
         $result   = mysqli_query($conn, $query);
@@ -99,6 +110,12 @@ if (isset($_POST['update'])) {
         $result   = mysqli_query($conn, $query);
 
         $query    = " UPDATE club_pics SET username = '$user' WHERE username = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query    = " UPDATE saved_pics SET username = '$user' WHERE username = '$username'";
+        $result   = mysqli_query($conn, $query);
+
+        $query    = " UPDATE saved_clubpics SET username = '$user' WHERE username = '$username'";
         $result   = mysqli_query($conn, $query);
 
         $query = "UPDATE image_comments SET commenter = '$user' WHERE commenter = '$username'";
@@ -151,7 +168,7 @@ if (isset($_POST['update'])) {
 
             <div class=" mb-3 ">
                 <label for="Profile" class="form-label "> Profile Pic: </label> <br>
-                <input type="file" onChange="imagePreview(this)"  name="uploadpic" id="uploadpic" class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
+                <input type="file" onChange="imagePreview(this)" name="uploadpic" id="uploadpic" class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
             </div>
 
             <br>
@@ -200,7 +217,6 @@ if (isset($_POST['update'])) {
 
         imagePreview(this);
     });
-
 </script>
 
 </html>
