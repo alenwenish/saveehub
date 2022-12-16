@@ -54,23 +54,13 @@ while ($row = mysqli_fetch_array($res))
             </li>
 
             <div class="p-2 border border-light shadow m-3 " id="save_pics">
-
                 <?php foreach ($saved_pics as $data) { ?>
-
                     <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="30%" alt="" class="p-2">
-
                 <?php } ?>
-
                 <?php foreach ($savedclub_pics as $data) { ?>
-
                     <img src="./club_pics/<?php echo $data['post']; ?>" width="30%" height="30%" alt="" class="p-2">
-
                 <?php } ?>
-
-
             </div>
-
-
 
             <li class="list-group-item d-flex justify-content-between fs-3 align-items-center">
 
