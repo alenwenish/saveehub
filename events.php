@@ -96,9 +96,27 @@ while ($row = mysqli_fetch_array($res))
                 <?php echo $row['username']; ?>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <span>
-                    <i class="fa-solid fa-ellipsis-vertical btn" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Save Post">
+                    <i class="fa-solid fa-ellipsis-vertical btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     </i>
                 </span>
+
+                <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog ">
+                        <div class="modal-content ">
+
+                            <div class="modal-body d-flex justify-content-between bg-secondary">
+
+                                <button class="btn text-start text-light">
+                                    <i class="fs-4 fa-regular fa-bookmark" ></i>
+                                </button>
+
+                                <h3 class="text-secondary fs-4 float-end pt-1 text-light pe-3">Save Post</h3>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </h4>
             <img src="./club_pics/<?php echo $row['post']; ?>" width="300px" class="roll-in-left p-3 shadow mx-auto" alt="">
             <h4 class="p-1">

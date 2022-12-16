@@ -8,13 +8,34 @@ $username = $_SESSION['name'];
 $status = $_SESSION['is_club'];
 
 
+
+$rows = array();
+
 $sql = "SELECT * FROM image where username IN (SELECT follower_name FROM followers WHERE account = '$username') ORDER BY created_at DESC LIMIT 10";
 
 
 $res = mysqli_query($conn, $sql);
-$rows = array();
 while ($row = mysqli_fetch_array($res))
     $rows[] = $row;
+
+
+if (isset($_POST['savepost'])) {
+
+    $id = stripslashes($_REQUEST['savepost']);
+
+    $query    = "INSERT INTO saved_pics (post_id,username)VALUES ('$id', '$username')";
+    $result   = mysqli_query($conn, $query);
+
+    $sql = "SELECT * FROM image where username IN (SELECT follower_name FROM followers WHERE account = '$username') ORDER BY created_at DESC LIMIT 10";
+    $res = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_array($res))
+        $rows[] = $row;
+
+
+}
+
+
+
 
 
 ?>
@@ -159,7 +180,6 @@ while ($row = mysqli_fetch_array($res))
 
         <div class="text-center ">
 
-
             <h4 class="ps-3 ">
                 <?php
                 $picture = '';
@@ -174,10 +194,32 @@ while ($row = mysqli_fetch_array($res))
                 <?php } ?>
                 <?php echo $row['username']; ?>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <span> 
-                    <i class="fa-solid fa-ellipsis-vertical btn" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content=  "Save Post" >
+                <span>
+                    <i class="fa-solid fa-ellipsis-vertical btn" data-bs-toggle="modal" data-bs-target="#I<?php echo  $row['id']; ?>">
                     </i>
                 </span>
+
+
+
+
+                <div class="modal fade " id="I<?php echo  $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog ">
+                        <div class="modal-content ">
+                            <div class="modal-body d-flex justify-content-between bg-secondary">
+
+                                <form method="POST">
+                                    <button class="btn text-start text-light" type="submit" value=<?php echo  $row['id']; ?> name="savepost">
+                                        <i class="fs-4 fa-regular fa-bookmark"></i>
+                                    </button>
+                                </form>
+
+                                <h3 class="text-secondary fs-4 float-end pt-1 text-light pe-3">Save Post</h3>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </h4>
 
 
@@ -241,8 +283,7 @@ while ($row = mysqli_fetch_array($res))
     <script>
         $(window).on("load", function() {
             $(".loader-wrapper").delay(1000).fadeOut("slow");
-        }
-        );
+        });
 
 
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))

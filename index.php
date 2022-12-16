@@ -575,9 +575,8 @@ if (isset($_POST['club_signup'])) {
                     <input type="text" class="form-control shadow" id="number" name="number">
                 </div>
 
-                <div class="pt-3  text-center ">
-                    <!-- <input type="submit" value="Register" id="Sign Up" name="signup" class="btn btn-light btn-outline-primary shadow-sm"> -->
-
+                <div class="pt-3  text-center ">    
+                  
                     <button class="text-white text-center" type="submit" id="Sign Up" name="signup">
                         &nbsp; &nbsp;REGISTER
                         <div id="clip">
@@ -637,8 +636,7 @@ if (isset($_POST['club_signup'])) {
 
 
                 <div class="pt-3  text-center">
-                    <!-- <input type="submit" value="Register" id="club Sign Up" name="club_signup" class="btn btn-light btn-outline-primary shadow-sm"> -->
-
+                   
                     <button class="text-white text-center" type="submit" id="club Sign Up" name="club_signup">
                         &nbsp; &nbsp;REGISTER
                         <div id="clip">
