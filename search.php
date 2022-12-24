@@ -5,65 +5,72 @@ include('config/connect.php');
 $status = $_SESSION['is_club'];
 
 
-$username = 'prakash';
+$search_name = '';
+$search_msg = 'No Results !';
+
 $name = $bio = $link = $pic =  $count = '';
 
+if (isset($_POST['search'])) {
 
-$sql = "SELECT count(follower_name) as following FROM followers WHERE account = '$username'";
-$res = mysqli_query($conn, $sql);
-$following = $res->fetch_array()['following'];
+    $search_name = stripslashes($_REQUEST['search_name']);
+    $search_name = mysqli_real_escape_string($conn, $search_name);
 
+    $username = $search_name;
 
-$sql = "SELECT count(follower_name) as follower FROM followers WHERE follower_name = '$username'";
-$res = mysqli_query($conn, $sql);
-$follower = $res->fetch_array()['follower'];
-
-if ($status == 0) {
-    $sql = "SELECT name  FROM login WHERE username = '$username'";
+    $sql = "SELECT count(follower_name) as following FROM followers WHERE account = '$username'";
     $res = mysqli_query($conn, $sql);
-    $name = $res->fetch_array()['name'];
+    $following = $res->fetch_array()['following'];
 
-    $sql = "SELECT bio  FROM login WHERE username = '$username'";
+
+    $sql = "SELECT count(follower_name) as follower FROM followers WHERE follower_name = '$username'";
     $res = mysqli_query($conn, $sql);
-    $bio = $res->fetch_array()['bio'];
+    $follower = $res->fetch_array()['follower'];
 
-    $sql = "SELECT link FROM login WHERE username = '$username'";
-    $res = mysqli_query($conn, $sql);
-    $link = $res->fetch_array()['link'];
+    if ($status == 0) {
+        $sql = "SELECT name  FROM login WHERE username = '$username'";
+        $res = mysqli_query($conn, $sql);
+        $name = $res->fetch_array()['name'];
 
-    $sql = "SELECT pic FROM login where username = '$username'";
-    $res = mysqli_query($conn, $sql);
-    $pic = $res->fetch_array()['pic'];
+        $sql = "SELECT bio  FROM login WHERE username = '$username'";
+        $res = mysqli_query($conn, $sql);
+        $bio = $res->fetch_array()['bio'];
 
-    $sql = "SELECT COUNT(post) as count FROM image where username = '$username'";
-    $res = mysqli_query($conn, $sql);
-    $count = $res->fetch_array()['count'];
-} else if ($status == 1) {
+        $sql = "SELECT link FROM login WHERE username = '$username'";
+        $res = mysqli_query($conn, $sql);
+        $link = $res->fetch_array()['link'];
+
+        $sql = "SELECT pic FROM login where username = '$username'";
+        $res = mysqli_query($conn, $sql);
+        $pic = $res->fetch_array()['pic'];
+
+        $sql = "SELECT COUNT(post) as count FROM image where username = '$username'";
+        $res = mysqli_query($conn, $sql);
+        $count = $res->fetch_array()['count'];
+    } else if ($status == 1) {
 
 
 
-    $sql = "SELECT name  FROM club WHERE club_name = '$username'";
-    $res = mysqli_query($conn, $sql);
-    $name = $res->fetch_array()['name'];
+        $sql = "SELECT name  FROM club WHERE club_name = '$username'";
+        $res = mysqli_query($conn, $sql);
+        $name = $res->fetch_array()['name'];
 
-    $sql = "SELECT bio  FROM club WHERE club_name = '$username'";
-    $res = mysqli_query($conn, $sql);
-    $bio = $res->fetch_array()['bio'];
+        $sql = "SELECT bio  FROM club WHERE club_name = '$username'";
+        $res = mysqli_query($conn, $sql);
+        $bio = $res->fetch_array()['bio'];
 
-    $sql = "SELECT link FROM club WHERE club_name = '$username'";
-    $res = mysqli_query($conn, $sql);
-    $link = $res->fetch_array()['link'];
+        $sql = "SELECT link FROM club WHERE club_name = '$username'";
+        $res = mysqli_query($conn, $sql);
+        $link = $res->fetch_array()['link'];
 
-    $sql = "SELECT pic FROM club where club_name = '$username'";
-    $res = mysqli_query($conn, $sql);
-    $pic = $res->fetch_array()['pic'];
+        $sql = "SELECT pic FROM club where club_name = '$username'";
+        $res = mysqli_query($conn, $sql);
+        $pic = $res->fetch_array()['pic'];
 
-    $sql = "SELECT COUNT(post) as count FROM club_pics where username = '$username'";
-    $res = mysqli_query($conn, $sql);
-    $count = $res->fetch_array()['count'];
+        $sql = "SELECT COUNT(post) as count FROM club_pics where username = '$username'";
+        $res = mysqli_query($conn, $sql);
+        $count = $res->fetch_array()['count'];
+    }
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -185,8 +192,6 @@ if ($status == 0) {
 
     }
 
-
-
     .effects::after {
         content: "";
         position: absolute;
@@ -206,10 +211,19 @@ if ($status == 0) {
 
     <?php include('navigation.php'); ?>
 
-    <form action="" method="POST">
 
 
+    <form action="" method="POST" class="d-flex mx-auto justify-content-center w-75">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search here... " name="search_name"
+                aria-describedby="button-addon2">
+            <button class="btn btn-primary" type="submit" name="search" id="button-addon2"><i
+                    class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
     </form>
+
+
+    <?php if ($search_name != '') { ?>
 
     <div class=" row p-2" id="box1">
         <div class="text-center col-4 text-dark" id="part1">
@@ -271,33 +285,27 @@ if ($status == 0) {
                 <div class="modal-body ">
 
                     <?php
-                    $query = "SELECT account from followers where follower_name = '$username'";
-                    $result = mysqli_query($conn, $query);
-                    $rows = array();
-                    while ($row = mysqli_fetch_array($result))
-                        $rows[] = $row;
-                    ?>
+                        $query = "SELECT account from followers where follower_name = '$username'";
+                        $result = mysqli_query($conn, $query);
+                        $rows = array();
+                        while ($row = mysqli_fetch_array($result))
+                            $rows[] = $row;
+                        ?>
 
 
                     <?php foreach ($rows as $row) { ?>
 
 
                     <div class="d-flex justify-content-around">
-                        <span class="p-1 text-center text-secondary w-50 border shadow "> <?php echo $row['account']; ?>
+                        <span class="p-1 text-center text-secondary w-50 border shadow ">
+                            <?php echo $row['account']; ?>
                         </span>
                         <span> <a
                                 href="unfollow.php?follower_name=<?php echo $username ?>&account=<?php echo $row['account'] ?>"><button
                                     class="btn btn-secondary"> Remove </button></a></span>
-
                     </div>
-
-
                     <br>
-
-
                     <?php } ?>
-
-
 
                 </div>
 
@@ -316,12 +324,12 @@ if ($status == 0) {
                 <div class="modal-body">
 
                     <?php
-                    $query = "SELECT follower_name from followers where account = '$username'";
-                    $result = mysqli_query($conn, $query);
-                    $rows = array();
-                    while ($row = mysqli_fetch_array($result))
-                        $rows[] = $row;
-                    ?>
+                        $query = "SELECT follower_name from followers where account = '$username'";
+                        $result = mysqli_query($conn, $query);
+                        $rows = array();
+                        while ($row = mysqli_fetch_array($result))
+                            $rows[] = $row;
+                        ?>
 
                     <?php foreach ($rows as $row) { ?>
 
@@ -351,18 +359,18 @@ if ($status == 0) {
     <div class="container  p-1" id="post">
         <?php
 
-        if ($status == 0) {
+            if ($status == 0) {
 
-            $sql = "SELECT * FROM image where username = '$username'";
+                $sql = "SELECT * FROM image where username = '$username'";
 
-            $res = mysqli_query($conn, $sql);
+                $res = mysqli_query($conn, $sql);
 
-            $my_pics = array();
-            while ($row = mysqli_fetch_array($res))
-                $my_pics[] = $row;
+                $my_pics = array();
+                while ($row = mysqli_fetch_array($res))
+                    $my_pics[] = $row;
 
-            foreach ($my_pics as $data) {
-        ?>
+                foreach ($my_pics as $data) {
+            ?>
 
 
         <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="10%" alt="" class="images btn d-inline"
@@ -380,7 +388,8 @@ if ($status == 0) {
                         <?php } else { ?>
                         <i class="fa-regular fa-user m-2 text-start fs-3"></i>
                         <?php } ?>
-                        <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?> </span>
+                        <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?>
+                        </span>
                         <a href="delete.php?id=<?php echo $data['id']; ?>&category=0&post=<?php echo $data['post']; ?>"
                             class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
 
@@ -404,14 +413,14 @@ if ($status == 0) {
                             class="text-decoration-none fs-4 text-secondary"><span>
 
                                 <?php
-                                        $image_id = $data['id'];
-                                        $comment_query = "SELECT COUNT(comments)as count from image_comments where image_id='$image_id'";
-                                        $res = mysqli_query($conn, $comment_query);
+                                            $image_id = $data['id'];
+                                            $comment_query = "SELECT COUNT(comments)as count from image_comments where image_id='$image_id'";
+                                            $res = mysqli_query($conn, $comment_query);
 
-                                        echo $res->fetch_array()['count'];
+                                            echo $res->fetch_array()['count'];
 
 
-                                        ?>
+                                            ?>
 
                                 Comments</span>
                         </a>
@@ -427,13 +436,13 @@ if ($status == 0) {
                         <div class="text-start text-secondary mx-auto">
                             &nbsp; <span class="fs-6">
                                 <?php
-                                        $dt = strtotime($data['created_at']);
-                                        echo date("d", $dt);
-                                        echo " ";
-                                        echo date("M", $dt);
-                                        echo " ";
-                                        echo date("Y", $dt);
-                                        ?>
+                                            $dt = strtotime($data['created_at']);
+                                            echo date("d", $dt);
+                                            echo " ";
+                                            echo date("M", $dt);
+                                            echo " ";
+                                            echo date("Y", $dt);
+                                            ?>
                             </span>
                         </div>
 
@@ -447,19 +456,19 @@ if ($status == 0) {
 
 
         <?php }
-        } else if ($status == 1) {
+            } else if ($status == 1) {
 
-            $sql = "SELECT * FROM club_pics where username = '$username'";
-            $res = mysqli_query($conn, $sql);
+                $sql = "SELECT * FROM club_pics where username = '$username'";
+                $res = mysqli_query($conn, $sql);
 
-            $my_pics = array();
-            while ($row = mysqli_fetch_array($res))
-                $my_pics[] = $row;
+                $my_pics = array();
+                while ($row = mysqli_fetch_array($res))
+                    $my_pics[] = $row;
 
-            foreach ($my_pics as $data) {
+                foreach ($my_pics as $data) {
 
 
-            ?>
+                ?>
         <img src="./club_pics/<?php echo $data['post']; ?>" width="25%" height="10%" alt="" class="btn"
             data-bs-toggle="modal" data-bs-target="#<?php echo $data['username'][0]; ?><?php echo $data['id']; ?>">
 
@@ -472,7 +481,8 @@ if ($status == 0) {
                     <div>
                         <img src="./profile_pics/<?php echo $pic ?>" class="m-2 text-start " alt=""
                             style=" width: 50px; height: 50px; border-radius: 80px;">
-                        <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?> </span>
+                        <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?>
+                        </span>
                         <a href="delete.php?id=<?php echo $data['id']; ?>&category=1&post=<?php echo $data['post']; ?>"
                             class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
                     </div>
@@ -493,14 +503,14 @@ if ($status == 0) {
                             class="text-decoration-none text-secondary fs-4"><span>
 
                                 <?php
-                                        $image_id = $data['id'];
-                                        $comment_query = "SELECT COUNT(comments)as count from club_pics_comments where image_id='$image_id'";
-                                        $res = mysqli_query($conn, $comment_query);
+                                            $image_id = $data['id'];
+                                            $comment_query = "SELECT COUNT(comments)as count from club_pics_comments where image_id='$image_id'";
+                                            $res = mysqli_query($conn, $comment_query);
 
-                                        echo $res->fetch_array()['count'];
+                                            echo $res->fetch_array()['count'];
 
 
-                                        ?>
+                                            ?>
 
                                 Comments</span>
                         </a>
@@ -516,13 +526,13 @@ if ($status == 0) {
                         <div class="text-start text-secondary mx-auto">
                             &nbsp; <span class="fs-6">
                                 <?php
-                                        $dt = strtotime($data['created_at']);
-                                        echo date("d", $dt);
-                                        echo " ";
-                                        echo date("M", $dt);
-                                        echo " ";
-                                        echo date("Y", $dt);
-                                        ?>
+                                            $dt = strtotime($data['created_at']);
+                                            echo date("d", $dt);
+                                            echo " ";
+                                            echo date("M", $dt);
+                                            echo " ";
+                                            echo date("Y", $dt);
+                                            ?>
                             </span>
                         </div>
 
@@ -533,15 +543,19 @@ if ($status == 0) {
         </div>
 
         <?php }
-        } ?>
+            } ?>
 
     </div>
 
 
     <br><br> <br>
+
+    <?php } else {  ?>
+
+    <p class="text-center p-2 text-secondary"> <?php echo $search_msg; ?> </p>
+
+    <?php } ?>
     <?php include('footer.php'); ?>
-
-
 </body>
 
 </html>
