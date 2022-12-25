@@ -4,7 +4,6 @@ session_start();
 include('config/connect.php');
 $status = $_SESSION['is_club'];
 
-
 $search_name = '';
 $search_msg = 'No Results !';
 
@@ -16,7 +15,7 @@ if (isset($_POST['search'])) {
     $search_name = mysqli_real_escape_string($conn, $search_name);
 
     $username = $search_name;
-
+    
     $sql = "SELECT count(follower_name) as following FROM followers WHERE account = '$username'";
     $res = mysqli_query($conn, $sql);
     $following = $res->fetch_array()['following'];
@@ -26,49 +25,62 @@ if (isset($_POST['search'])) {
     $res = mysqli_query($conn, $sql);
     $follower = $res->fetch_array()['follower'];
 
-    if ($status == 0) {
-        $sql = "SELECT name  FROM login WHERE username = '$username'";
-        $res = mysqli_query($conn, $sql);
-        $name = $res->fetch_array()['name'];
 
-        $sql = "SELECT bio  FROM login WHERE username = '$username'";
-        $res = mysqli_query($conn, $sql);
+    $sql = "SELECT name  FROM login WHERE username = '$username'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res))
+        $name = $res->fetch_array()['name'];
+        
+
+
+    $sql = "SELECT bio  FROM login WHERE username = '$username'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res))
         $bio = $res->fetch_array()['bio'];
 
-        $sql = "SELECT link FROM login WHERE username = '$username'";
-        $res = mysqli_query($conn, $sql);
+    $sql = "SELECT link FROM login WHERE username = '$username'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res))
         $link = $res->fetch_array()['link'];
 
-        $sql = "SELECT pic FROM login where username = '$username'";
-        $res = mysqli_query($conn, $sql);
+    $sql = "SELECT pic FROM login where username = '$username'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res))
         $pic = $res->fetch_array()['pic'];
 
-        $sql = "SELECT COUNT(post) as count FROM image where username = '$username'";
-        $res = mysqli_query($conn, $sql);
-        $count = $res->fetch_array()['count'];
-    } else if ($status == 1) {
+    $sql = "SELECT COUNT(post) as count FROM image where username = '$username'";
+    $res = mysqli_query($conn, $sql);
+    $count = $res->fetch_array()['count'];
 
-
-
-        $sql = "SELECT name  FROM club WHERE club_name = '$username'";
-        $res = mysqli_query($conn, $sql);
+    $sql = "SELECT name  FROM club WHERE club_name = '$username'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res))
         $name = $res->fetch_array()['name'];
 
-        $sql = "SELECT bio  FROM club WHERE club_name = '$username'";
-        $res = mysqli_query($conn, $sql);
+    $sql = "SELECT bio  FROM club WHERE club_name = '$username'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res))
         $bio = $res->fetch_array()['bio'];
 
-        $sql = "SELECT link FROM club WHERE club_name = '$username'";
-        $res = mysqli_query($conn, $sql);
+
+    $sql = "SELECT link FROM club WHERE club_name = '$username'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res))
         $link = $res->fetch_array()['link'];
 
-        $sql = "SELECT pic FROM club where club_name = '$username'";
-        $res = mysqli_query($conn, $sql);
+    $sql = "SELECT pic FROM club where club_name = '$username'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res))
         $pic = $res->fetch_array()['pic'];
 
-        $sql = "SELECT COUNT(post) as count FROM club_pics where username = '$username'";
-        $res = mysqli_query($conn, $sql);
+    $sql = "SELECT COUNT(post) as count FROM club_pics where username = '$username'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res))
         $count = $res->fetch_array()['count'];
+
+    if($name == ''){
+        $search_name = '';
+        $search_msg = 'User Not Found';
     }
 }
 ?>
@@ -119,6 +131,24 @@ if (isset($_POST['search'])) {
         border: 1px solid #0f0;
         background-image: linear-gradient(to right, #011314, #081516, #0f1818, #141a1a, #181c1c);
         border-radius: 10px;
+    }
+
+    @media (min-width: 1100px) {
+
+        #followers,
+        #following,
+        #posts {
+            font-size: 21px;
+        }
+    }
+
+    @media screen and (max-width: 1000px) and (min-width: 200px) {
+
+        #followers,
+        #following,
+        #posts {
+            font-size: 11px;
+        }
     }
 
     .tilt-in-top-1 {
@@ -226,7 +256,7 @@ if (isset($_POST['search'])) {
     <?php if ($search_name != '') { ?>
 
     <div class=" row p-2" id="box1">
-        <div class="text-center col-4 text-dark" id="part1">
+        <div class="text-center col col-lg-4 text-dark" id="part1">
 
             <?php if ($pic == '') {  ?>
             <h1 style="font-size:72px"> <i class="fa-regular fa-user pt-3"></i> </h1>
@@ -245,21 +275,21 @@ if (isset($_POST['search'])) {
             <br>
         </div>
 
-        <div class=" col-8 " id="part2">
+        <div class=" col col-lg-8 " id="part2">
             <div class="d-flex justify-content-around text-center pt-3 pe-3 mx-auto">
 
-                <button class="effects text-light fw-bolder fs-5 m-1 p-2 w-25" class="btn" id="posts">
+                <button class="text-light fw-bolder  m-1 p-2 w-25" class="btn" id="posts">
                     <a href="#post" class="text-decoration-none text-white"> Posts </a> <br>
                     <?php echo $count; ?>
                 </button>
 
-                <button class="effects text-light fw-bolder fs-5 m-1 p-2 w-25 " class="btn" data-bs-toggle="modal"
+                <button class="text-light fw-bolder  m-1 p-2 w-25 " class="btn" data-bs-toggle="modal"
                     data-bs-target="#exampleModal" id="followers">
                     Followers <br>
                     <?php echo $follower; ?>
                 </button>
 
-                <button class="effects text-light fw-bolder fs-5 m-1 p-2 w-25" class="btn" data-bs-toggle="modal"
+                <button class="text-light fw-bolder  m-1 p-2 w-25" class="btn" data-bs-toggle="modal"
                     data-bs-target="#exampleModal1" id="following">
                     Following <br>
                     <?php echo $following; ?>

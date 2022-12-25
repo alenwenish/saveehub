@@ -310,8 +310,9 @@ if ($status == 0) {
 
 
                     <div class="d-flex justify-content-around">
-                        <span class="p-1 text-center text-secondary w-50 border shadow "> <?php echo $row['account']; ?>
-                        </span>
+                        <p class="p-1 fs-6 text-center text-secondary w-75 mx-1 border shadow ">
+                            <?php echo $row['account']; ?>
+                        </p>
                         <span> <a
                                 href="unfollow.php?follower_name=<?php echo $username ?>&account=<?php echo $row['account'] ?>"><button
                                     class="btn btn-secondary"> Remove </button></a></span>
@@ -354,7 +355,7 @@ if ($status == 0) {
 
                     <div class="d-flex justify-content-around">
 
-                        <span class="p-1 text-center text-secondary w-50 border shadow ">
+                        <span class="p-1 fs-6 text-center text-secondary w-75 m-1 border shadow ">
                             <?php echo $row['follower_name']; ?> </span>
 
                         <span> <a
