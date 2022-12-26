@@ -2,7 +2,7 @@
 
 session_start();
 include('config/connect.php');
-$status = $_SESSION['is_club'];
+$status = '';
 
 $search_name = '';
 $search_msg = 'No Results !';
@@ -15,24 +15,38 @@ if (isset($_POST['search'])) {
     $search_name = mysqli_real_escape_string($conn, $search_name);
 
     $username = $search_name;
+
+    $testname = '';
+
+    $sql = "SELECT username  FROM login WHERE username = '$username'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res)){
+        $testname = $res->fetch_array()['username'];
+        $status = 0;
+    }
+    
+    $sql = "SELECT club_name  FROM club WHERE club_name = '$username'";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res)){
+        $testname = $res->fetch_array()['club_name'];
+        $status = 1;
+    }
     
     $sql = "SELECT count(follower_name) as following FROM followers WHERE account = '$username'";
     $res = mysqli_query($conn, $sql);
     $following = $res->fetch_array()['following'];
-
 
     $sql = "SELECT count(follower_name) as follower FROM followers WHERE follower_name = '$username'";
     $res = mysqli_query($conn, $sql);
     $follower = $res->fetch_array()['follower'];
 
 
+    if($status == 0){
     $sql = "SELECT name  FROM login WHERE username = '$username'";
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res))
         $name = $res->fetch_array()['name'];
         
-
-
     $sql = "SELECT bio  FROM login WHERE username = '$username'";
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res))
@@ -50,8 +64,9 @@ if (isset($_POST['search'])) {
 
     $sql = "SELECT COUNT(post) as count FROM image where username = '$username'";
     $res = mysqli_query($conn, $sql);
-    $count = $res->fetch_array()['count'];
-
+    if (mysqli_num_rows($res))
+        $count = $res->fetch_array()['count'];
+    }else if($status == 1){
     $sql = "SELECT name  FROM club WHERE club_name = '$username'";
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res))
@@ -77,12 +92,14 @@ if (isset($_POST['search'])) {
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res))
         $count = $res->fetch_array()['count'];
-
+    }
     if($name == ''){
         $search_name = '';
         $search_msg = 'User Not Found';
     }
+    
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -239,7 +256,7 @@ if (isset($_POST['search'])) {
 
 <body id="search">
 
-    <?php include('navigation.php'); ?>
+    <!-- <?php include('navigation.php');  ?> -->
 
 
 
@@ -253,7 +270,7 @@ if (isset($_POST['search'])) {
     </form>
 
 
-    <?php if ($search_name != '') { ?>
+    <?php if ($search_name != '') { echo $status; ?>
 
     <div class=" row p-2" id="box1">
         <div class="text-center col col-lg-4 text-dark" id="part1">
@@ -387,11 +404,11 @@ if (isset($_POST['search'])) {
     <h3 class="text-secondary fw-normal text-center "> POSTS</h3>
 
     <div class="container  p-1" id="post">
-        <?php
-
-            if ($status == 0) {
+        <?php  if ($status == 0) {
 
                 $sql = "SELECT * FROM image where username = '$username'";
+
+                echo $sql;
 
                 $res = mysqli_query($conn, $sql);
 
@@ -399,8 +416,10 @@ if (isset($_POST['search'])) {
                 while ($row = mysqli_fetch_array($res))
                     $my_pics[] = $row;
 
+                echo $my_pics;
+                
                 foreach ($my_pics as $data) {
-            ?>
+        ?>
 
 
         <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="10%" alt="" class="images btn d-inline"
@@ -489,8 +508,9 @@ if (isset($_POST['search'])) {
             } else if ($status == 1) {
 
                 $sql = "SELECT * FROM club_pics where username = '$username'";
+                echo $sql;
                 $res = mysqli_query($conn, $sql);
-
+                
                 $my_pics = array();
                 while ($row = mysqli_fetch_array($res))
                     $my_pics[] = $row;

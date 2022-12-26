@@ -372,7 +372,8 @@ if (isset($_POST['login'])) {
                 </div>
 
                 <div class="pt-3 pb-1 text-center  w-100">
-                    <a href="index.php">New User? Register Now !!!</a>
+                    <a href="index.php">New User? Register Now !!!</a> <br>
+                    <a href="forgotpassword.php"> Forgot Password ? </a>
                 </div>
             </form>
 
