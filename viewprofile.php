@@ -38,6 +38,7 @@ if ($status == 0) {
   $sql = "SELECT COUNT(post) as count FROM image where username = '$username'";
   $res = mysqli_query($conn, $sql);
   $count = $res->fetch_array()['count'];
+  
 } else if ($status == 1) {
 
 
@@ -117,6 +118,12 @@ if ($status == 0) {
         border: 1px solid #0f0;
         background-image: linear-gradient(to right, #011314, #081516, #0f1818, #141a1a, #181c1c);
         border-radius: 10px;
+    }
+
+    .images {
+        width: 30%;
+        aspect-ratio: 3/2;
+        object-fit: contain;
     }
 
     @media (min-width: 1100px) {
@@ -270,9 +277,28 @@ if ($status == 0) {
             </div>
 
             <br>
-            <button class="effects btn text-center mx-auto d-block w-75 " data-bs-toggle="modal"
-                data-bs-target="#exampleModal2"> <a href="editprofile.php" class="text-decoration-none text-white"> Edit
-                    Profile </a> </button>
+            <div class="d-flex">
+                <button class="effects btn text-center mx-3 w-75 " data-bs-toggle="modal"
+                    data-bs-target="#exampleModal2">
+                    <a href="editprofile.php" class="text-decoration-none text-white"> Edit
+                        Profile </a> </button>
+
+                <button class="btn btn-light btn-sm mx-2 text-center ">
+                    <span>Contact me</span>
+                    <div class="container">
+                        <a href="" class="text-decoration-none fs-3 text-dark p-1">
+                            <i class="fa-sharp fa-solid fa-envelope"></i>
+                        </a>
+                        <a href="" class="text-decoration-none fs-3 text-dark p-1">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="" class="text-decoration-none fs-3 text-dark p-1">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                    </div>
+                </button>
+            </div>
+
 
             <br>
             <div class="w-75 m-auto text-center">
@@ -393,8 +419,8 @@ if ($status == 0) {
     ?>
 
 
-        <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="10%" alt="" class="images btn d-inline"
-            data-bs-toggle="modal" data-bs-target="#<?php echo $data['username']; ?><?php echo $data['id']; ?>">
+        <img src="./uploads/<?php echo $data['post']; ?>" alt="" class="images btn d-inline" data-bs-toggle="modal"
+            data-bs-target="#<?php echo $data['username']; ?><?php echo $data['id']; ?>">
 
         <div class="modal fade" id="<?php echo $data['username']; ?><?php echo $data['id']; ?>" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -408,7 +434,8 @@ if ($status == 0) {
                         <?php } else { ?>
                         <i class="fa-regular fa-user m-2 text-start fs-3"></i>
                         <?php } ?>
-                        <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?> </span>
+                        <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?>
+                        </span>
                         <a href="delete.php?id=<?php echo $data['id']; ?>&category=0&post=<?php echo $data['post']; ?>"
                             class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
 
@@ -488,8 +515,8 @@ if ($status == 0) {
 
 
       ?>
-        <img src="./club_pics/<?php echo $data['post']; ?>" width="25%" height="10%" alt="" class="btn"
-            data-bs-toggle="modal" data-bs-target="#<?php echo $data['username'][0]; ?><?php echo $data['id']; ?>">
+        <img src="./club_pics/<?php echo $data['post']; ?>" alt="" class="images btn d-inline" data-bs-toggle="modal"
+            data-bs-target="#<?php echo $data['username'][0]; ?><?php echo $data['id']; ?>">
 
 
         <div class="modal fade" id="<?php echo $data['username'][0]; ?><?php echo $data['id']; ?>" tabindex="-1"
@@ -500,7 +527,8 @@ if ($status == 0) {
                     <div>
                         <img src="./profile_pics/<?php echo $pic ?>" class="m-2 text-start " alt=""
                             style=" width: 50px; height: 50px; border-radius: 80px;">
-                        <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?> </span>
+                        <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?>
+                        </span>
                         <a href="delete.php?id=<?php echo $data['id']; ?>&category=1&post=<?php echo $data['post']; ?>"
                             class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
                     </div>

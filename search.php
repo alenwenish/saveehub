@@ -9,6 +9,9 @@ $search_name = '';
 $search_msg = 'No Results !';
 
 $name = $bio = $link = $pic =  $count = '';
+$following = $follower = 0;
+$testname = '';
+
 
 if (isset($_POST['search'])) {
 
@@ -17,23 +20,24 @@ if (isset($_POST['search'])) {
 
     $username = $search_name;
 
-    $testname = '';
-
+   
     
-    $sql = "SELECT username  FROM login WHERE username = '$username'";
+    $sql = "SELECT username  FROM login WHERE username like '%$username%'";
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res)){
         $testname = $res->fetch_array()['username'];
+        $username = $testname;
         $_SESSION['status'] = 0;
     }
     
-    $sql = "SELECT club_name  FROM club WHERE club_name = '$username'";
+    $sql = "SELECT club_name  FROM club WHERE club_name like '%$username%'";
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res)){
         $testname = $res->fetch_array()['club_name'];
+        $username = $testname;
         $_SESSION['status'] = 1;
     }
-    
+   
     $sql = "SELECT count(follower_name) as following FROM followers WHERE account = '$username'";
     $res = mysqli_query($conn, $sql);
     $following = $res->fetch_array()['following'];
@@ -96,7 +100,7 @@ if (isset($_POST['search'])) {
     if (mysqli_num_rows($res))
         $count = $res->fetch_array()['count'];
     }
-    if($name == ''){
+    if($testname == ''){
         $search_name = '';
         $search_msg = 'User Not Found';
     }
@@ -160,6 +164,12 @@ if (isset($_POST['search'])) {
         #posts {
             font-size: 21px;
         }
+    }
+
+    .images {
+        width: 30%;
+        aspect-ratio: 3/2;
+        object-fit: contain;
     }
 
     @media screen and (max-width: 1000px) and (min-width: 200px) {
@@ -259,7 +269,7 @@ if (isset($_POST['search'])) {
 
 <body id="search">
 
-    <!-- <?php include('navigation.php');  ?> -->
+    <?php include('navigation.php');  ?>
 
 
 
@@ -284,7 +294,7 @@ if (isset($_POST['search'])) {
             <img src="./profile_pics/<?php echo $pic ?>" class="pt-2" alt="" id="profile_pic">
             <?php } ?>
 
-            <p class="fs-3 fw-bold"> <?php echo  $username ?> </p>
+            <p class="fs-3 fw-bold"> <?php echo  $testname ?> </p>
 
             <div class="text-center">
                 <spam class="fw-bolder"> <?php echo $name; ?></spam> <br>
@@ -425,8 +435,8 @@ if (isset($_POST['search'])) {
         ?>
 
 
-        <img src="./uploads/<?php echo $data['post']; ?>" width="30%" height="10%" alt="" class="images btn d-inline"
-            data-bs-toggle="modal" data-bs-target="#<?php echo $data['username']; ?><?php echo $data['id']; ?>">
+        <img src="./uploads/<?php echo $data['post']; ?>" alt="" class="images btn d-inline" data-bs-toggle="modal"
+            data-bs-target="#<?php echo $data['username']; ?><?php echo $data['id']; ?>">
 
         <div class="modal fade" id="<?php echo $data['username']; ?><?php echo $data['id']; ?>" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -442,8 +452,6 @@ if (isset($_POST['search'])) {
                         <?php } ?>
                         <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?>
                         </span>
-                        <a href="delete.php?id=<?php echo $data['id']; ?>&category=0&post=<?php echo $data['post']; ?>"
-                            class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
 
                     </div>
 
@@ -522,8 +530,8 @@ if (isset($_POST['search'])) {
 
 
                 ?>
-        <img src="./club_pics/<?php echo $data['post']; ?>" width="25%" height="10%" alt="" class="btn"
-            data-bs-toggle="modal" data-bs-target="#<?php echo $data['username'][0]; ?><?php echo $data['id']; ?>">
+        <img src="./club_pics/<?php echo $data['post']; ?>" alt="" class="images btn d-inline" data-bs-toggle="modal"
+            data-bs-target="#<?php echo $data['username'][0]; ?><?php echo $data['id']; ?>">
 
 
         <div class="modal fade" id="<?php echo $data['username'][0]; ?><?php echo $data['id']; ?>" tabindex="-1"
@@ -534,10 +542,9 @@ if (isset($_POST['search'])) {
                     <div>
                         <img src="./profile_pics/<?php echo $pic ?>" class="m-2 text-start " alt=""
                             style=" width: 50px; height: 50px; border-radius: 80px;">
+
                         <span class="fs-5 text-start " id="exampleModalLabel"><?php echo $data['username']; ?>
                         </span>
-                        <a href="delete.php?id=<?php echo $data['id']; ?>&category=1&post=<?php echo $data['post']; ?>"
-                            class="float-end me-2 mt-3 text-danger"> <i class="fa-solid fa-trash"></i></a>
                     </div>
 
                     <div class="tilt-in-top-1 modal-body">
