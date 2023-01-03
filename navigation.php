@@ -1,8 +1,8 @@
 <style>
 #profile_pic {
-    width: 50px;
-    height: 50px;
-    border-radius: 80px;
+    width: 30px;
+    height: 30px;
+    border-radius: 0px;
 }
 
 #navigation {
@@ -36,17 +36,14 @@ $pic = $res->fetch_array()['pic'];
 
         &nbsp;
 
-        <a class="nav-link text-black float-start text-warning fs-4 ps-4" href="viewprofile.php">
+        <a class="nav-link text-black float-start text-warning fs-6" href="viewprofile.php">
 
-            <?php if ($pic == '') {  ?>
-            <i class="fa-regular fa-user"></i>
-            <?php } else { ?>
-            <img src="./profile_pics/<?php echo $pic ?>" class="pt-2" alt="" id="profile_pic">
-            <?php } ?>
+
 
 
 
             <?php echo  $_SESSION['name'] ?> </a>
+
 
         <img src="images/logo1.png" class="d-block mx-auto" width="100px" height="10%">
         <a class="nav-link text-black float-end text-warning fs-3 " href="settings.php"> <i

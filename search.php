@@ -331,6 +331,21 @@ if (isset($_POST['search'])) {
                 <a href="#" class="text-decoration-none text-white"> Follow </a>
             </button>
 
+            <button class="effects mb-2 mx-auto w-auto d-block">
+                <span>Contact me</span>
+                <div class="container">
+                    <a href="" class="text-decoration-none fs-3 text-white p-1">
+                        <i class="fa-sharp fa-solid fa-envelope"></i>
+                    </a>
+                    <a href="" class="text-decoration-none fs-3 text-white p-1">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="" class="text-decoration-none fs-3 text-white p-1">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+            </button>
+
         </div>
 
     </div>
