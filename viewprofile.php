@@ -251,7 +251,13 @@ if ($status == 0) {
                 <a href="https://<?php echo $link ?>" class="text-primary fw-bold"> <?php echo $link; ?> </a>
 
             </div>
-            <br>
+
+            <?php if($status == 0) { ?>
+            <button class="btn btn-dark text-center m-3 w-50">
+                <a href="editresume.php" class="text-decoration-none text-warning">
+                    Add Resume </a> </button>
+            <?php } ?>
+
         </div>
 
         <div class="col col-lg-8" id="part2">

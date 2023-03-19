@@ -337,7 +337,7 @@ if (isset($_POST['login'])) {
 
     <div class="container position-relative">
         <br>
-        <img src="./images/logo1.png" alt="logo" width="40%" height="30%" class="mx-auto  d-block ">
+        <img src="./images/logo1.png" alt="logo" width="30%" height="30%" class="mx-auto  d-block ">
         <br>
 
         <div class="bounce-in-top card mb-3  mx-auto p-3 border-secondary" id="login_card">
