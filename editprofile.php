@@ -11,8 +11,6 @@ $user = $name = $bio = $link = ' ';
 
 if (isset($_POST['update'])) {
 
-
-
     $filename = $_FILES["uploadpic"]["name"];
     $tempname = $_FILES["uploadpic"]["tmp_name"];
 
@@ -168,7 +166,8 @@ if (isset($_POST['update'])) {
 
             <div class=" mb-3 ">
                 <label for="Profile" class="form-label "> Profile Pic: </label> <br>
-                <input type="file" onChange="imagePreview(this)" name="uploadpic" id="uploadpic" class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
+                <input type="file" onChange="imagePreview(this)" name="uploadpic" id="uploadpic"
+                    class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04">
             </div>
 
             <br>
@@ -177,7 +176,8 @@ if (isset($_POST['update'])) {
 
             <div class="mb-3 ">
                 <label for="username" class="form-label "> Username/Clubname: </label>
-                <input type="text" class="form-control shadow" id="username" name="username" value="<?php echo $username ?>" required>
+                <input type="text" class="form-control shadow" id="username" name="username"
+                    value="<?php echo $username ?>" required>
             </div>
 
             <div class="mb-3">
@@ -196,7 +196,8 @@ if (isset($_POST['update'])) {
             </div>
 
             <div class="pt-3  text-center  w-100">
-                <input type="submit" value="Update" id="update" name="update" class="btn btn-light btn-outline-primary shadow-sm">
+                <input type="submit" value="Update" id="update" name="update"
+                    class="btn btn-light btn-outline-primary shadow-sm">
             </div>
         </form>
     </div>
@@ -204,19 +205,19 @@ if (isset($_POST['update'])) {
 </body>
 
 <script>
-    function imagePreview(fileInput) {
-        if (fileInput.files && fileInput.files[0]) {
-            var fileReader = new FileReader();
-            fileReader.onload = function(event) {
-                $('#preview').html('<img src="' + event.target.result + '" width="300" height="auto"/>');
-            };
-            fileReader.readAsDataURL(fileInput.files[0]);
-        }
+function imagePreview(fileInput) {
+    if (fileInput.files && fileInput.files[0]) {
+        var fileReader = new FileReader();
+        fileReader.onload = function(event) {
+            $('#preview').html('<img src="' + event.target.result + '" width="300" height="auto"/>');
+        };
+        fileReader.readAsDataURL(fileInput.files[0]);
     }
-    $("#image").change(function() {
+}
+$("#image").change(function() {
 
-        imagePreview(this);
-    });
+    imagePreview(this);
+});
 </script>
 
 </html>

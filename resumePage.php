@@ -2,7 +2,7 @@
 session_start();
 include('config/connect.php');
 
-$username = $_SESSION['name'];
+
 
 $firstName = $lastName = $address = $city = $state = $zipCode = $dob = $age = $phoneNumber = $email = $objective = $schoolName = $schoolMarks = $schoolYear = $collegeName = $collegeMarks = $collegeYear = $diplomaName = $diplomaMarks = $diplomaYear = '';
 $skill1 = $skill1_p = $skill2 = $skill2_p = $skill3 = $skill3_p = $skill4 = $skill4_p = $skill5 = $skill5_p = $skill6 = $skill6_p = '';
@@ -11,133 +11,100 @@ $project1_title = $project1_desc = $project2_title = $project2_desc = '';
 $achievements = '';
 $dept =  '';
 $linkedin = $github = '';
-
-
+$username = '';
 $regno = '';
 
-$sql = "SELECT * FROM resume where username = '$username'";
-$res = mysqli_query($conn, $sql);
+if (isset($_POST['submit'])) {
 
-$rows1 = mysqli_num_rows($res);
-
-if($rows1 == 1){
-
-
-while ($row = mysqli_fetch_array($res)){
-
-// $firstName = $res->fetch_array()['firstName'];
-// $lastName = $res->fetch_array()['lastName'];
-// $address = $res->fetch_array()['address'];
-// $city = $res->fetch_array()['city'];
-// $state = $res->fetch_array()['state'];
-// $zipCode = $res->fetch_array()['zipCode'];
-// $dob = $res->fetch_array()['dob'];
-// $age = $res->fetch_array()['age'];
-// $phoneNumber = $res->fetch_array()['phoneNumber'];
-// $email = $res->fetch_array()['email'];
-// $objective = $res->fetch_array()['objective'];
-// $schoolName = $res->fetch_array()['schoolName'];
-// $schoolMarks = $res->fetch_array()['schoolMarks'];
-// $schoolYear = $res->fetch_array()['schoolYear'];
-// $diplomaName = $res->fetch_array()['diplomaName'];
-// $diplomaMarks = $res->fetch_array()['diplomaMarks'];
-// $diplomaYear = $res->fetch_array()['diplomaYear'];
-// $collegeName = $res->fetch_array()['collegeName'];
-// $collegeMarks = $res->fetch_array()['collegeMarks'];
-// $collegeYear = $res->fetch_array()['collegeYear'];
-// $skill1 = $res->fetch_array()['skill1'];
-// $skill1_p = $res->fetch_array()['skill1_p'];
-// $skill2 = $res->fetch_array()['skill2'];
-// $skill2_p= $res->fetch_array()['skill2_p'];
-// $skill3 = $res->fetch_array()['skill3'];
-// $skill3_p = $res->fetch_array()['skill3_p'];
-// $skill4 = $res->fetch_array()['skill4'];
-// $skill4_p = $res->fetch_array()['skill4_p'];
-// $skill5 = $res->fetch_array()['skill5'];
-// $skill5_p = $res->fetch_array()['skill5_p'];
-// $skill6 = $res->fetch_array()['skill6'];
-// $skill6_p = $res->fetch_array()['skill6_p'];
-// $company1 = $res->fetch_array()['company1'];
-// $company1_role = $res->fetch_array()['company1_role'];
-// $company1_time = $res->fetch_array()['company1_time'];
-// $company1_desc = $res->fetch_array()['company1_desc'];
-// $company2 = $res->fetch_array()['company2'];
-// $company2_role = $res->fetch_array()['company2_role'];
-// $company2_time = $res->fetch_array()['company2_time'];
-// $company2_desc = $res->fetch_array()['company2_desc'];
-// $project1_title = $res->fetch_array()['project1_title'];
-// $project1_desc = $res->fetch_array()['project1_desc'];
-// $project2_title = $res->fetch_array()['project2_title'];
-// $project2_desc =  $res->fetch_array()['project2_desc'];
-// $achievements = $res->fetch_array()['achievements'];
-
-$firstName = $row['2'];
-$lastName = $row['3'];
-$address = $row['4'];
-$city = $row['5'];
-$state = $row['6'];
-$zipCode = $row['7']; 
-$dob = $row['8'];
-$age = $row['9'];
-$phoneNumber = $row['10']; 
-$email = $row['11'];
-$objective = $row['12'];
-
-$schoolName = $row['13'];
-$schoolMarks = $row['14'];
-$schoolYear =$row['15'];
-
-$diplomaName = $row['19'];
-$diplomaMarks = $row['20'];
-$diplomaYear =$row['21'];
-
-$collegeName = $row['16'];
-$collegeMarks = $row['17'];
-$collegeYear = $row['18'];
-
-$skill1 = $row['22'];
-$skill1_p = $row['23'];
-$skill2 = $row['24'];
-$skill2_p = $row['25'];
-$skill3 = $row['26'];
-$skill3_p = $row['27'];
-$skill4 = $row['28'];
-$skill4_p = $row['29'];
-$skill5 = $row['30'];
-$skill5_p = $row['31'];
-$skill6 = $row['32'];
-$skill6_p = $row['33'];
-
-$company1 = $row['34'];
-$company1_role = $row['35'];
-$company1_time = $row['36'];
-$company1_desc = $row['37'];
-
-$company2 = $row['38'];
-$company2_role = $row['39'];
-$company2_time = $row['40'];
-$company2_desc = $row['41'];
-
-$project1_title = $row['42'];
-$project1_desc = $row['43']; 
-$project2_title = $row['44'];
-$project2_desc =  $row['45'];
-
-$achievements = $row['46'];
-
-$dept = $row['47'];
-$linkedin = $row['48'];
-$github = $row['49'];
-$resumepdf = $row['50'];
-$regno = $row['51'];
-
-}
+    $regno = stripslashes($_REQUEST['regno']);
+    $regno = mysqli_real_escape_string($conn, $regno);
+    $url = "http://localhost/saveehub/resumePage.php?regno=" . $regno;
+    echo $url;
+    header("Location: $url ");
 }
 
 
-$sql = "SELECT pic FROM login where username = '$username'";
-$res = mysqli_query($conn, $sql);
-$pic = $res->fetch_array()['pic'];
+
+$regno =  $_GET['regno'];
+
+
+if ($regno != '' && $regno != "") {
+
+    $sql = "SELECT * FROM resume where regno = '$regno'";
+    $res = mysqli_query($conn, $sql);
+
+    $rows1 = mysqli_num_rows($res);
+
+    if ($rows1 == 1) {
+
+
+        while ($row = mysqli_fetch_array($res)) {
+            $username = $row['1'];
+            $firstName = $row['2'];
+            $lastName = $row['3'];
+            $address = $row['4'];
+            $city = $row['5'];
+            $state = $row['6'];
+            $zipCode = $row['7'];
+            $dob = $row['8'];
+            $age = $row['9'];
+            $phoneNumber = $row['10'];
+            $email = $row['11'];
+            $objective = $row['12'];
+
+            $schoolName = $row['13'];
+            $schoolMarks = $row['14'];
+            $schoolYear = $row['15'];
+
+            $diplomaName = $row['19'];
+            $diplomaMarks = $row['20'];
+            $diplomaYear = $row['21'];
+
+            $collegeName = $row['16'];
+            $collegeMarks = $row['17'];
+            $collegeYear = $row['18'];
+
+            $skill1 = $row['22'];
+            $skill1_p = $row['23'];
+            $skill2 = $row['24'];
+            $skill2_p = $row['25'];
+            $skill3 = $row['26'];
+            $skill3_p = $row['27'];
+            $skill4 = $row['28'];
+            $skill4_p = $row['29'];
+            $skill5 = $row['30'];
+            $skill5_p = $row['31'];
+            $skill6 = $row['32'];
+            $skill6_p = $row['33'];
+
+            $company1 = $row['34'];
+            $company1_role = $row['35'];
+            $company1_time = $row['36'];
+            $company1_desc = $row['37'];
+
+            $company2 = $row['38'];
+            $company2_role = $row['39'];
+            $company2_time = $row['40'];
+            $company2_desc = $row['41'];
+
+            $project1_title = $row['42'];
+            $project1_desc = $row['43'];
+            $project2_title = $row['44'];
+            $project2_desc =  $row['45'];
+
+            $achievements = $row['46'];
+
+            $dept = $row['47'];
+            $linkedin = $row['48'];
+            $github = $row['49'];
+            $resumepdf = $row['50'];
+        }
+
+        $sql = "SELECT pic FROM login where username = '$username'";
+        $res = mysqli_query($conn, $sql);
+        $pic = $res->fetch_array()['pic'];
+    };
+}
 
 
 ?>
@@ -177,6 +144,7 @@ $pic = $res->fetch_array()['pic'];
 
 <body>
 
+    <?php if ($regno != '' && $regno != "" && $rows1 == 1) { ?>
     <div id="outer" class="p-2">
 
         <div class="w-50 mx-auto text-center bg-white">
@@ -208,23 +176,24 @@ $pic = $res->fetch_array()['pic'];
 
                 <br>
                 <div class="text-center mx-auto">
-                    <a href="mailto:<?php echo $email;?>"><i class="fa-sharp fa-solid fa-envelope fs-5 p-3"></i></a>
+                    <a href="mailto:<?php echo $email; ?>"><i class="fa-sharp fa-solid fa-envelope fs-5 p-3"></i></a>
                     <a href="<?php echo $linkedin; ?>"><i class="fa-brands fa-linkedin fs-5 p-3"></i></a>
                     <a href="<?php echo $github; ?>"><i class="fa-brands fa-github fs-5 p-3"></i></a>
 
                 </div>
             </div>
             <div class="col-lg-6 pt-3 p-4">
-                <span class="fs-3 fw-bold p-1"><?php echo $firstName." ".$lastName ?></span>
+                <span class="fs-3 fw-bold p-1"><?php echo $firstName . " " . $lastName ?></span>
 
                 <button class="clipboard bg-white border border-white text-primary"><i
                         class="fa-solid fa-copy px-5"></i>
-                </button> <br>
+                </button>
 
+                <br>
                 <span class="fs-5  p-1"><?php echo $dept ?></span> <br>
 
-                <?php if($resumepdf != '' ){ ?>
-                <a href="<?php echo "resumes/".$resumepdf ?>" download>
+                <?php if ($resumepdf != '') { ?>
+                <a href=" <?php echo "resumes/" . $resumepdf ?>" download>
                     <?php } ?>
 
                     <button class="btn btn-dark m-3"> Download Resume </button></a>
@@ -244,7 +213,7 @@ $pic = $res->fetch_array()['pic'];
                             Address &nbsp;
                         </td>
                         <td>
-                            :&nbsp; <?php echo $address." ".$city." ".$state; ?>
+                            :&nbsp; <?php echo $address . " " . $city . " " . $state; ?>
                         </td>
                     </tr>
 
@@ -277,7 +246,7 @@ $pic = $res->fetch_array()['pic'];
 
     </div>
 
-    <?php if($rows1 == 1) { ?>
+
 
     <div class=" w-75 m-auto" id="about">
         <br>
@@ -372,13 +341,13 @@ $pic = $res->fetch_array()['pic'];
         <br>
         <div>
             <h4><?php echo $company1_time ?></h4>
-            <h5><?php echo $company1_role.", ".$company1 ?></h5>
+            <h5><?php echo $company1_role . ", " . $company1 ?></h5>
             <p><?php echo $company1_desc ?></p>
         </div>
 
         <div>
             <h4><?php echo $company2_time ?></h4>
-            <h5><?php echo $company2_role.", ".$company2 ?></h5>
+            <h5><?php echo $company2_role . ", " . $company2 ?></h5>
             <p><?php echo $company2_desc ?></p>
         </div>
 
@@ -420,28 +389,33 @@ $pic = $res->fetch_array()['pic'];
 
     </div>
 
-    <?php } else{ ?>
+    <?php } else { ?>
 
-    <h5 class="text-danger text-center p-3">You are yet to add your resume details. Fill it now by clicking the
-        button
-        below</h5>
-    <button class="btn btn-dark d-block mx-auto my-2 w-50">
-        <a href="editresume.php" class="text-decoration-none text-warning">
-            Add Resume </a> </button>
+    <h5 class="text-danger text-center p-3">You have entered wrong register number.<br> <br> Please enter the correct
+        one
+    </h5>
 
+    <form action="" method="POST" class="row  w-50 m-auto" enctype="multipart/form-data">
+
+        <input type="text" name="regno" class="form-control" id="inputEmail4" placeholder="Enter your Reg no">
+        <button type="submit" class="btn btn-dark d-block mx-auto my-2 w-50" name="submit">
+
+            Submit </button>
+
+    </form>
 
     <?php } ?>
 
 
     <br><br><br>
 
-    <?php include('footer.php'); ?>
+
 
 </body>
 
 <script>
 var $temp = $("<input>");
-var $url = "http://localhost/saveehub/resumePage.php?regno=" + <?php echo $regno; ?>
+var $url = $(location).attr('href');
 
 $('.clipboard').on('click', function() {
     $("body").append($temp);

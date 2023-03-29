@@ -11,9 +11,18 @@ $company1 = $company1_role = $company1_time = $company1_desc = $company2 = $comp
 $project1_title = $project1_desc = $project2_title = $project2_desc = '';
 $achievements = '';
 $linkedin = $github = '';
+$filename = '';
+$regno = '';
 
 
 if (isset($_POST['submit'])) {
+
+    $filename = $_FILES["uploadresume"]["name"];
+    $tempname = $_FILES["uploadresume"]["tmp_name"];
+
+    $folder  = './resumes/'.$filename;
+    move_uploaded_file($tempname, $folder);
+
 
     $firstName = stripslashes($_REQUEST['fname']);
     $firstName = mysqli_real_escape_string($conn, $firstName);
@@ -146,9 +155,12 @@ if (isset($_POST['submit'])) {
     $github = stripslashes($_REQUEST['github']);
     $github = mysqli_real_escape_string($conn, $github);
 
+    $regno = stripslashes($_REQUEST['regno']);
+    $regno = mysqli_real_escape_string($conn, $regno);
 
-    $query    = "INSERT INTO resume (username,firstName,lastName,address,city,state,zipCode,dob,age,phoneNumber,email,objective,schoolName,schoolMarks,schoolYear,collegeName,collegeMarks,collegeYear,diplomaName,diplomaMarks,diplomaYear,skill1,skill1_p,skill2,skill2_p,skill3,skill3_p,skill4,skill4_p,skill5,skill5_p,skill6,skill6_p,company1,company1_role,company1_time,company1_desc,company2,company2_role,company2_time,company2_desc,project1_title,project1_desc,project2_title,project2_desc,achievements,dept,linkedin,github)
-    VALUES ('$username','$firstName','$lastName', '$address' , '$city' , '$state' , '$zipCode' , '$dob' , '$age' , '$phoneNumber' , '$email'  ,'$objective' , '$schoolName' , '$schoolMarks' , '$schoolYear' , '$collegeName' , '$collegeMarks' , '$collegeYear' , '$diplomaName' , '$diplomaMarks' , '$diplomaYear','$skill1','$skill1_p','$skill2','$skill2_p','$skill3','$skill3_p','$skill4','$skill4_p','$skill5','$skill5_p','$skill6','$skill6_p','$company1','$company1_role','$company1_time','$company1_desc','$company2','$company2_role','$company2_time','$company2_desc','$project1_title','$project1_desc','$project2_title','$project2_desc','$achievements','$dept','$linkedin','$github')";
+
+    $query    = "INSERT INTO resume (username,firstName,lastName,address,city,state,zipCode,dob,age,phoneNumber,email,objective,schoolName,schoolMarks,schoolYear,collegeName,collegeMarks,collegeYear,diplomaName,diplomaMarks,diplomaYear,skill1,skill1_p,skill2,skill2_p,skill3,skill3_p,skill4,skill4_p,skill5,skill5_p,skill6,skill6_p,company1,company1_role,company1_time,company1_desc,company2,company2_role,company2_time,company2_desc,project1_title,project1_desc,project2_title,project2_desc,achievements,dept,linkedin,github,resumepdf,regno)
+    VALUES ('$username','$firstName','$lastName', '$address' , '$city' , '$state' , '$zipCode' , '$dob' , '$age' , '$phoneNumber' , '$email'  ,'$objective' , '$schoolName' , '$schoolMarks' , '$schoolYear' , '$collegeName' , '$collegeMarks' , '$collegeYear' , '$diplomaName' , '$diplomaMarks' , '$diplomaYear','$skill1','$skill1_p','$skill2','$skill2_p','$skill3','$skill3_p','$skill4','$skill4_p','$skill5','$skill5_p','$skill6','$skill6_p','$company1','$company1_role','$company1_time','$company1_desc','$company2','$company2_role','$company2_time','$company2_desc','$project1_title','$project1_desc','$project2_title','$project2_desc','$achievements','$dept','$linkedin','$github','$filename','$regno')";
 
  
 
@@ -192,8 +204,19 @@ $state_count =  count($states);
 
         <form action="" method="POST" class="row m-2" enctype="multipart/form-data">
 
+            <div class="mb-3 ">
+                <p class="text-secondary text-center">UPLOAD YOUR RESUME (.pdf format) </p>
+                <input type="file" name="uploadresume" id="uploadresume"
+                    class="form-control border border-dark border-2" aria-describedby="inputGroupFileAddon04" required>
+            </div>
+
 
             <h1 class="fs-2 text-secondary py-2">Personal Details : </h1>
+
+            <div class="">
+                <label for="inputEmail4" class="form-label">Register Number </label>
+                <input type="text" name="regno" class="form-control" id="inputEmail4">
+            </div>
 
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">First Name</label>
